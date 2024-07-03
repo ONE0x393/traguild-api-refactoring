@@ -14,3 +14,5 @@ initialize().then(() => {
 }).catch(err => {
     console.error('Error initializing database:', err);
 });
+
+// JIRA 연결 테스트
