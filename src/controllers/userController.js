@@ -8,6 +8,14 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+exports.getIndexUsers = async (req, res) => {
+    try{
+        const users = await userService.getIndexUsers(req.query.user_idx);
+        res.json(users);
+    } catch (e){
+        res.status(500).json({message: e.message});
+    }
+}
 
 exports.createuser = async (req, res) => {
     try{
