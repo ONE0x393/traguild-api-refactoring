@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('@src/config/database');
 
-const Report = sequelize.define('Report', {
+const Report = sequelize.define('TB_REPORT', {
     report_idx:{  //신고글 고유 KEY
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -16,7 +16,7 @@ const Report = sequelize.define('Report', {
         allowNull: false
     },
     report_type: {  //신고종류
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     created_time: { //신고시간
@@ -25,7 +25,7 @@ const Report = sequelize.define('Report', {
     }
 }, {
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 });
 
 module.exports = Report;
