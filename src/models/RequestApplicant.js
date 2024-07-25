@@ -14,7 +14,8 @@ const RequestApplicant = sequelize.define('TB_REQUEST_APPLICANT', {
         type: DataTypes.STRING(5)
     },
     is_canceled: { //지원 취소 여부
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        defaultValue:0
     }
 }, {
     freezeTableName: true,

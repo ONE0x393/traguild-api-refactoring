@@ -13,6 +13,7 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
     },
     request_region: {  //지역 카테고리
         type: DataTypes.STRING(20),
+        defaultValue:"자유"
     },
     request_title: {  //의뢰 제목
         type: DataTypes.STRING(20),
@@ -22,7 +23,8 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.TEXT
     },
     request_cost: {  //의뢰 비용
-        type: DataTypes.STRING(20)
+        type: DataTypes.STRING(20),
+        defaultValue:0
     },
     request_state: {  //의뢰 상태
         type: DataTypes.STRING(5)
@@ -34,7 +36,8 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.DATE
     },
     is_deleted: {  //삭제여부
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        defaultValue:0
     },
     applicant_idx: {  //선정된 지원자 유저 고유 KEY
         type: DataTypes.INTEGER
