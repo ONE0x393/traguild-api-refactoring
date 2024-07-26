@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const {DataTypes, Sequelize} = require('sequelize');
 const sequelize = require('@src/config/database');
 
 const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
@@ -33,7 +33,8 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.STRING(5)
     },
     created_date: {  //등록날짜
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.fn('now')
     },
     is_deleted: {  //삭제여부
         type: DataTypes.BOOLEAN,
