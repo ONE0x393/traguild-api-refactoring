@@ -4,6 +4,7 @@ const sequelize = require('@src/config/database');
 exports.getAllUsers = async () => {
     return await User.findAll();
 }
+
 exports.getIndexUsers = async (idx) => {
     //return await sequelize.query('SELECT * FROM Users WHERE user_idx = 1'); 중복 호출
     try {

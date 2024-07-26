@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const {DataTypes, Sequelize} = require('sequelize');
 const sequelize = require('@src/config/database');
 
 const UserInfo = sequelize.define('TB_USER_INFO', {
@@ -40,11 +40,13 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
     },
     created_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.fn('now')
     },
     last_login_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.fn('now')
     },
     is_available: {
         type: DataTypes.BOOLEAN,
