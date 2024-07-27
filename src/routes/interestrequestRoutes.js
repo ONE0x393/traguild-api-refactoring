@@ -4,15 +4,15 @@ const interestrequestController = require('@src/controllers/interestrequestContr
 const router = express.Router();
 
 /**
- * 새로운 사용자 정보 삽입
+ * 새로운 관심의뢰 정보 삽입
  */
 router.put('/', interestrequestController.createInterestRequest);
 /**
- * 모든 사용자 정보 조회
+ * 모든 관심의뢰 정보 조회
  */
 router.post('/all', interestrequestController.getAllInterestRequests);
 /**
- * 사용자 정보 수정
+ * 관심의뢰 정보 수정
  */
 router.post('/update', interestrequestController.updateInterestRequest);
 
