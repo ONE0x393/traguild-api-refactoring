@@ -11,7 +11,7 @@ const CommunityComment = sequelize.define('TB_COMMUNITY_COMMENT', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    cmt_writer_idx: {
+    user_idx: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -21,11 +21,13 @@ const CommunityComment = sequelize.define('TB_COMMUNITY_COMMENT', {
     },
     created_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequelize.fn('NOW')
     },
     updated_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequelize.fn('NOW')
     },
     is_deleted: {
         type: DataTypes.BOOLEAN,

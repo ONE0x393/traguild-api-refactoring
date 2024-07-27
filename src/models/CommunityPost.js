@@ -11,7 +11,7 @@ const CommunityPost = sequelize.define('TB_COMMUNITY_POST', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
-    post_writer_idx: {
+    user_idx: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -21,11 +21,13 @@ const CommunityPost = sequelize.define('TB_COMMUNITY_POST', {
     },
     created_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequelize.fn('NOW')
     },
     updated_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequelize.fn('NOW')
     },
     is_deleted: {
         type: DataTypes.BOOLEAN,
