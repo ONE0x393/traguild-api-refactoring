@@ -21,7 +21,8 @@ const Report = sequelize.define('TB_REPORT', {
     },
     created_time: { //신고시간
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequelize.fn('now')
     }
 }, {
     freezeTableName: true,
