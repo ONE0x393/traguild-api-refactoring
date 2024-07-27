@@ -1,8 +1,8 @@
 const RequestInfo = require('@src/models/RequestInfo');
 const sequelize = require('@src/config/database');
 
-exports.createRequestInfo = async (Data) => {
-    return RequestInfo.create(Data);
+exports.createRequestInfo = async (data) => {
+    return RequestInfo.create(data);
 }
 
 exports.getAllRequestInfos = async () => {
@@ -13,23 +13,23 @@ exports.getRequestInfo = async (request_idx) => {
     return RequestInfo.findByPk(request_idx);
 }
 
-exports.updateRequestInfo = async (Data) => {
+exports.updateRequestInfo = async (data) => {
 
     return await RequestInfo.update({
-        request_idx: Data.request_idx,
-        user_idx: Data.user_idx,
-        request_region: Data.request_region,
-        request_title: Data.request_title,
-        request_content: Data.request_content,
-        request_cost: Data.request_cost,
-        request_state: Data.request_state,
-        transaction_state: Data.transaction_state,
-        created_date: Data.created_date,
-        is_deleted: Data.is_deleted,
-        applicant_idx: Data.applicant_idx
+        request_idx: data.request_idx,
+        user_idx: data.user_idx,
+        request_region: data.request_region,
+        request_title: data.request_title,
+        request_content: data.request_content,
+        request_cost: data.request_cost,
+        request_state: data.request_state,
+        transaction_state: data.transaction_state,
+        created_date: data.created_date,
+        is_deleted: data.is_deleted,
+        applicant_idx: data.applicant_idx
     }, {
         where: {
-            request_idx: Data.request_idx
+            request_idx: data.request_idx
         }
     });
 }

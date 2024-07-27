@@ -1,24 +1,24 @@
 const RequestApplicant = require('@src/models/RequestApplicant');
 const sequelize = require('@src/config/database');
 
-exports.createRequestApplicant = async (Data) => {
-    return RequestApplicant.create(Data);
+exports.createRequestApplicant = async (data) => {
+    return RequestApplicant.create(data);
 }
 
 exports.getAllRequestApplicants = async () => {
     return await RequestApplicant.findAll();
 }
 
-exports.updateRequestApplicant = async (Data) => {
+exports.updateRequestApplicant = async (data) => {
 
     return await RequestApplicant.update({
-        request_idx: Data.request_idx,
-        applicant_idx: Data.applicant_idx,
-        applicant_state: Data.applicant_state,
-        is_canceled: Data.is_canceled
+        request_idx: data.request_idx,
+        applicant_idx: data.applicant_idx,
+        applicant_state: data.applicant_state,
+        is_canceled: data.is_canceled
     }, {
         where: {
-            request_idx: Data.request_idx
+            request_idx: data.request_idx
         }
     });
 }
