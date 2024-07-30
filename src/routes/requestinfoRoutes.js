@@ -10,7 +10,7 @@ router.put('/', requestinfoController.createRequestInfo);
 /**
  * 의뢰 정보 조회
  */
-router.post('/', requestinfoController.getRequestInfo);
+router.post('/', requestinfoController.getRequestInfoByIDX);
 /**
  * 모든 의뢰 정보 조회
  */

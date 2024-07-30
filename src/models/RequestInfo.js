@@ -34,7 +34,11 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
     },
     created_date: {  //등록날짜
         type: DataTypes.DATE,
-        defaultValue: Sequelize.fn('now')
+        allowNull: false
+    },
+    updated_time: {
+        type: DataTypes.DATE,
+        allowNull: false
     },
     is_deleted: {  //삭제여부
         type: DataTypes.BOOLEAN,

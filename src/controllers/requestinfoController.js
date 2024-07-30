@@ -18,9 +18,9 @@ exports.getAllRequestInfos = async (req, res) => {
     }
 }
 
-exports.getRequestInfo = async (req, res) => {
+exports.getRequestInfoByIDX = async (req, res) => {
     try{
-        const requesetinfo = await RequestInfoService.getRequestInfo(req.body.request_idx);
+        const requesetinfo = await RequestInfoService.getRequestInfoByIDX(req.body.request_idx);
         res.json(requesetinfo);
     } catch (e){
         res.status(500).json({message: e.message});

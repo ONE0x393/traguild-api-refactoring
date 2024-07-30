@@ -1,21 +1,57 @@
 const RequestInfo = require('@src/models/RequestInfo');
 const sequelize = require('@src/config/database');
+const esClient = require('@src/config/esClient');
 
 exports.createRequestInfo = async (data) => {
-    return RequestInfo.create(data);
+    const now = new Date();
+    data.created_date = now.toISOString();
+    data.updated_time = now.toISOString();
+
+    const request = await RequestInfo.create(data);
+
+    await esClient.index({
+        index: 'request_info',
+        id: request.request_idx,
+        body: request
+    });
+
+    return request;
+    //return RequestInfo.create(data);
 }
 
 exports.getAllRequestInfos = async () => {
-    return await RequestInfo.findAll();
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            query: {
+                match_all: {}
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+    //return await RequestInfo.findAll();
 }
 
-exports.getRequestInfo = async (request_idx) => {
-    return RequestInfo.findByPk(request_idx);
+exports.getRequestInfoByIDX = async (request_idx) => {
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            query: {
+                term: { request_idx: request_idx }
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+    //return RequestInfo.findByPk(request_idx);
 }
 
 exports.updateRequestInfo = async (data) => {
+    const now = new Date();
+    data.updated_time = now.toISOString();
 
-    return await RequestInfo.update({
+    await RequestInfo.update({
         request_idx: data.request_idx,
         user_idx: data.user_idx,
         request_region: data.request_region,
@@ -29,7 +65,16 @@ exports.updateRequestInfo = async (data) => {
         applicant_idx: data.applicant_idx
     }, {
         where: {
-            request_idx: data.request_idx
+            request_idx: data.request_idx,
+            user_idx: data.user_idx
         }
     });
+    await esClient.update({
+        index: 'request_info',
+        id: data.request_idx,
+        body: {
+            doc: data
+        }
+    });
+    return data;
 }
