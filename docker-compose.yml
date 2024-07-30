@@ -13,3 +13,22 @@ services:
     volumes:
       - /var/lib/mysql
     platform: linux/x86_64
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
+    container_name: capstone_elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /var/lib/elasticsearch/data
+    platform: linux/x86_64
