@@ -33,7 +33,7 @@ exports.getAllRequestInfos = async () => {
     //return await RequestInfo.findAll();
 }
 
-exports.getRequestInfoByIDX = async (request_idx) => {
+exports.getRequestInfoByIdx = async (request_idx) => {
     const { body } = await esClient.search({
         index: 'request_info',
         body: {
