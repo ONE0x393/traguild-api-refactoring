@@ -6,10 +6,10 @@ const communityPostRoutes = require('@src/routes/communityPostRoutes');
 const communityCommentRoutes = require('@src/routes/communityCommentRoutes');
 const reportRoutes = require('@src/routes/reportRoutes');
 const keywordRoutes = require('@src/routes/keywordRoutes');
-const AlarmtypeRoutes = require('@src/routes/alarmtypeRoutes');
-const interestrequestRoutes = require('@src/routes/interestrequestRoutes');
-const requestinfoRoutes = require('@src/routes/requestinfoRoutes');
-const requestapplicantRoutes = require('@src/routes/requestapplicantRoutes');
+const alarmTypeRoutes = require('@src/routes/alarmTypeRoutes');
+const interestRequestRoutes = require('@src/routes/interestRequestRoutes');
+const requestInfoRoutes = require('@src/routes/requestInfoRoutes');
+const requestApplicantRoutes = require('@src/routes/requestApplicantRoutes');
 
 const router = express.Router();
 
@@ -19,10 +19,10 @@ router.use('/userRelation', userRelationRoutes);
 router.use('/communityPost', communityPostRoutes);
 router.use('/communityComment', communityCommentRoutes);
 router.use('/report', reportRoutes);
-router.use('/keyWord', keywordRoutes);
-router.use('/alarmType', AlarmtypeRoutes);
-router.use('/interestrequest', interestrequestRoutes);
-router.use('/requestinfo', requestinfoRoutes);
-router.use('/requestapplicant', requestapplicantRoutes);
+router.use('/keyword', keywordRoutes);
+router.use('/alarmType', alarmTypeRoutes);
+router.use('/interestRequest', interestRequestRoutes);
+router.use('/requestinfo', requestInfoRoutes);
+router.use('/requestApplicant', requestApplicantRoutes);
 
 module.exports = router;
