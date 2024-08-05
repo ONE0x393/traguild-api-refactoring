@@ -1,5 +1,6 @@
 require('module-alias/register');
-const initialize = require('@src/models/initialize');
+const logger = require("@src/config/winston/logger");
+const initialize = require('@src/models/config/initialize');
 const esClient = require('@src/config/esClient');
 const app = require('@src/app');
 require('dotenv').config();
@@ -12,18 +13,18 @@ initialize().then(async () => {
     try {
         // 모든 인덱스 삭제
         await esClient.indices.delete({ index: '_all' });
-        console.log('Deleted all indices');
+        logger.info('Deleted all indices');
     } catch (error) {
-        console.error('Failed to delete all indices', error);
+        logger.error('Failed to delete all indices', error);
     }
     // */
 
     // 서버 시작
     app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+        logger.info(`Server is running on port ${PORT}`);
     });
 }).catch(err => {
-    console.error('Error initializing database:', err);
+    logger.error('Error initializing database:', err);
 });
 
 // JIRA 연결 테스트
