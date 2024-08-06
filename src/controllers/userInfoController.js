@@ -5,11 +5,11 @@ const requestIp = require('request-ip');
 
 exports.createUser = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} GET /api/userInfo/`);
+        logger.info(`${requestIp.getClientIp(req)} PUT /api/userInfo`);
         const user = await userInfoService.createUser(req.body);
         res.status(201).json(user);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} GET /api/userInfo/ 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} PUT /api/userInfo 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 };
