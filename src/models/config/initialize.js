@@ -1,17 +1,22 @@
-const User = require('@src/models/User');
 const sequelize = require('@src/config/database');
+const logger = require('@src/config/winston/logger');
+const process = require("process");
 
 const initialize = async () => {
     await sequelize.sync({force: true});
-    console.log('Database synchronized');
+    try{
+        if(process.env.NODE_ENV != "prod") {
+            logger.info('Database synchronized');
 
-    // 기본값 삽입
-    await User.bulkCreate([
-        {name: 'John Doe', email: 'joh1234n@example.com', password: 'password123'},
-        {name: 'Jane Smith', email: 'jan1234e@example.com', password: 'password123'}
-    ]);
+            // Insert UserInfo data
+            const insertUserInfo = require('@src/models/dummy/insertUserInfo');
+            await insertUserInfo();
 
-    console.log('Initial data inserted');
+            logger.info('Initial data inserted');
+        }
+    } catch(e){
+        logger.error(`models/initialize.js => ${e.message}`);
+    }
 };
 
 module.exports = initialize;

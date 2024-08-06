@@ -1,5 +1,4 @@
 const express = require('express');
-const userRoutes = require('@src/routes/userRoutes');
 const userInfoRoutes = require('@src/routes/userInfoRoutes');
 const userRelationRoutes = require('@src/routes/userRelationRoutes');
 const communityPostRoutes = require('@src/routes/communityPostRoutes');
@@ -13,7 +12,6 @@ const requestApplicantRoutes = require('@src/routes/requestApplicantRoutes');
 
 const router = express.Router();
 
-// router.use('/users', userRoutes);
 router.use('/userInfo', userInfoRoutes);
 router.use('/userRelation', userRelationRoutes);
 router.use('/communityPost', communityPostRoutes);
