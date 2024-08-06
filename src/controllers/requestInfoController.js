@@ -15,11 +15,11 @@ exports.createRequestInfo= async (req, res) => {
 
 exports.getAllRequestInfos = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/all`);
         const requestInfo = await requestInfoService.getAllRequestInfos();
         res.json(requestInfo);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/all 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
@@ -37,11 +37,11 @@ exports.getRequestInfoByIdx = async (req, res) => {
 
 exports.updateRequestInfo = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/update`);
         const requestInfo = await requestInfoService.updateRequestInfo(req.body);
         res.json(requestInfo);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/update 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

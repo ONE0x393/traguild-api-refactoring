@@ -15,22 +15,22 @@ exports.createInterestRequest= async (req, res) => {
 
 exports.getAllInterestRequests = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/all`);
         const InterestRequest = await interestRequestService.getAllInterestRequests();
         res.json(InterestRequest);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/all 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
 
 exports.updateInterestRequest = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/update`);
         const InterestRequest = await interestRequestService.updateInterestRequest(req.body);
         res.json(InterestRequest);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/update 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

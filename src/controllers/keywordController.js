@@ -15,22 +15,22 @@ exports.createKeyword = async (req, res) => {
 
 exports.getAllKeywords = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/keyWord`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/keyWord/all`);
         const keywords = await keywordService.getAllKeywords();
         res.json(keywords);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/keyWord 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/keyWord/all 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
 
 exports.updateKeyword = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/keyWord`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/keyWord/update`);
         const keywords = await keywordService.updateKeyword(req.body);
         res.json(keywords);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/keyWord 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/keyWord/update 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
