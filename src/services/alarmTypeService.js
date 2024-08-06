@@ -12,7 +12,7 @@ exports.getAllAlarmTypes = async () => {
 exports.updateAlarmType = async (alarmData) => {
 
     return await AlarmType.update({
-        recevier_user_idx: alarmData.recevier_user_idx,
+        receiver_user_idx: alarmData.receiver_user_idx,
         sender_user_idx: alarmData.sender_user_idx,
         alarm_type: alarmData.alarm_type,
         request_idx: alarmData.request_idx

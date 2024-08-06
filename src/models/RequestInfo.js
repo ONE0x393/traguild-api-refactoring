@@ -38,7 +38,8 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
     },
     updated_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.fn('now')
     },
     is_deleted: {  //삭제여부
         type: DataTypes.BOOLEAN,

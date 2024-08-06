@@ -12,6 +12,26 @@ const initialize = async () => {
             const insertUserInfo = require('@src/models/dummy/insertUserInfo');
             await insertUserInfo();
 
+            // Insert KeyWord data
+            const insertKeyWord = require('@src/models/dummy/insertKeyWord');
+            await insertKeyWord();
+
+            // Insert AlarmType data
+            const insertAlarmType = require('@src/models/dummy/insertAlarmType');
+            await insertAlarmType();
+
+            // Insert AlarmType data
+            const insertInterestRequest = require('@src/models/dummy/insertInterestRequest');
+            await insertInterestRequest();
+
+            // Insert RequestInfo data
+            const insertRequestInfo = require('@src/models/dummy/insertRequestInfo');
+            await insertRequestInfo();
+
+            // Insert RequestApplicant data
+            const insertRequestApplicant = require('@src/models/dummy/insertRequestApplicant');
+            await insertRequestApplicant();
+
             logger.info('Initial data inserted');
         }
     } catch(e){

@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const sequelize = require('@src/config/database');
 
 const AlarmType = sequelize.define('TB_ALARM_TYPE', {
-    recevier_user_idx:{  //수신자 고유 KEY
+    receiver_user_idx:{  //수신자 고유 KEY
         type: DataTypes.INTEGER,
         allowNull: false
     },
