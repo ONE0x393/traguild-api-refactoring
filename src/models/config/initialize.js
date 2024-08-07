@@ -13,14 +13,14 @@ const initialize = async () => {
             await insertUserInfo();
 
             // Insert KeyWord data
-            const insertKeyWord = require('@src/models/dummy/insertKeyWord');
-            await insertKeyWord();
+            const insertKeyword = require('@src/models/dummy/insertKeyword');
+            await insertKeyword();
 
             // Insert AlarmType data
             const insertAlarmType = require('@src/models/dummy/insertAlarmType');
             await insertAlarmType();
 
-            // Insert AlarmType data
+            // Insert InterestRequest data
             const insertInterestRequest = require('@src/models/dummy/insertInterestRequest');
             await insertInterestRequest();
 

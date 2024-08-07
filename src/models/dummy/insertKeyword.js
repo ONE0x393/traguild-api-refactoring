@@ -1,7 +1,7 @@
-const KeyWord = require('@src/models/Keyword');
+const Keyword = require('@src/models/Keyword');
 
-const insertKeyWord = async () => {
-    return KeyWord.bulkCreate([
+const insertKeyword = async () => {
+    return Keyword.bulkCreate([
         {
             "keyword_user_idx": "1",
             "keyword_detail": "공사장 알바"
@@ -21,4 +21,4 @@ const insertKeyWord = async () => {
     ]);
 }
 
-module.exports = insertKeyWord;
+module.exports = insertKeyword;
