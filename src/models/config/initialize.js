@@ -1,18 +1,44 @@
 const sequelize = require('@src/config/database');
 const logger = require('@src/config/winston/logger');
 const process = require("process");
+const esClient = require('@src/config/esClient');
+
 
 const initialize = async () => {
     await sequelize.sync({force: true});
     try{
         if(process.env.NODE_ENV != "prod") {
+            try {
+                // 모든 인덱스 삭제
+                await esClient.indices.delete({ index: '_all' });
+                logger.info('Deleted all indices');
+            } catch (error) {
+                logger.error('Failed to delete all indices', error);
+            }
+
             logger.info('Database synchronized');
 
             // Insert UserInfo data
             const insertUserInfo = require('@src/models/dummy/insertUserInfo');
             await insertUserInfo();
 
-            // Insert KeyWord data
+            // Insert UserRelation data
+            const insertUserRelation = require('@src/models/dummy/insertUserRelation');
+            await insertUserRelation();
+
+            // Insert CommunityPost data
+            const insertCommunityPost = require('@src/models/dummy/insertCommunityPost');
+            await insertCommunityPost();
+
+            // Insert CommunityComment data
+            const insertCommunityComment = require('@src/models/dummy/insertCommunityComment');
+            await insertCommunityComment();
+
+            // Insert Report data
+            const insertReport = require('@src/models/dummy/insertReport');
+            await insertReport();
+
+            // Insert Keyword data
             const insertKeyword = require('@src/models/dummy/insertKeyword');
             await insertKeyword();
 
