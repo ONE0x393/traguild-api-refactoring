@@ -25,11 +25,11 @@ exports.getUserRelations = async (req, res) => {
 }
 exports.deleteUserRelations = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/userRelation`);
+        logger.info(`${requestIp.getClientIp(req)} DELETE /api/userRelation`);
         const users = await userRelationService.deleteUserRelations(req.body);
         res.json(users);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/userRelation 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} DELETE /api/userRelation 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

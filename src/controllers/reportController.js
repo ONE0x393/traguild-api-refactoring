@@ -15,21 +15,21 @@ exports.createReport = async (req, res) => {
 
 exports.getAllReports = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/report`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/report/all`);
         const resData = await reportService.getAllReports();
         res.json(resData);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/report 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/report/all 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
 exports.getReportsByUser = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/report`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/report/byUser`);
         const resData = await reportService.getReportsByUser(req.body.user_idx);
         res.json(resData);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/report 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/report/byUser 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

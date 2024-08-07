@@ -16,26 +16,32 @@ exports.createUser = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
     try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/all`);
         const users = await userInfoService.getAllUsers();
         res.json(users);
     } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/all 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
 exports.getUser = async (req, res) => {
     try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo`);
         const users = await userInfoService.getUser(req.body.user_idx);
         res.json(users);
     } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
 
 exports.updateUser = async (req, res) => {
     try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
         const users = await userInfoService.updateUser(req.body);
         res.json(users);
     } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/update 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

@@ -15,11 +15,11 @@ exports.createCommunityPost = async (req, res) => {
 
 exports.getAllCommunityPosts = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/communityPost`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/communityPost/all`);
         const resData = await communityPostService.getAllCommunityPosts();
         res.json(resData);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/communityPost 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/communityPost/all 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
@@ -36,11 +36,11 @@ exports.getCommunityPostsByUser = async (req, res) => {
 
 exports.updateCommunityPost = async (req, res) => {
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/communityPost`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/communityPost/update`);
         const resData = await communityPostService.updateCommunityPost(req.body);
         res.json(resData);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/communityPost 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/communityPost/update 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
