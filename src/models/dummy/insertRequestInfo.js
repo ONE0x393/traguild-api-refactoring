@@ -1,7 +1,8 @@
 const RequestInfo = require('@src/models/RequestInfo');
+const esClient = require('@src/config/esClient');
 
 const insertRequestInfo = async () => {
-    return RequestInfo.bulkCreate([
+    const requests = await RequestInfo.bulkCreate([
         {
             "user_idx": "1",
             "request_region": "경남 김해",
@@ -49,6 +50,14 @@ const insertRequestInfo = async () => {
             "created_date": "2024-08-20"
         },
     ]);
+    for(const request of requests){
+        await esClient.index({
+            index: 'request_info',
+            id: request.request_idx,
+            body: request
+        });
+    }
+    return requests;
 }
 
 module.exports = insertRequestInfo;
