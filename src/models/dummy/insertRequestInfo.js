@@ -11,7 +11,8 @@ const insertRequestInfo = async () => {
             "request_cost": "70,000",
             "request_state": "모집완료",
             "transaction_state": "완료",
-            "created_date": "2024-07-29"
+            "created_date": "2024-07-29",
+            "updated_time": "2024-07-29"
         },{
             "user_idx": "1",
             "request_region": "경남 김해",
@@ -20,7 +21,8 @@ const insertRequestInfo = async () => {
             "request_cost": "100,000",
             "request_state": "모집중",
             "transaction_state": "미완료",
-            "created_date": "2024-07-29"
+            "created_date": "2024-07-29",
+            "updated_time": "2024-07-29"
         },{
             "user_idx": "3",
             "request_region": "창원",
@@ -29,7 +31,8 @@ const insertRequestInfo = async () => {
             "request_cost": "50,000",
             "request_state": "모집완료",
             "transaction_state": "미완료",
-            "created_date": "2024-08-01"
+            "created_date": "2024-08-01",
+            "updated_time": "2024-08-01"
         },{
             "user_idx": "4",
             "request_region": "울산",
@@ -38,7 +41,8 @@ const insertRequestInfo = async () => {
             "request_cost": "250,000",
             "request_state": "모집중",
             "transaction_state": "미완료",
-            "created_date": "2024-07-14"
+            "created_date": "2024-07-14",
+            "updated_time": "2024-07-14"
         },{
             "user_idx": "5",
             "request_region": "부산",
@@ -47,7 +51,8 @@ const insertRequestInfo = async () => {
             "request_cost": "50,000",
             "request_state": "모집예정",
             "transaction_state": "미완료",
-            "created_date": "2024-08-20"
+            "created_date": "2024-08-20",
+            "updated_time": "2024-08-20"
         },
     ]);
     for(const request of requests){
