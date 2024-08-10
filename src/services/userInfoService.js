@@ -14,8 +14,6 @@ exports.getUser = async (user_idx) => {
 }
 
 exports.updateUser = async (userData) => {
-    console.log(userData.last_login_time);
-
     return await UserInfo.update({
         user_pw: userData.user_pw,
         user_name: userData.user_name,
