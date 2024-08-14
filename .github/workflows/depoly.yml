@@ -1,0 +1,33 @@
+name: Deploy to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  depoly:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Add SSH known hosts
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+  
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Copy files via SSH
+      run: |
+        ssh -vvv ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "rm -rf ~/app && mkdir -p ~/app"
+        scp -P ${{ secrets.SERVER_PORT }} -r * ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/app
+
+    # - name: Deploy with Docker Compose
+    #   run: |
+    #     ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "cd ~/app && docker-compose down && docker-compose up -d --build"
