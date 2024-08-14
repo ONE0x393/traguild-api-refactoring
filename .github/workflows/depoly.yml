@@ -45,4 +45,4 @@ jobs:
 
     - name: Deploy with Docker Compose
       run: |
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "cd ~/app && docker-compose --profile production down && docker-compose --profile production up -d --build"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "cd ~/app && docker compose --profile production down && docker compose --profile production up -d --build"
