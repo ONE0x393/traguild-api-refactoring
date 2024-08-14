@@ -7,7 +7,7 @@ const esClient = require('@src/config/esClient');
 const initialize = async () => {
     await sequelize.sync({force: true});
     try{
-        if(process.env.NODE_ENV != "prod") {
+        if(process.env.NODE_ENV != "production") {
             try {
                 // 모든 인덱스 삭제
                 await esClient.indices.delete({ index: '_all' });
