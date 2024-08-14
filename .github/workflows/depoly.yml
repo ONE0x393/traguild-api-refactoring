@@ -20,7 +20,7 @@ jobs:
 
     - name: Copy files via SSH
       run: |
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "rm -rf ~/app && mkdir -p ~/app"
+        ssh -vvv ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "rm -rf ~/app && mkdir -p ~/app"
         scp -P ${{ secrets.SERVER_PORT }} -r . ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/app
 
     # - name: Deploy with Docker Compose
