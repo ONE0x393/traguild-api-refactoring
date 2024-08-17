@@ -14,6 +14,9 @@ services:
     restart: on-failure
     profiles:
       - production
+    dns:
+      - 8.8.8.8   # Google DNS
+      - 8.8.4.4   # Google DNS
 
   mysql:
     image: mysql:8.0
@@ -37,6 +40,9 @@ services:
     profiles:
       - production
       - development
+    dns:
+      - 8.8.8.8   # Google DNS
+      - 8.8.4.4   # Google DNS
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
@@ -64,3 +70,6 @@ services:
     profiles:
       - production
       - development
+    dns:
+      - 8.8.8.8   # Google DNS
+      - 8.8.4.4   # Google DNS
