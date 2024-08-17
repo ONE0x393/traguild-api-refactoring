@@ -30,17 +30,23 @@ jobs:
     
     - name: Create .env file on the server
       run: |
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'PORT=${{ secrets.PORT }}' >> ~/app/.env"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' > ~/app/.env"
-
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'PORT=${{ secrets.PORT }}' >> ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_HOST=${{ secrets.DB_HOST }}' >> ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_PORT=${{ secrets.DB_PORT }}' >> ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_USER=${{ secrets.DB_USER }}' >> ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' > ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_NAME=${{ secrets.DB_NAME }}' >> ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_HOST=${{ secrets.ES_HOST }}' >> ~/app/.env.production"
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_PORT=${{ secrets.ES_PORT }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} << EOF
+          cat <<EOT >> ~/app/.env
+          PORT=${{ secrets.PORT }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          EOT
+    
+          cat <<EOT >> ~/app/.env.production
+          PORT=${{ secrets.PORT }}
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=${{ secrets.DB_PORT }}
+          DB_USER=${{ secrets.DB_USER }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_NAME=${{ secrets.DB_NAME }}
+          ES_HOST=${{ secrets.ES_HOST }}
+          ES_PORT=${{ secrets.ES_PORT }}
+          EOT
+        EOF
         
 
     - name: Deploy with Docker Compose
