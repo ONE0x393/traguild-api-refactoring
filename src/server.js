@@ -17,5 +17,3 @@ initialize().then(async () => {
 }).catch(err => {
     logger.error('Error initializing database:', err);
 });
-
-// JIRA 연결 테스트

@@ -1,5 +1,5 @@
-const UserInfo = require('@src/models/UserInfo');
-const sequelize = require('@src/config/database');
+const UserInfo = require('../models/UserInfo');
+const sequelize = require('../config/database');
 
 exports.createUser = async (userData) => {
     return UserInfo.create(userData);

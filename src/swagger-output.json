@@ -1,0 +1,461 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Your API Title",
+    "description": "API documentation for your project",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/userInfo/": {
+      "put": {
+        "tags": [
+          "userInfo - 유저 정보 테이블"
+        ],
+        "description": "유저 정보 생성",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string",
+                  "example": "gdhong"
+                },
+                "user_pw": {
+                  "type": "string",
+                  "example": "mypassword"
+                },
+                "user_name": {
+                  "type": "string",
+                  "example": "홍길동"
+                },
+                "user_email": {
+                  "type": "string",
+                  "example": "gdhong@gmail.com"
+                },
+                "user_birth": {
+                  "type": "string",
+                  "example": "1900-01-01"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "작성됨"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "userInfo - 유저 정보 테이블"
+        ],
+        "description": "유저 정보 조회",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "유저 정보",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_idx": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/userInfo/all": {
+      "post": {
+        "tags": [
+          "userInfo - 유저 정보 테이블"
+        ],
+        "description": "유저 정보 전체 조회",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/userInfo/update": {
+      "post": {
+        "tags": [
+          "userInfo - 유저 정보 테이블"
+        ],
+        "description": "유저 정보 갱신",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "유저 정보",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_idx": {
+                  "type": "number",
+                  "example": 1
+                },
+                "user_pw": {
+                  "type": "string",
+                  "example": "chPw"
+                },
+                "user_emaill": {
+                  "type": "string",
+                  "example": "chmail@gmail.com"
+                },
+                "user_birth": {
+                  "type": "string",
+                  "example": "1932-04-03"
+                },
+                "user_rate": {
+                  "type": "number",
+                  "example": 73
+                },
+                "is_agree_privacy": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "last_login_time": {
+                  "type": "string",
+                  "example": "2024-07-26 14:44:27"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/userRelation/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/userRelation/delete": {
+      "delete": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityPost/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityPost/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityPost/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityComment/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityComment/byPost": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityComment/byUser": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/communityComment/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/report/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/report/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/report/byUser": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/keyword/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/keyword/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/keyword/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/alarmType/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/alarmType/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/alarmType/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/interestRequest/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/interestRequest/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/interestRequest/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/requestinfo/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/requestinfo/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/requestinfo/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/requestApplicant/": {
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/requestApplicant/all": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/requestApplicant/update": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}
