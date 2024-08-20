@@ -1,14 +1,14 @@
 const express = require('express');
-const userInfoRoutes = require('@src/routes/userInfoRoutes');
-const userRelationRoutes = require('@src/routes/userRelationRoutes');
-const communityPostRoutes = require('@src/routes/communityPostRoutes');
-const communityCommentRoutes = require('@src/routes/communityCommentRoutes');
-const reportRoutes = require('@src/routes/reportRoutes');
-const keywordRoutes = require('@src/routes/keywordRoutes');
-const alarmTypeRoutes = require('@src/routes/alarmTypeRoutes');
-const interestRequestRoutes = require('@src/routes/interestRequestRoutes');
-const requestInfoRoutes = require('@src/routes/requestInfoRoutes');
-const requestApplicantRoutes = require('@src/routes/requestApplicantRoutes');
+const userInfoRoutes = require('./userInfoRoutes');
+const userRelationRoutes = require('./userRelationRoutes');
+const communityPostRoutes = require('./communityPostRoutes');
+const communityCommentRoutes = require('./communityCommentRoutes');
+const reportRoutes = require('./reportRoutes');
+const keywordRoutes = require('./keywordRoutes');
+const alarmTypeRoutes = require('./alarmTypeRoutes');
+const interestRequestRoutes = require('./interestRequestRoutes');
+const requestInfoRoutes = require('./requestInfoRoutes');
+const requestApplicantRoutes = require('./requestApplicantRoutes');
 
 const router = express.Router();
 
