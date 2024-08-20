@@ -1,5 +1,5 @@
-const AlarmType = require('@src/models/AlarmType');
-const sequelize = require('@src/config/database');
+const AlarmType = require('../models/AlarmType');
+const sequelize = require('../config/database');
 
 exports.createAlarmType = async (alarmData) => {
     return AlarmType.create(alarmData);

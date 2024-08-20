@@ -1,6 +1,6 @@
-const RequestInfo = require('@src/models/RequestInfo');
-const sequelize = require('@src/config/database');
-const esClient = require('@src/config/esClient');
+const RequestInfo = require('../models/RequestInfo');
+const sequelize = require('../config/database');
+const esClient = require('../config/esClient');
 
 exports.createRequestInfo = async (data) => {
     const now = new Date();

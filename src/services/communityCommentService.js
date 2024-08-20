@@ -1,6 +1,6 @@
-const CommunityComment = require('@src/models/CommunityComment');
-const sequelize = require('@src/config/database');
-const esClient = require('@src/config/esClient');
+const CommunityComment = require('../models/CommunityComment');
+const sequelize = require('../config/database');
+const esClient = require('../config/esClient');
 
 exports.createCommunityComment = async (commentData) => {
     const now = new Date();

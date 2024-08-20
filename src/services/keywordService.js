@@ -1,5 +1,5 @@
-const Keyword = require('@src/models/Keyword');
-const sequelize = require('@src/config/database');
+const Keyword = require('../models/Keyword');
+const sequelize = require('../config/database');
 
 exports.createKeyword = async (keywordData) => {
     return Keyword.create(keywordData);

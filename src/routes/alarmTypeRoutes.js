@@ -1,5 +1,5 @@
 const express = require('express');
-const alarmTypeController = require('@src/controllers/alarmTypeController');
+const alarmTypeController = require('../controllers/alarmTypeController');
 
 const router = express.Router();
 

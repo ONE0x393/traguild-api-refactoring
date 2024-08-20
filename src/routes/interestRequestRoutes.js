@@ -1,5 +1,5 @@
 const express = require('express');
-const interestRequestController = require('@src/controllers/interestRequestController');
+const interestRequestController = require('../controllers/interestRequestController');
 
 const router = express.Router();
 

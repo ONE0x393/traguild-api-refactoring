@@ -1,6 +1,6 @@
-const CommunityPost = require('@src/models/CommunityPost');
-const sequelize = require('@src/config/database');
-const esClient = require('@src/config/esClient');
+const CommunityPost = require('../models/CommunityPost');
+const sequelize = require('../config/database');
+const esClient = require('../config/esClient');
 
 exports.createCommunityPost = async (postData) => {
     const now = new Date();

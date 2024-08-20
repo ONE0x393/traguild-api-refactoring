@@ -1,5 +1,5 @@
-const RequestApplicant = require('@src/models/RequestApplicant');
-const sequelize = require('@src/config/database');
+const RequestApplicant = require('../models/RequestApplicant');
+const sequelize = require('../config/database');
 
 exports.createRequestApplicant = async (data) => {
     return RequestApplicant.create(data);

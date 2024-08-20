@@ -1,5 +1,5 @@
 const express = require('express');
-const keywordController = require('@src/controllers/keywordController');
+const keywordController = require('../controllers/keywordController');
 
 const router = express.Router();
 

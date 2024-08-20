@@ -1,5 +1,5 @@
 const express = require('express');
-const communityPostController = require('@src/controllers/communityPostController');
+const communityPostController = require('../controllers/communityPostController');
 
 const router = express.Router();
 

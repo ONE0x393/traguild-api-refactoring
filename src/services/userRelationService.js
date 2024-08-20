@@ -1,5 +1,5 @@
-const UserRelation = require('@src/models/UserRelation');
-const sequelize = require('@src/config/database');
+const UserRelation = require('../models/UserRelation');
+const sequelize = require('../config/database');
 
 exports.createUserRelation = async (relationData) => {
     return UserRelation.create(relationData);

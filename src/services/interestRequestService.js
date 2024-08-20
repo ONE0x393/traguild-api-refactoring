@@ -1,5 +1,5 @@
-const InterestRequest = require('@src/models/InterestRequest');
-const sequelize = require('@src/config/database');
+const InterestRequest = require('../models/InterestRequest');
+const sequelize = require('../config/database');
 
 exports.createInterestRequest = async (data) => {
     return InterestRequest.create(data);

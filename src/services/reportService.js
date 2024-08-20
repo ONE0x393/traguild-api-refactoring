@@ -1,5 +1,5 @@
-const Report = require('@src/models/Report');
-const sequelize = require('@src/config/database');
+const Report = require('../models/Report');
+const sequelize = require('../config/database');
 
 exports.createReport = async (reportData) => {
     return Report.create(reportData);

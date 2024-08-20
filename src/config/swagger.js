@@ -5,8 +5,8 @@ const endpointsFiles = ['../app.js'];
 
 const doc = {
     info: {
-        title: 'Your API Title',
-        description: 'API documentation for your project',
+        title: '캡스톤 디자인 API',
+        description: '캡스톤 디자인 API 문서입니다.',
     },
     host: 'localhost:3000',
     schemes: ['http'],
