@@ -20,11 +20,11 @@ exports.createUser = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} PUT /api/userInfo`);
+        logger.info(`${req.connection.remoteAddress} PUT /api/userInfo`);
         const user = await userInfoService.createUser(req.body);
         res.status(201).json(user);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} PUT /api/userInfo 500 ERROR: ${e.message}`);
+        logger.error(`${req.connection.remoteAddress} PUT /api/userInfo 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 };
