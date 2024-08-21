@@ -47,11 +47,6 @@
                 }
               }
             }
-          },
-          {
-            "name": "x-forwarded-for",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
