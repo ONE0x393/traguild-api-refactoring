@@ -11,6 +11,7 @@ const swaggerFile = require("./swagger-output");
 const app = express();
 
 app.use(bodyParser.json());
+app.set('trust proxy', true);
 
 // Swagger UI setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
