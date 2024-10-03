@@ -25,8 +25,9 @@ jobs:
 
     - name: Copy files via SSH
       run: |
-        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "rm -rf ~/app && mkdir -p ~/app"
-        scp -P ${{ secrets.SERVER_PORT }} -r * ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/app
+        #ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "rm -rf ~/app && mkdir -p ~/app"
+        ssh ubuntu@203.241.246.200 -p 22 "rm -rf ~/app && mkdir -p ~/app"
+        # scp -P ${{ secrets.SERVER_PORT }} -r * ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/app
     
     - name: Create .env file on the server
       run: |
