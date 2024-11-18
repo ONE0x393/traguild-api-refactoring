@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require("./config/winston/logger");
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const cors = require('cors');
 const sequelize = require('./config/database');
 
 const swaggerUi = require('swagger-ui-express');
@@ -9,6 +10,7 @@ const swaggerFile = require("./swagger-output");
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.set('trust proxy', true);
 
