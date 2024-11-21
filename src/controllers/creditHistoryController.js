@@ -72,6 +72,7 @@ exports.updateCreditHistory = async (req, res) => {
         in: 'body',
         required: true,
         schema: {
+            "credit_trade_idx": 1,
             "host_user_idx": 1,
             "apply_user_idx": 2,
             "request_idx": 3,
