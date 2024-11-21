@@ -16,6 +16,10 @@ router.post('/', requestInfoController.getRequestInfoByIdx);
  */
 router.post('/all', requestInfoController.getAllRequestInfos);
 /**
+ * 모든 의뢰 정보 조회
+ */
+router.post('/fetch', requestInfoController.getFetchRequestInfos);
+/**
  * 의뢰 정보 수정
  */
 router.post('/update', requestInfoController.updateRequestInfo);
