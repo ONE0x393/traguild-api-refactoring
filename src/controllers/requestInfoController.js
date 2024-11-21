@@ -45,6 +45,31 @@ exports.getAllRequestInfos = async (req, res) => {
     }
 }
 
+exports.getFetchRequestInfos = async (req, res) => {
+    /*
+    #swagger.description = "의뢰 정보 n건 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "page": 1,
+            "limit": 10
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
+        const requestInfo = await requestInfoService.getFetchRequestInfos(req.body);
+        res.json(requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/all 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
+
+
 exports.getRequestInfoByIdx = async (req, res) => {
     /*
     #swagger.description = "특정 의뢰 정보 조회"

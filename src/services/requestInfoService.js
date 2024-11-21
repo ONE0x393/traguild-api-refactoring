@@ -33,6 +33,29 @@ exports.getAllRequestInfos = async () => {
     //return await RequestInfo.findAll();
 }
 
+exports.getFetchRequestInfos = async (data) => {
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            sort: [
+                {
+                    request_idx: {
+                        order: 'desc' // 역순 정렬 (내림차순)
+                    }
+                }
+            ],
+            from: (data.page - 1) * data.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
+            size: data.limit, // 가져올 개수
+            query: {
+                match_all: {}
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+    //return await RequestInfo.findAll();
+}
+
 exports.getRequestInfoByIdx = async (request_idx) => {
     const { body } = await esClient.search({
         index: 'request_info',
