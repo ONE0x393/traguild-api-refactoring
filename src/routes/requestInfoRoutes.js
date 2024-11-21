@@ -24,6 +24,10 @@ router.post('/fetch', requestInfoController.getFetchRequestInfos);
  */
 router.post('/getApply', requestInfoController.getFecthApplicantByUser);
 /**
+ * 모든 의뢰 정보 조회 (10건)
+ */
+router.post('/fetch', requestInfoController.getFetchRequestInfos);
+/**
  * 의뢰 정보 수정
  */
 router.post('/update', requestInfoController.updateRequestInfo);
