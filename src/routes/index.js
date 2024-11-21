@@ -20,7 +20,7 @@ router.use('/report', reportRoutes);
 router.use('/keyword', keywordRoutes);
 router.use('/alarmType', alarmTypeRoutes);
 router.use('/interestRequest', interestRequestRoutes);
-router.use('/requestinfo', requestInfoRoutes);
+router.use('/requestInfo', requestInfoRoutes);
 router.use('/requestApplicant', requestApplicantRoutes);
 
 module.exports = router;

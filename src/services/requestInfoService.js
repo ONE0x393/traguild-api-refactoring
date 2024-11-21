@@ -59,7 +59,6 @@ exports.updateRequestInfo = async (data) => {
         request_content: data.request_content,
         request_cost: data.request_cost,
         request_state: data.request_state,
-        transaction_state: data.transaction_state,
         created_date: data.created_date,
         is_deleted: data.is_deleted,
         applicant_idx: data.applicant_idx

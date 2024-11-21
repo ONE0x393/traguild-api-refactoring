@@ -16,7 +16,6 @@ exports.createRequestInfo= async (req, res) => {
             "request_content": "제목이랑 같습니다. 야리끼리로 하루 일하실 성인남성 3분 구합니다.",
             "request_cost": "시급 2만원",
             "request_state": "미완료",
-            "transaction_state": "거래미완",
             "applicant_idx": 2
         }
     }
@@ -83,7 +82,6 @@ exports.updateRequestInfo = async (req, res) => {
             "request_content": "2분 지원완료 됬습니다. 마지막 1분 모집합니다",
             "request_cost": "시급 2만원",
             "request_state": "미완료",
-            "transaction_state": "거래미완",
             "applicant_idx": 2
         }
     }

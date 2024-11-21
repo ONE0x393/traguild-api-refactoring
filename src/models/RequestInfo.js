@@ -29,9 +29,6 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
     request_state: {  //의뢰 상태
         type: DataTypes.STRING(5)
     },
-    transaction_state: {  //거래 상태
-        type: DataTypes.STRING(5)
-    },
     created_date: {  //등록날짜
         type: DataTypes.DATE,
         allowNull: false
