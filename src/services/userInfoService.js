@@ -18,6 +18,8 @@ exports.updateUser = async (userData) => {
         user_pw: userData.user_pw,
         user_name: userData.user_name,
         user_email: userData.user_email,
+        user_nickname: userData.user_nickname,
+        user_credit: userData.user_credit,
         user_birth: userData.user_birth,
         user_rate: userData.user_rate,
         is_agree_privacy: userData.is_agree_privacy,

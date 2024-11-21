@@ -14,6 +14,8 @@ exports.createUser = async (req, res) => {
             user_id: "gdhong",
             user_pw: "mypassword",
             user_name: "홍길동",
+            user_nickname: "율도국 대가리",
+            user_credit: 777,
             user_email: "gdhong@gmail.com",
             user_birth: "1900-01-01"
         }

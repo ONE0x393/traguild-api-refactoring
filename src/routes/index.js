@@ -9,7 +9,6 @@ const alarmTypeRoutes = require('./alarmTypeRoutes');
 const interestRequestRoutes = require('./interestRequestRoutes');
 const requestInfoRoutes = require('./requestInfoRoutes');
 const requestApplicantRoutes = require('./requestApplicantRoutes');
-const userCreditInfoRoutes = require('./userCreditInfoRoutes');
 const creditHistoryRoutes = require('./creditHistoryRoutes');
 
 const router = express.Router();
@@ -24,7 +23,6 @@ router.use('/alarmType', alarmTypeRoutes);
 router.use('/interestRequest', interestRequestRoutes);
 router.use('/requestInfo', requestInfoRoutes);
 router.use('/requestApplicant', requestApplicantRoutes);
-router.use('/userCreditInfo', userCreditInfoRoutes);
 router.use('/creditHistory', creditHistoryRoutes);
 
 module.exports = router;

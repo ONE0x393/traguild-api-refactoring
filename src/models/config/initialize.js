@@ -58,10 +58,6 @@ const initialize = async () => {
             const insertRequestApplicant = require('@src/models/dummy/insertRequestApplicant');
             await insertRequestApplicant();
 
-            // Insert UserCreditInfo data
-            const insertUserCreditInfo = require('@src/models/dummy/insertUserCreditInfo');
-            await insertUserCreditInfo();
-
             // Insert CreditHistory data
             const insertCreditHistory = require('@src/models/dummy/insertCreditHistory');
             await insertCreditHistory();
