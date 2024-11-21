@@ -79,6 +79,8 @@ exports.updateUser = async (req, res) => {
             "user_idx": 1,
             "user_pw": "chPw",
             "user_emaill": "chmail@gmail.com",
+            user_nickname: "율도국 정상화",
+            user_credit: 9080,
             "user_birth": "1932-04-03",
             "user_rate": 73,
             "is_agree_privacy": true
