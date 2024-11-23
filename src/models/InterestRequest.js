@@ -2,6 +2,11 @@ const {DataTypes} = require('sequelize');
 const sequelize = require('@src/config/database');
 
 const InterestRequest = sequelize.define('TB_INTEREST_REQUEST', {
+    interest_idx:{
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     user_idx:{  //유저 고유 KEY
         type: DataTypes.INTEGER,
         allowNull: false

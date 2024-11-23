@@ -9,7 +9,7 @@ exports.createInterestRequest = async (data) => {
 
     await esClient.index({
         index: 'interest_request',
-        id: interest.user_idx,
+        id: interest.interest_idx,
         body: interest
     });
 
@@ -56,7 +56,7 @@ exports.updateInterestRequest = async (data) => {
     });
     await esClient.update({
         index: 'interest_request',
-        id: data.user_idx,
+        id: data.interest_idx,
         body: {
             doc: data
         }
