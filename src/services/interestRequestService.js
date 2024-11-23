@@ -4,15 +4,13 @@ const esClient = require('../config/esClient');
 
 exports.createInterestRequest = async (data) => {
     const interest = await InterestRequest.create(data);
-    if (interest.interest_idx) {
-        await esClient.index({
-            index: 'interest_request',
-            id: interest.interest_idx,  // DB에서 생성된 interest_idx를 안전하게 사용
-            body: interest  // 삽입된 interest 객체
-        });
-    } else {
-        throw new Error("Failed to create interest request or interest_idx is missing");
-    }
+    await esClient.index({
+        index: 'interest_request',
+        id: interest.interest_idx,
+        body: interest
+    });
+
+    return interest;
 }
 
 exports.getAllInterestRequests = async () => {
@@ -43,6 +41,8 @@ exports.getInterestRequestByUser = async (user_idx) => {
 
 exports.updateInterestRequest = async (data) => {
 
+
+
     await InterestRequest.update({
         user_idx: data.user_idx,
         request_idx: data.request_idx
@@ -51,17 +51,12 @@ exports.updateInterestRequest = async (data) => {
             user_idx: data.user_idx
         }
     });
-    if (data.interest_idx) {
-        await esClient.update({
-            index: 'interest_request',
-            id: data.interest_idx,
-            body: {
-                doc: data
-            }
-        });
-    } else {
-        throw new Error("Failed to create interest request or interest_idx is missing");
-    }
-
+    await esClient.update({
+        index: 'interest_request',
+        id: data.interest_idx,
+        body: {
+            doc: data
+        }
+    });
     return data;
 }

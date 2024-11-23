@@ -71,7 +71,7 @@ exports.getRequestInfoByIdx = async (request_idx) => {
 }
 
 //terms를 사용해 배열로 값을 받아와도 한번에 처리
-exports.getRequestInfosByIdxList = async (requestIdxList, page, limit) => {
+exports.getRequestInfosByIdxList = async (requestIdxList, body) => {
     const { body } = await esClient.search({
         index: 'request_info',
         body: {
@@ -94,8 +94,8 @@ exports.getRequestInfosByIdxList = async (requestIdxList, page, limit) => {
                     }
                 }
             ],
-            from: (page - 1) * limit, // 시작 위치, 0부터 시작하기 때문에 page-1
-            size: limit, // 가져올 개수
+            from: (body.page - 1) * body.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
+            size: body.limit, // 가져올 개수
         }
     });
 
