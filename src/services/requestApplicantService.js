@@ -23,3 +23,14 @@ exports.updateRequestApplicant = async (data) => {
         }
     });
 }
+
+exports.updateRequestAllApplicantForReject = async (request_idx, applicant_state) => {
+
+    return await RequestApplicant.update({
+        applicant_state: applicant_state,
+    }, {
+        where: {
+            request_idx: request_idx
+        }
+    });
+}

@@ -15,5 +15,9 @@ router.post('/all', requestApplicantController.getAllRequestApplicants);
  * 의뢰지원자 정보 수정
  */
 router.post('/update', requestApplicantController.updateRequestApplicant);
+/**
+ * 모든 의뢰지원자 일괄 반려
+ */
+router.post('/rejectAll', requestApplicantController.updateRequestAllApplicantForReject);
 
 module.exports = router;
