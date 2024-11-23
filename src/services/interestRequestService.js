@@ -48,7 +48,7 @@ exports.updateInterestRequest = async (data) => {
         request_idx: data.request_idx
     }, {
         where: {
-            user_idx: data.user_idx
+            interest_idx: data.interest_idx
         }
     });
     await esClient.update({
