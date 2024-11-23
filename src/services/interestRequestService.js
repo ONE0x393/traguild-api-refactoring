@@ -1,19 +1,18 @@
 const InterestRequest = require('../models/InterestRequest');
 const sequelize = require('../config/database');
 const esClient = require('../config/esClient');
-const RequestInfo = require("@src/models/RequestInfo");
 
 exports.createInterestRequest = async (data) => {
-    return InterestRequest.create(data);
-    const interest = await RequestInfo.create(data);
-
-    await esClient.index({
-        index: 'interest_request',
-        id: interest.interest_idx,
-        body: interest
-    });
-
-    return interest;
+    const interest = await InterestRequest.create(data);
+    if (interest.interest_idx) {
+        await esClient.index({
+            index: 'interest_request',
+            id: interest.interest_idx,  // DB에서 생성된 interest_idx를 안전하게 사용
+            body: interest  // 삽입된 interest 객체
+        });
+    } else {
+        throw new Error("Failed to create interest request or interest_idx is missing");
+    }
 }
 
 exports.getAllInterestRequests = async () => {
@@ -44,9 +43,7 @@ exports.getInterestRequestByUser = async (user_idx) => {
 
 exports.updateInterestRequest = async (data) => {
 
-
-
-    await RequestInfo.update({
+    await InterestRequest.update({
         user_idx: data.user_idx,
         request_idx: data.request_idx
     }, {
@@ -54,12 +51,17 @@ exports.updateInterestRequest = async (data) => {
             user_idx: data.user_idx
         }
     });
-    await esClient.update({
-        index: 'interest_request',
-        id: data.interest_idx,
-        body: {
-            doc: data
-        }
-    });
+    if (data.interest_idx) {
+        await esClient.update({
+            index: 'interest_request',
+            id: data.interest_idx,
+            body: {
+                doc: data
+            }
+        });
+    } else {
+        throw new Error("Failed to create interest request or interest_idx is missing");
+    }
+
     return data;
 }
