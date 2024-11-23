@@ -30,7 +30,8 @@ exports.updateRequestAllApplicantForReject = async (request_idx, applicant_state
         applicant_state: applicant_state,
     }, {
         where: {
-            request_idx: request_idx
+            request_idx: request_idx, //특정 의뢰에 지원한 사람들 중
+            applicant_state: "대기", //상태가 대기중인 지원자들에 한하여
         }
     });
 }
