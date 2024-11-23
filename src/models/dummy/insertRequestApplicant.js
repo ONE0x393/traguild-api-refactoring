@@ -4,25 +4,25 @@ const insertRequestApplicant = async () => {
     return RequestApplicant.bulkCreate([
         {
             "request_idx": "1",
-            "applicant_idx": "1",
-            "applicant_state": "수락"
+            "user_idx": "1",
+            "applicant_state": "승인"
         },{
             "request_idx": "1",
-            "applicant_idx": "2",
+            "user_idx": "2",
             "applicant_state": "취소",
             "is_canceled": "1"
         },{
             "request_idx": "1",
-            "applicant_idx": "3",
+            "user_idx": "3",
             "applicant_state": "대기"
         },{
             "request_idx": "5",
-            "applicant_idx": "3",
-            "applicant_state": "거절"
+            "user_idx": "3",
+            "applicant_state": "반려"
         },{
             "request_idx": "3",
-            "applicant_idx": "5",
-            "applicant_state": "수락"
+            "user_idx": "5",
+            "applicant_state": "승인"
         },
     ]);
 }

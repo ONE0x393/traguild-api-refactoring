@@ -11,8 +11,9 @@ exports.createRequestApplicant= async (req, res) => {
         required: true,
         schema: {
             "request_idx": 1,
-            "applicant_idx": 2,
-            "applicant_state": "지원성공"
+            "user_idx": 2,
+            "applicant_state": "승인"
+            "applicant_intro": "안녕하십니까".
         }
     }
     */
@@ -50,8 +51,9 @@ exports.updateRequestApplicant = async (req, res) => {
         required: true,
         schema: {
             "request_idx": 1,
-            "applicant_idx": 2,
-            "applicant_state": "선발보류"
+            "user_idx": 2,
+            "applicant_state": "대기"
+            "applicant_intro": "한곡 뽑아보겠습니다!".
         }
     }
     */
