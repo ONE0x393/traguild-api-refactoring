@@ -37,6 +37,14 @@
                   "type": "string",
                   "example": "홍길동"
                 },
+                "user_nickname": {
+                  "type": "string",
+                  "example": "율도국 대가리"
+                },
+                "user_credit": {
+                  "type": "number",
+                  "example": 777
+                },
                 "user_email": {
                   "type": "string",
                   "example": "gdhong@gmail.com"
@@ -130,6 +138,14 @@
                 "user_emaill": {
                   "type": "string",
                   "example": "chmail@gmail.com"
+                },
+                "user_nickname": {
+                  "type": "string",
+                  "example": "율도국 정상화"
+                },
+                "user_credit": {
+                  "type": "number",
+                  "example": 9080
                 },
                 "user_birth": {
                   "type": "string",
@@ -905,7 +921,7 @@
         }
       }
     },
-    "/api/requestinfo/": {
+    "/api/requestInfo/": {
       "put": {
         "tags": [
           "requestInfo - 의뢰 정보 테이블"
@@ -919,17 +935,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "request_idx": {
-                  "type": "number",
-                  "example": 1
-                },
                 "user_idx": {
                   "type": "number",
                   "example": 1
                 },
                 "request_region": {
                   "type": "string",
-                  "example": "경남"
+                  "example": "경상남도 창원시"
                 },
                 "request_title": {
                   "type": "string",
@@ -940,16 +952,12 @@
                   "example": "제목이랑 같습니다. 야리끼리로 하루 일하실 성인남성 3분 구합니다."
                 },
                 "request_cost": {
-                  "type": "string",
-                  "example": "시급 2만원"
+                  "type": "number",
+                  "example": 20000
                 },
                 "request_state": {
                   "type": "string",
                   "example": "미완료"
-                },
-                "transaction_state": {
-                  "type": "string",
-                  "example": "거래미완"
                 },
                 "applicant_idx": {
                   "type": "number",
@@ -999,7 +1007,7 @@
         }
       }
     },
-    "/api/requestinfo/all": {
+    "/api/requestInfo/all": {
       "post": {
         "tags": [
           "requestInfo - 의뢰 정보 테이블"
@@ -1015,7 +1023,43 @@
         }
       }
     },
-    "/api/requestinfo/update": {
+    "/api/requestInfo/fetch": {
+      "post": {
+        "tags": [
+          "requestInfo - 의뢰 정보 테이블"
+        ],
+        "description": "의뢰 정보 n건 조회",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "number",
+                  "example": 1
+                },
+                "limit": {
+                  "type": "number",
+                  "example": 10
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/requestInfo/update": {
       "post": {
         "tags": [
           "requestInfo - 의뢰 정보 테이블"
@@ -1039,7 +1083,7 @@
                 },
                 "request_region": {
                   "type": "string",
-                  "example": "경남"
+                  "example": "경상남도 창원시"
                 },
                 "request_title": {
                   "type": "string",
@@ -1050,16 +1094,12 @@
                   "example": "2분 지원완료 됬습니다. 마지막 1분 모집합니다"
                 },
                 "request_cost": {
-                  "type": "string",
-                  "example": "시급 2만원"
+                  "type": "number",
+                  "example": 25000
                 },
                 "request_state": {
                   "type": "string",
                   "example": "미완료"
-                },
-                "transaction_state": {
-                  "type": "string",
-                  "example": "거래미완"
                 },
                 "applicant_idx": {
                   "type": "number",
@@ -1160,6 +1200,144 @@
                 "applicant_state": {
                   "type": "string",
                   "example": "선발보류"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/creditHistory/": {
+      "put": {
+        "tags": [
+          "creditHistory - credit 거래 내역 테이블"
+        ],
+        "description": "새로운 credit 거래 내역 추가",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "host_user_idx": {
+                  "type": "number",
+                  "example": 1
+                },
+                "apply_user_idx": {
+                  "type": "number",
+                  "example": 2
+                },
+                "request_idx": {
+                  "type": "number",
+                  "example": 3
+                },
+                "trade_amount": {
+                  "type": "number",
+                  "example": 120
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "작성됨"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "creditHistory - credit 거래 내역 테이블"
+        ],
+        "description": "새로운 credit 거래 내역 추가",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "credit_trade_idx": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/creditHistory/all": {
+      "post": {
+        "tags": [
+          "creditHistory - credit 거래 내역 테이블"
+        ],
+        "description": "새로운 credit 거래 내역 추가",
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/creditHistory/update": {
+      "post": {
+        "tags": [
+          "creditHistory - credit 거래 내역 테이블"
+        ],
+        "description": "새로운 credit 거래 내역 추가",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "credit_trade_idx": {
+                  "type": "number",
+                  "example": 1
+                },
+                "host_user_idx": {
+                  "type": "number",
+                  "example": 1
+                },
+                "apply_user_idx": {
+                  "type": "number",
+                  "example": 2
+                },
+                "request_idx": {
+                  "type": "number",
+                  "example": 3
+                },
+                "trade_amount": {
+                  "type": "number",
+                  "example": 2500
                 }
               }
             }

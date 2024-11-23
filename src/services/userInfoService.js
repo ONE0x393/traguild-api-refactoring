@@ -30,3 +30,13 @@ exports.updateUser = async (userData) => {
         }
     });
 }
+
+exports.updateUserForCredit = async (userData) => {
+    return await UserInfo.update({
+        user_credit: userData.user_credit,
+    }, {
+        where: {
+            user_idx: userData.user_idx
+        }
+    });
+}

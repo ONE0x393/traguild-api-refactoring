@@ -96,3 +96,26 @@ exports.updateUser = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.updateUserForCredit = async (req, res) => {
+    /*
+    #swagger.description = "사용자 정보 갱신"
+    #swagger.tags = ['userInfo - 사용자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            user_credit: 9080,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/updateForCredit`);
+        const users = await userInfoService.updateUserForCredit(req.body);
+        res.json(users);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/updateForCredit 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
