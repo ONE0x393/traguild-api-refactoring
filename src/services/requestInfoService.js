@@ -107,14 +107,31 @@ exports.getRequestInfoByUser = async (user_idx) => {
         index: 'request_info',
         body: {
             query: {
-                term: { user_idx: user_idx }
-            }
+                bool: {
+                    must: [
+                        {
+                            terms: { request_idx: requestIdxList }  // 관심 있는 여러 request_idx
+                        },
+                        {
+                            term: { is_deleted: false }  // 삭제되지 않은 데이터만
+                        }
+                    ]
+                }
+            },
+            sort: [
+                {
+                    request_idx: {
+                        order: 'desc' // 역순 정렬 (내림차순)
+                    }
+                }
+            ],
+            from: (page - 1) * limit, // 시작 위치, 0부터 시작하기 때문에 page-1
+            size: limit, // 가져올 개수
         }
     });
 
     return body.hits.hits.map(hit => hit._source);
-    //return RequestInfo.findByPk(request_idx);
-}
+};
 
 exports.updateRequestInfo = async (data) => {
     const now = new Date();
