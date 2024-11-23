@@ -12,8 +12,13 @@ router.put('/', interestRequestController.createInterestRequest);
  */
 router.post('/all', interestRequestController.getAllInterestRequests);
 /**
+ * 모든 관심의뢰 정보 조회
+ */
+router.post('/fetch', interestRequestController.getFetchInterestRequestsByUser);
+/**
  * 관심의뢰 정보 수정
  */
 router.post('/update', interestRequestController.updateInterestRequest);
+
 
 module.exports = router;

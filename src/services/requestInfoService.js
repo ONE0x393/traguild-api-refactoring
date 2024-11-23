@@ -70,6 +70,38 @@ exports.getRequestInfoByIdx = async (request_idx) => {
     //return RequestInfo.findByPk(request_idx);
 }
 
+//terms를 사용해 배열로 값을 받아와도 한번에 처리
+exports.getRequestInfosByIdxList = async (requestIdxList, page, limit) => {
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            query: {
+                bool: {
+                    must: [
+                        {
+                            terms: { request_idx: requestIdxList }  // 관심 있는 여러 request_idx
+                        },
+                        {
+                            term: { is_deleted: false }  // 삭제되지 않은 데이터만
+                        }
+                    ]
+                }
+            },
+            sort: [
+                {
+                    request_idx: {
+                        order: 'desc' // 역순 정렬 (내림차순)
+                    }
+                }
+            ],
+            from: (page - 1) * limit, // 시작 위치, 0부터 시작하기 때문에 page-1
+            size: limit, // 가져올 개수
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+};
+
 exports.updateRequestInfo = async (data) => {
     const now = new Date();
     data.updated_time = now.toISOString();
