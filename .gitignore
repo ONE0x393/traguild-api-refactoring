@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,git,node,dotenv,visualstudiocode,intellij+all
 
 ### Swagger ###
-./src/swagger-output.json
+src/swagger-output.json
 
 ### dotenv ###
 .env
