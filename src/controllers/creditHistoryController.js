@@ -10,10 +10,11 @@ exports.createCreditHistory= async (req, res) => {
         in: 'body',
         required: true,
         schema: {
-            "host_user_idx": 1,
-            "apply_user_idx": 2,
+            "user_idx": 1,
             "request_idx": 3,
-            "trade_amount": 120,
+            "modify_credit": 120,
+            "modify_type":false,
+            "credit_from": "글 작성",
         }
     }
     */
@@ -73,10 +74,11 @@ exports.updateCreditHistory = async (req, res) => {
         required: true,
         schema: {
             "credit_trade_idx": 1,
-            "host_user_idx": 1,
-            "apply_user_idx": 2,
+            "user_idx": 1,
             "request_idx": 3,
-            "trade_amount": 2500,
+            "modify_credit": 2500,
+            "modify_type":false,
+            "credit_from": "글 작성",
         }
     }
     */

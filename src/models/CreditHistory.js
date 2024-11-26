@@ -7,11 +7,7 @@ const CreditHistory = sequelize.define('TB_CREDIT_HISTORY', {
         autoIncrement: true,
         primaryKey: true
     },
-    host_user_idx: {  //의뢰공고 유저 고유 KEY(고용자)
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    apply_user_idx: {  //지원한 유저 고유 KEY(피고용자)
+    user_idx: {  //의뢰공고 유저 고유 KEY(고용자)
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -19,9 +15,16 @@ const CreditHistory = sequelize.define('TB_CREDIT_HISTORY', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    trade_amount: {  //거래한 Credit 양
+    modify_credit: {  //거래한 Credit 양
         type: DataTypes.INTEGER,
         defaultValue:0,
+    },
+    modify_type:{ // 거래한 Credit이 Minus(사용): false  /  Plus(생산): true 로 설정
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    credit_from:{ //0일경우 어디에 사용되었는지, 충전일 경우 credit이 어디서 들어왔는지 출처
+        type: DataTypes.STRING(20),
     },
     trade_time: {  //Credit 거래 시간
         type: DataTypes.DATE,

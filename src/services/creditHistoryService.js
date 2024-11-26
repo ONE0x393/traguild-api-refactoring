@@ -52,10 +52,11 @@ exports.updateCreditHistory = async (data) => {
 
     await CreditHistory.update({
         credit_trade_idx: data.credit_trade_idx,
-        host_user_idx: data.host_user_idx,
-        apply_user_idx: data.apply_user_idx,
+        user_idx: data.user_idx,
         request_idx: data.request_idx,
-        trade_amount: data.trade_amount,
+        modify_credit: data.modify_credit,
+        modify_type: data.modify_type,
+        credit_from: data.credit_from,
         updated_time:data.updated_time,
     }, {
         where: {

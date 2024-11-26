@@ -1,34 +1,38 @@
-const CreditHistory = require('@src/models/RequestInfo');
+const CreditHistory = require('@src/models/CreditHistory');
 const esClient = require('@src/config/esClient');
 
 const insertCreditHistory = async () => {
     const history = await CreditHistory.bulkCreate([
         {
-            "host_user_idx": 1,
-            "apply_user_idx": 2,
+            "user_idx": 1,
             "request_idx":3,
-            "trade_amount": 120,
+            "modify_credit": 120,
+            "modify_type": false,
+            "credit_from": "글 작성",
             "created_date": "2024-07-29",
             "updated_time": "2024-07-29"
         },{
-            "host_user_idx": 1,
-            "apply_user_idx": 3,
+            "user_idx": 1,
             "request_idx":3,
-            "trade_amount": 3500,
+            "modify_credit": 3500,
+            "modify_type": true,
+            "credit_from": "리뷰 작성",
             "created_date": "2024-10-29",
             "updated_time": "2024-10-29"
         },{
-            "host_user_idx": 2,
-            "apply_user_idx": 4,
+            "user_idx": 2,
             "request_idx":4,
-            "trade_amount": 2800,
+            "modify_credit": 2800,
+            "modify_type": true,
+            "credit_from": "리뷰 작성",
             "created_date": "2024-11-12",
             "updated_time": "2024-11-12"
         },{
-            "host_user_idx": 5,
-            "apply_user_idx": 3,
+            "user_idx": 5,
             "request_idx":5,
-            "trade_amount": 1600,
+            "modify_credit": 1600,
+            "modify_type": false,
+            "credit_from": "글 작성",
             "created_date": "2024-11-15",
             "updated_time": "2024-11-15"
         },
