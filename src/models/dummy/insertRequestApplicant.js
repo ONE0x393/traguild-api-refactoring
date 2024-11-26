@@ -8,7 +8,7 @@ const insertRequestApplicant = async () => {
             "applicant_state": "대기"
         },{
             "request_idx": 2,
-            "user_idx": 7,
+            "user_idx": 2,
             "applicant_state": "취소",
             "is_canceled": "1"
         },{
@@ -66,6 +66,26 @@ const insertRequestApplicant = async () => {
         },{
             "request_idx": 6,
             "user_idx": 3859,
+            "applicant_state": "대기"
+        },
+        {
+            "request_idx": 156,
+            "user_idx": 2,
+            "applicant_state": "대기"
+        },
+        {
+            "request_idx": 28,
+            "user_idx": 2,
+            "applicant_state": "대기"
+        },
+        {
+            "request_idx": 1222,
+            "user_idx": 2,
+            "applicant_state": "대기"
+        },
+        {
+            "request_idx": 977,
+            "user_idx": 2,
             "applicant_state": "대기"
         },
     ]);

@@ -114,11 +114,10 @@ exports.getFecthApplicantByUser = async (req, res) => {
 
         // request_idx만을 뽑아 배열로 만든다.
         const users_request_idx = users_requestInfo.map(item => item.request_idx);
-        console.log(users_request_idx)
 
         const users_applicant = await requestApplicantService.getRequestApplicantsByRequestIdx(users_request_idx, req.body);
 
-        res.json(users_applicant);
+        res.json(users_applicant.map(item => item.user_idx));
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});

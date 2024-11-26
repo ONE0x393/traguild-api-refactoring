@@ -42,6 +42,21 @@ exports.getAllRequestApplicants = async (req, res) => {
     }
 }
 
+exports.getFetchRequestInfosByUser = async (req, res) => {
+    /*
+    #swagger.description = "의뢰 지원자 정보 전체 조회"
+    #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/applyRequest`);
+        const RequestApplicant = await requestApplicantService.getFetchRequestInfosByUser(req.body.user_idx, req.body);
+        res.json(RequestApplicant.map(item => item.request_idx));
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/applyRequest 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateRequestApplicant = async (req, res) => {
     /*
     #swagger.description = "의뢰 지원자 정보 갱신"
@@ -80,11 +95,11 @@ exports.updateRequestAllApplicantForReject = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/updateRequestAllApplicantForReject`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/rejectAll`);
         const RequestApplicant = await requestApplicantService.updateRequestAllApplicantForReject(req.body.request_idx, req.body.applicant_state);
         res.json(RequestApplicant);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/updateRequestAllApplicantForReject 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/rejectAll 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
