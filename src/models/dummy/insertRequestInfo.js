@@ -82,7 +82,9 @@ const insertRequestInfo = async () => {
             "request_content": "제목이랑 같습니다",
             "request_cost": 20000,
             "request_state": "모집",
-            "applicant_idx": 377
+            "applicant_idx": 377,
+            "created_date": "2024-08-20",
+            "updated_time": "2024-08-20"
         },{
             "user_idx": 7,
             "request_region": "울산광역시 남구",
@@ -90,7 +92,9 @@ const insertRequestInfo = async () => {
             "request_content": "제목이랑 같습니다",
             "request_cost": 20000,
             "request_state": "모집",
-            "applicant_idx": 921
+            "applicant_idx": 921,
+            "created_date": "2024-08-20",
+            "updated_time": "2024-08-20"
         },{
             "user_idx": 8,
             "request_region": "인천광역시 미추홀구",
@@ -98,7 +102,9 @@ const insertRequestInfo = async () => {
             "request_content": "제목이랑 같습니다",
             "request_cost": 20000,
             "request_state": "모집",
-            "applicant_idx": 642
+            "applicant_idx": 642,
+            "created_date": "2024-08-20",
+            "updated_time": "2024-08-20"
         },
     ]);
     for(const request of requests){
