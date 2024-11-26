@@ -39,7 +39,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       TZ: Asia/Seoul
     volumes:
-      - db_datas:/var/lib/mysql
+      - /data/mysql:/var/lib/mysql
     platform: linux/x86_64
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
@@ -87,7 +87,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es_datas:/var/lib/elasticsearch/data
+      - /data/elastic:/var/lib/elasticsearch/data
     platform: linux/x86_64
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1" ]
@@ -113,7 +113,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es_datas:/var/lib/elasticsearch/data
+      - /var/lib/elasticsearch/data
     platform: linux/x86_64
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1" ]
@@ -122,17 +122,3 @@ services:
       retries: 5
     profiles:
       - development
-
-volumes:
-  db_datas:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /data/mysql
-  es_datas:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /data/elastic
