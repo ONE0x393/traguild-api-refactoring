@@ -69,22 +69,22 @@ const insertRequestApplicant = async () => {
             "applicant_state": "대기"
         },
         {
-            "request_idx": 156,
+            "request_idx": 7,
             "user_idx": 2,
             "applicant_state": "대기"
         },
         {
-            "request_idx": 28,
+            "request_idx": 8,
             "user_idx": 2,
             "applicant_state": "대기"
         },
         {
-            "request_idx": 1222,
+            "request_idx": 9,
             "user_idx": 2,
             "applicant_state": "대기"
         },
         {
-            "request_idx": 977,
+            "request_idx": 11,
             "user_idx": 2,
             "applicant_state": "대기"
         },
