@@ -114,6 +114,7 @@ exports.getFecthApplicantByUser = async (req, res) => {
 
         // request_idx만을 뽑아 배열로 만든다.
         const users_request_idx = users_requestInfo.map(item => item.request_idx);
+        console.log(users_request_idx)
 
         const users_applicant = await requestApplicantService.getRequestApplicantsByRequestIdx(users_request_idx, req.body);
 
