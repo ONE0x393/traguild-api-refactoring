@@ -1,0 +1,48 @@
+name: Deploy to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  depoly:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Add SSH known hosts
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+  
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Copy files via SSH
+      run: |
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "rm -rf ~/app && mkdir -p ~/app"
+        scp -P ${{ secrets.SERVER_PORT }} -r * ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/app
+    
+    - name: Create .env file on the server
+      run: |
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'PORT=${{ secrets.PORT }}' >> ~/app/.env"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' >> ~/app/.env"
+
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'PORT=${{ secrets.PORT }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'HOST=${{ secrets.HOST }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_HOST=${{ secrets.DB_HOST }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_PORT=${{ secrets.DB_PORT }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_USER=${{ secrets.DB_USER }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_PASSWORD=${{ secrets.DB_PASSWORD }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_NAME=${{ secrets.DB_NAME }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_HOST=${{ secrets.ES_HOST }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_PORT=${{ secrets.ES_PORT }}' >> ~/app/.env.production"
+
+    - name: Deploy with Docker Compose
+      run: |
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "cd ~/app && docker compose --profile production down && docker compose --profile production up -d --build"
