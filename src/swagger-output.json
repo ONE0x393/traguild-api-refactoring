@@ -173,6 +173,42 @@
         }
       }
     },
+    "/api/userInfo/updateforcredit": {
+      "post": {
+        "tags": [
+          "userInfo - 사용자 정보 테이블"
+        ],
+        "description": "사용자 정보 갱신",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_idx": {
+                  "type": "number",
+                  "example": 1
+                },
+                "user_credit": {
+                  "type": "number",
+                  "example": 9080
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
     "/api/userRelation/": {
       "put": {
         "tags": [
@@ -885,6 +921,39 @@
         }
       }
     },
+    "/api/interestRequest/fetch": {
+      "post": {
+        "tags": [
+          "interestRequest - 관심 의뢰 테이블"
+        ],
+        "description": "관심 의뢰 정보 전체 조회",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_idx": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "404": {
+            "description": "찾을 수 없음"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
     "/api/interestRequest/update": {
       "post": {
         "tags": [
@@ -1059,6 +1128,41 @@
         }
       }
     },
+    "/api/requestInfo/getApply": {
+      "post": {
+        "tags": [
+          "requestInfo - 의뢰 정보 테이블"
+        ],
+        "description": "특정 의뢰 정보 조회",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_idx": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "404": {
+            "description": "찾을 수 없음"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
     "/api/requestInfo/update": {
       "post": {
         "tags": [
@@ -1137,13 +1241,17 @@
                   "type": "number",
                   "example": 1
                 },
-                "applicant_idx": {
+                "user_idx": {
                   "type": "number",
                   "example": 2
                 },
                 "applicant_state": {
                   "type": "string",
-                  "example": "지원성공"
+                  "example": "대기"
+                },
+                "applicant_intro": {
+                  "type": "string",
+                  "example": "안녕하십니까"
                 }
               }
             }
@@ -1193,13 +1301,49 @@
                   "type": "number",
                   "example": 1
                 },
-                "applicant_idx": {
+                "user_idx": {
                   "type": "number",
                   "example": 2
                 },
                 "applicant_state": {
                   "type": "string",
-                  "example": "선발보류"
+                  "example": "대기"
+                },
+                "applicant_intro": {
+                  "type": "string",
+                  "example": "한곡 뽑아보겠습니다!"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
+    "/api/requestApplicant/rejectAll": {
+      "post": {
+        "tags": [
+          "requestApplicant - 의뢰 지원자 정보 테이블"
+        ],
+        "description": "의뢰 지원자 정보 갱신",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "request_idx": {
+                  "type": "number",
+                  "example": 1
                 }
               }
             }

@@ -102,6 +102,20 @@ exports.getRequestInfosByIdxList = async (requestIdxList, req_body) => {
     return body.hits.hits.map(hit => hit._source);
 };
 
+exports.getRequestInfoByUser = async (user_idx) => {
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            query: {
+                term: { user_idx: user_idx }
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+    //return RequestInfo.findByPk(request_idx);
+}
+
 exports.updateRequestInfo = async (data) => {
     const now = new Date();
     data.updated_time = now.toISOString();
