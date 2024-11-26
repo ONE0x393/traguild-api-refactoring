@@ -1015,6 +1015,41 @@
         }
       }
     },
+    "/api/requestinfo/getApply": {
+      "post": {
+        "tags": [
+          "requestInfo - 의뢰 정보 테이블"
+        ],
+        "description": "특정 의뢰 정보 조회",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_idx": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공"
+          },
+          "404": {
+            "description": "찾을 수 없음"
+          },
+          "500": {
+            "description": "내부 서버 오류"
+          }
+        }
+      }
+    },
     "/api/requestinfo/update": {
       "post": {
         "tags": [
