@@ -1,4 +1,5 @@
 const requestInfoService = require('../services/requestInfoService');
+const requestApplicantService = require('../services/requestApplicantService');
 const logger = require('../config/winston/logger');
 const requestIp = require('request-ip');
 
@@ -65,6 +66,39 @@ exports.getRequestInfoByIdx = async (req, res) => {
         res.json(requestInfo);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
+exports.getFecthApplicantByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 의뢰 정보 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
+
+        //특정 유저가 등록한 모든 requestInfo를 가져온다.
+        const users_requestInfo = await requestInfoService.getRequestInfoByUser(req.body.user_idx);
+        if(!users_requestInfo.length){
+            return res.status(404).json({ message: "No requests found for by this user" });
+        }
+
+        // request_idx만을 뽑아 배열로 만든다.
+        const users_request_idx = users_requestInfo.map(item => item.request_idx);
+
+        const users_applicant = await requestApplicantService.getRequestApplicantsByRequestIdx(users_request_idx);
+
+        res.json(users_applicant);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

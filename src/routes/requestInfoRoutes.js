@@ -16,6 +16,10 @@ router.post('/', requestInfoController.getRequestInfoByIdx);
  */
 router.post('/all', requestInfoController.getAllRequestInfos);
 /**
+ * 의뢰인의 모든 지원자 조회
+ */
+router.post('/getApply', requestInfoController.getFecthApplicantByUser);
+/**
  * 의뢰 정보 수정
  */
 router.post('/update', requestInfoController.updateRequestInfo);
