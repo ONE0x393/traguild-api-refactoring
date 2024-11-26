@@ -109,17 +109,12 @@ exports.getFecthApplicantByUser = async (req, res) => {
         logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
 
         //특정 유저가 등록한 모든 requestInfo를 가져온다.
-        const users_requestInfo = await requestInfoService.getRequestInfoByUser(req.body.user_idx);
+        const users_requestInfo = await requestInfoService.getRequestInfoByUser(req.body.user_idx, req.body);
         if(!users_requestInfo.length){
             return res.status(404).json({ message: "No requests found for by this user" });
         }
 
-        // request_idx만을 뽑아 배열로 만든다.
-        const users_request_idx = users_requestInfo.map(item => item.request_idx);
-
-        const users_applicant = await requestApplicantService.getRequestApplicantsByRequestIdx(users_request_idx, req.body);
-
-        res.json(users_applicant.map(item => item.user_idx));
+        res.json(users_requestInfo);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
