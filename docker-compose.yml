@@ -51,7 +51,7 @@ services:
 
   mysql-dev:
     image: mysql:8.0
-    container_name: capstone_MySQL
+    container_name: capstone_MySQL_dev
     restart: always
     ports:
       - 13306:3306
@@ -99,7 +99,7 @@ services:
 
   elastic-dev:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
-    container_name: capstone_elasticsearch
+    container_name: capstone_elasticsearch_dev
     restart: always
     ports:
       - 9200:9200
