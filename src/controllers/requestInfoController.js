@@ -16,7 +16,7 @@ exports.createRequestInfo= async (req, res) => {
             "request_title": "공사장 야리끼리 3인 급구!",
             "request_content": "제목이랑 같습니다. 야리끼리로 하루 일하실 성인남성 3분 구합니다.",
             "request_cost": 20000,
-            "request_state": "미완료",
+            "request_state": "모집",
             "applicant_idx": 2
         }
     }
@@ -138,7 +138,7 @@ exports.updateRequestInfo = async (req, res) => {
             "request_title": "공사장 야리끼리 1인 급구!",
             "request_content": "2분 지원완료 됬습니다. 마지막 1분 모집합니다",
             "request_cost": 25000,
-            "request_state": "미완료",
+            "request_state": "모집",
             "applicant_idx": 2
         }
     }
