@@ -28,6 +28,10 @@ router.post('/getApply', requestInfoController.getFecthApplicantByUser);
  */
 router.post('/fetch', requestInfoController.getFetchRequestInfos);
 /**
+ * 특정 유저의 의뢰에 대한 지원자들 조회(10명씩)
+ */
+router.post('/getApply', requestInfoController.getFecthApplicantByUser);
+/**
  * 의뢰 정보 수정
  */
 router.post('/update', requestInfoController.updateRequestInfo);
