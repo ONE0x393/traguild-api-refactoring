@@ -42,7 +42,6 @@ jobs:
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_NAME=${{ secrets.DB_NAME }}' >> ~/app/.env.production"
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_HOST=${{ secrets.ES_HOST }}' >> ~/app/.env.production"
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_PORT=${{ secrets.ES_PORT }}' >> ~/app/.env.production"
-        
 
     - name: Deploy with Docker Compose
       run: |

@@ -24,6 +24,15 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    user_nickname:{
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
+    user_credit:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue:0,
+    },
     user_birth: {
         type: DataTypes.DATE,
         allowNull: false

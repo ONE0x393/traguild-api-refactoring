@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,git,node,dotenv,visualstudiocode,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,git,node,dotenv,visualstudiocode,intellij+all
 
+### Swagger ###
+src/swagger-output.json
+
 ### dotenv ###
 .env
 .env.development
@@ -279,6 +282,7 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+src/tempCodeRunnerFile.js
 
 # yarn v2
 .yarn/cache

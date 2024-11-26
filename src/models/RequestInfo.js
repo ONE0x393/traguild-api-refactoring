@@ -23,14 +23,12 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.TEXT
     },
     request_cost: {  //의뢰 비용
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
         defaultValue:0
     },
     request_state: {  //의뢰 상태
-        type: DataTypes.STRING(5)
-    },
-    transaction_state: {  //거래 상태
-        type: DataTypes.STRING(5)
+        type: DataTypes.STRING(5),
+        defaultValue: "모집", //기본은 모집
     },
     created_date: {  //등록날짜
         type: DataTypes.DATE,

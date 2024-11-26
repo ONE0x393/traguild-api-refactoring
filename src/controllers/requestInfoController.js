@@ -11,14 +11,12 @@ exports.createRequestInfo= async (req, res) => {
         in: 'body',
         required: true,
         schema: {
-            "request_idx": 1,
             "user_idx": 1,
-            "request_region": "경남",
+            "request_region": "경상남도 창원시",
             "request_title": "공사장 야리끼리 3인 급구!",
             "request_content": "제목이랑 같습니다. 야리끼리로 하루 일하실 성인남성 3분 구합니다.",
-            "request_cost": "시급 2만원",
+            "request_cost": 20000,
             "request_state": "미완료",
-            "transaction_state": "거래미완",
             "applicant_idx": 2
         }
     }
@@ -44,6 +42,29 @@ exports.getAllRequestInfos = async (req, res) => {
         res.json(requestInfo);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/all 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
+exports.getFetchRequestInfos = async (req, res) => {
+    /*
+    #swagger.description = "의뢰 정보 n건 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "page": 1,
+            "limit": 10
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
+        const requestInfo = await requestInfoService.getFetchRequestInfos(req.body);
+        res.json(requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
@@ -93,11 +114,10 @@ exports.getFecthApplicantByUser = async (req, res) => {
 
         // request_idx만을 뽑아 배열로 만든다.
         const users_request_idx = users_requestInfo.map(item => item.request_idx);
-        console.log(users_request_idx)
 
         const users_applicant = await requestApplicantService.getRequestApplicantsByRequestIdx(users_request_idx, req.body);
 
-        res.json(users_applicant);
+        res.json(users_applicant.map(item => item.user_idx));
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
@@ -114,12 +134,11 @@ exports.updateRequestInfo = async (req, res) => {
         schema: {
             "request_idx": 1,
             "user_idx": 1,
-            "request_region": "경남",
+            "request_region": "경상남도 창원시",
             "request_title": "공사장 야리끼리 1인 급구!",
             "request_content": "2분 지원완료 됬습니다. 마지막 1분 모집합니다",
-            "request_cost": "시급 2만원",
+            "request_cost": 25000,
             "request_state": "미완료",
-            "transaction_state": "거래미완",
             "applicant_idx": 2
         }
     }
