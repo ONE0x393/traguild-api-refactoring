@@ -59,7 +59,7 @@ exports.getFetchRequestInfosByUser = async (req, res) => {
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/applyRequest`);
         const RequestApplicant = await requestApplicantService.getFetchRequestInfosByUser(req.body.user_idx, req.body);
-        res.json(RequestApplicant.map(item => item.request_idx));
+        res.json(RequestApplicant);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/applyRequest 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
