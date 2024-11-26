@@ -44,8 +44,17 @@ exports.getAllRequestApplicants = async (req, res) => {
 
 exports.getFetchRequestInfosByUser = async (req, res) => {
     /*
-    #swagger.description = "의뢰 지원자 정보 전체 조회"
+    #swagger.description = "특정 사용자가 지원한 의뢰 조회"
     #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 2,
+            "page": 1,
+            "limit": 10
+        }
+    }
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/applyRequest`);

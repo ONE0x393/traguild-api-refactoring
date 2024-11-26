@@ -93,13 +93,15 @@ exports.getRequestInfoByIdx = async (req, res) => {
 
 exports.getFecthApplicantByUser = async (req, res) => {
     /*
-    #swagger.description = "특정 의뢰 정보 조회"
+    #swagger.description = "특정 사용자의 의뢰에 지원한 사람들 조회"
     #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',
         required: true,
         schema: {
-            "user_idx": 1
+            "user_idx": 1,
+            "page": 1,
+            "limit": 10
         }
     }
     */
