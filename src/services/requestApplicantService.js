@@ -55,10 +55,7 @@ exports.getFetchRequestInfosByUser = async (user_idx, data) => {
 exports.updateRequestApplicant = async (data) => {
 
     return await RequestApplicant.update({
-        request_idx: data.request_idx,
-        user_idx: data.user_idx,
         applicant_state: data.applicant_state,
-        applicant_intro: data.applicant_intro,
         is_canceled: data.is_canceled
     }, {
         where: {
