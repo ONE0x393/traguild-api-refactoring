@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-     mysql:
+     mysql-prod:
          condition: service_healthy
      elasticsearch:
          condition: service_healthy
