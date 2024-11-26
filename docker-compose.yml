@@ -27,7 +27,29 @@ services:
     profiles:
       - production
 
-  mysql:
+  mysql-prod:
+    image: mysql:8.0
+    container_name: capstone_MySQL
+    restart: always
+    ports:
+      - 13306:3306
+    environment:
+      MYSQL_DATABASE: capstone_db
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      TZ: Asia/Seoul
+    volumes:
+      - db_datas:/var/lib/mysql
+    platform: linux/x86_64
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    profiles:
+      - production
+
+  mysql-dev:
     image: mysql:8.0
     container_name: capstone_MySQL
     restart: always
@@ -47,7 +69,6 @@ services:
       timeout: 5s
       retries: 3
     profiles:
-      - production
       - development
 
   elasticsearch:
@@ -76,3 +97,11 @@ services:
     profiles:
       - production
       - development
+
+volumes:
+  db_datas:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/mysql
