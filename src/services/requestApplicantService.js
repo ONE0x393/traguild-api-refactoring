@@ -18,7 +18,10 @@ exports.getRequestApplicantsByRequestIdx = async (requestIdxList, data) => {
             where: {
                 request_idx: {
                     [Op.in]: requestIdxList // 배열에 있는 값들을 조건으로 설정
-                }
+                },
+                is_canceled: false,
+                applicant_state: "대기",
+
             },
             limit: data.limit,  // 한 페이지에 표시할 최대 데이터 수
             offset: offset // 시작 위치 (페이지 번호에 따라 계산된 값)
