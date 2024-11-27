@@ -5,9 +5,9 @@ const esClient = require('@src/config/esClient');
 
 
 const initialize = async () => {
-    await sequelize.sync({force: true});
     try{
         if(process.env.NODE_ENV != "production") {
+            await sequelize.sync({force: true});
             try {
                 // 모든 인덱스 삭제
                 await esClient.indices.delete({ index: '_all' });
@@ -63,7 +63,7 @@ const initialize = async () => {
             await insertCreditHistory();
 
             logger.info('Initial data inserted');
-        }
+        } else await sequelize.sync();
     } catch(e){
         logger.error(`models/initialize.js => ${e.message}`);
     }
