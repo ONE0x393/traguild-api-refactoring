@@ -22,6 +22,8 @@ const RequestApplicant = sequelize.define('TB_REQUEST_APPLICANT', {
     },
     applicant_intro: { //지원자 자기 소개?
         type: DataTypes.STRING(200),
+        defaultValue: "",
+        allowNull: false
     },
     is_canceled: { //지원 취소 여부
         type: DataTypes.BOOLEAN,

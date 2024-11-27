@@ -20,7 +20,9 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         allowNull: false
     },
     request_content: {  //의뢰 내용
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: false,
+        defaultValue: "",
     },
     request_cost: {  //의뢰 비용
         type: DataTypes.INTEGER,
