@@ -16,7 +16,6 @@ app.set('trust proxy', true);
 
 // Swagger UI setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-//app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // set up routes
 app.use('/api', routes);
