@@ -11,8 +11,8 @@ exports.getLogin = async (req, res) => {
         in: 'body',
         required: true,
         schema: {
-            user_id: 1,
-            user_pw: 1
+            user_id: "gdhong",
+            user_pw: "mypassword"
         }
     }
     */
