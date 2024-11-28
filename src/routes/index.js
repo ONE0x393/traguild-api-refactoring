@@ -10,6 +10,7 @@ const interestRequestRoutes = require('./interestRequestRoutes');
 const requestInfoRoutes = require('./requestInfoRoutes');
 const requestApplicantRoutes = require('./requestApplicantRoutes');
 const creditHistoryRoutes = require('./creditHistoryRoutes');
+const loginRoutes = require('./loginRoutes');
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use('/interestRequest', interestRequestRoutes);
 router.use('/requestInfo', requestInfoRoutes);
 router.use('/requestApplicant', requestApplicantRoutes);
 router.use('/creditHistory', creditHistoryRoutes);
+router.use('/login', loginRoutes);
 
 module.exports = router;

@@ -35,7 +35,6 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
     },
     user_birth: {
         type: DataTypes.DATE,
-        allowNull: false
     },
     user_rate: {
         type: DataTypes.STRING(50),
