@@ -61,7 +61,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       TZ: Asia/Seoul
     volumes:
-      - db_data_dev:/var/lib/mysql
+      - /var/lib/mysql
     platform: linux/x86_64
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
@@ -113,7 +113,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - es_data_dev:/usr/share/elasticsearch/data
+      - /usr/share/elasticsearch/data
     platform: linux/x86_64
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1" ]
