@@ -161,6 +161,9 @@ exports.getRequestInfoByUser = async (user_idx, data) => {
                 type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
             }
         );
+        if(result.length===0){
+            return [];
+        }
 
         return result;
 
