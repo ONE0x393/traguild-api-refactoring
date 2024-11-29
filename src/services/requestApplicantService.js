@@ -92,7 +92,7 @@ exports.getApplicantInfoByUser = async (user_idx, data) => {
                 FROM TB_REQUEST_INFO ri
                          JOIN TB_REQUEST_APPLICANT ra ON ri.request_idx = ra.request_idx
                          JOIN TB_USER_INFO ui ON ra.user_idx = ui.user_idx
-                WHERE ri.user_idx = :user_idx
+                WHERE ri.user_idx = :user_idx AND ra.applicant_state = status
                 ORDER BY ri.request_idx DESC
                     LIMIT :limit OFFSET :offset
             `,
@@ -101,6 +101,7 @@ exports.getApplicantInfoByUser = async (user_idx, data) => {
                     user_idx,      // `:user_idx`에 값을 바인딩
                     limit: data.limit,   // `:limit`에 페이지당 데이터 수를 바인딩
                     offset: offset,      // `:offset`에 계산된 오프셋 값 바인딩
+                    status: data.status,
                 },
                 type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
             }
