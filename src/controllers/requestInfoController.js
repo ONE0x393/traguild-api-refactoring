@@ -54,6 +54,7 @@ exports.getFetchRequestInfos = async (req, res) => {
         in: 'body',
         required: true,
         schema: {
+            "user_idx": 1,
             "page": 1,
             "limit": 10
         }
@@ -117,6 +118,36 @@ exports.getFecthApplicantByUser = async (req, res) => {
         res.json(users_requestInfo);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
+exports.getFecthApplicantOnlyMine = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자의 의뢰에 지원한 사람들 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "page": 1,
+            "limit": 10
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/onlyMine`);
+
+        //특정 유저가 등록한 모든 requestInfo를 가져온다.
+        const users_requestInfo = await requestInfoService.getFetchRequestInfosOnlyMine(req.body);
+        if(!users_requestInfo.length){
+            return res.status(404).json({ message: "No requests found for by this user" });
+        }
+
+        res.json(users_requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/onlyMine 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

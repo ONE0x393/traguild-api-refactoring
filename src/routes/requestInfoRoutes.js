@@ -16,9 +16,13 @@ router.post('/', requestInfoController.getRequestInfoByIdx);
  */
 router.post('/all', requestInfoController.getAllRequestInfos);
 /**
- * 모든 의뢰 정보 조회
+ * 내 의뢰를 제외한 의뢰들 조회
  */
 router.post('/fetch', requestInfoController.getFetchRequestInfos);
+/**
+ * 내가 올린 의뢰만 조회
+ */
+router.post('/onlyMine', requestInfoController.getFecthApplicantOnlyMine);
 /**
  * 특정 유저의 의뢰에 대한 지원자들 조회(10명씩)
  */

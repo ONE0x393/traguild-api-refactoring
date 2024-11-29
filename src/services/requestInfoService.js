@@ -33,6 +33,29 @@ exports.getAllRequestInfos = async () => {
     //return await RequestInfo.findAll();
 }
 
+exports.getFetchRequestInfosOnlyMine = async (data) => {
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            sort: [
+                {
+                    request_idx: {
+                        order: 'desc' // 역순 정렬 (내림차순)
+                    }
+                }
+            ],
+            from: (data.page - 1) * data.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
+            size: data.limit, // 가져올 개수
+            query: {
+                term: { user_idx:data.user_idx }
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+    //return await RequestInfo.findAll();
+}
+
 exports.getFetchRequestInfos = async (data) => {
     const { body } = await esClient.search({
         index: 'request_info',
@@ -47,7 +70,13 @@ exports.getFetchRequestInfos = async (data) => {
             from: (data.page - 1) * data.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
             size: data.limit, // 가져올 개수
             query: {
-                match_all: {}
+                bool: {
+                    must_not: [ //검색자 자기자신의 의뢰는 제외하여 검색
+                        {
+                            term: { user_idx: data.user_idx }
+                        }
+                    ]
+                }
             }
         }
     });
@@ -112,6 +141,7 @@ exports.getRequestInfoByUser = async (user_idx, data) => {
                     ri.request_idx,
                     ui.user_nickname,
                     ui.user_id,
+                    ui.user_idx,
                     ra.applicant_intro,
                     ra.applicant_state,
                     ri.request_region

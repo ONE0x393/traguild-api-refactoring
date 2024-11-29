@@ -14,6 +14,7 @@ exports.createUser = async (req, res) => {
             user_id: "gdhong",
             user_pw: "mypassword",
             user_name: "홍길동",
+            user_region: "경상남도 창원시",
             user_nickname: "율도국 대가리",
             user_credit: 777,
             user_email: "gdhong@gmail.com",
@@ -78,9 +79,10 @@ exports.updateUser = async (req, res) => {
         schema: {
             "user_idx": 1,
             "user_pw": "chPw",
+            "user_region": "경상남도 창원시",
             "user_emaill": "chmail@gmail.com",
-            user_nickname: "율도국 정상화",
-            user_credit: 9080,
+            "user_nickname": "율도국 정상화",
+            "user_credit": 9080,
             "user_birth": "1932-04-03",
             "user_rate": 73,
             "is_agree_privacy": true
