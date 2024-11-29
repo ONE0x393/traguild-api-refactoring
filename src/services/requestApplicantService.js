@@ -4,6 +4,17 @@ const { Op } = require('sequelize');
 const RequestInfo = require('../models/RequestInfo');
 
 exports.createRequestApplicant = async (data) => {
+    const existingApplicant = await RequestApplicant.findOne({
+        where: {
+            user_idx: data.user_idx,
+            request_idx: data.request_idx,
+            applicant_state: { [Op.in]: ["대기", "승인"] },
+            is_canceled: false
+        }
+    });
+    if (existingApplicant) {
+        return { http_status: "fail" };
+    }
     return RequestApplicant.create(data);
 }
 
