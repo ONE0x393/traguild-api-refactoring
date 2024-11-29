@@ -20,6 +20,10 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    user_region:{
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
     user_email: {
         type: DataTypes.STRING(50),
         allowNull: false

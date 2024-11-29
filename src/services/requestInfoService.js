@@ -108,8 +108,12 @@ exports.getRequestInfoByUser = async (user_idx, data) => {
         const result = await sequelize.query(
             `
                 SELECT
+                    ri.request_title,
+                    ri.request_idx,
                     ui.user_nickname,
+                    ui.user_id,
                     ra.applicant_intro,
+                    ra.applicant_state,
                     ri.request_region
                 FROM TB_REQUEST_INFO ri
                          JOIN TB_REQUEST_APPLICANT ra ON ri.request_idx = ra.request_idx
