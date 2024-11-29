@@ -19,6 +19,10 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.STRING(20),
         allowNull: false
     },
+    request_img:{ //의뢰 관련 이미지
+        type: DataTypes.STRING(200),
+        defaultValue: "",
+    },
     request_content: {  //의뢰 내용
         type: DataTypes.TEXT,
         allowNull: false,

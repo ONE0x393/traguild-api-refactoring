@@ -69,6 +69,28 @@ exports.getUser = async (req, res) => {
     }
 }
 
+exports.getUserWithImg = async (req, res) => {
+    /*
+    #swagger.description = "사용자 정보 조회"
+    #swagger.tags = ['userInfo - 사용자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            user_idx: 1,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userImg`);
+        const users = await userInfoService.getUserWithImg(req.body.user_idx);
+        res.json(users);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userImg 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateUser = async (req, res) => {
     /*
     #swagger.description = "사용자 정보 갱신"
@@ -92,6 +114,36 @@ exports.updateUser = async (req, res) => {
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
         const users = await userInfoService.updateUser(req.body);
+        res.json(users);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/update 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
+exports.updateUserImg = async (req, res) => {
+    /*
+    #swagger.description = "사용자 정보 갱신"
+    #swagger.tags = ['userInfo - 사용자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "user_pw": "chPw",
+            "user_region": "경상남도 창원시",
+            "user_emaill": "chmail@gmail.com",
+            "user_nickname": "율도국 정상화",
+            "user_credit": 9080,
+            "user_birth": "1932-04-03",
+            "user_rate": 73,
+            "is_agree_privacy": true
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
+        const users = await userInfoService.updateUserImg(req.body);
         res.json(users);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/update 500 ERROR: ${e.message}`);

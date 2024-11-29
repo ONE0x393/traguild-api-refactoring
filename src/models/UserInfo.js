@@ -32,6 +32,10 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    user_img: {
+        type: DataTypes.STRING(200),
+        defaultValue: "",
+    },
     user_credit:{
         type: DataTypes.INTEGER,
         allowNull: false,

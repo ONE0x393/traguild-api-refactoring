@@ -6,11 +6,31 @@ exports.createUser = async (userData) => {
 }
 
 exports.getAllUsers = async () => {
-    return await UserInfo.findAll();
+    return await UserInfo.findAll(
+        {attributes: {
+                exclude: ['user_pw', 'user_img'] // user_id와 user_img를 제외
+            }}
+    );
 }
 
 exports.getUser = async (user_idx) => {
-    return UserInfo.findByPk(user_idx);
+    return UserInfo.findAll({
+        where: {
+            user_idx: user_idx // user_idx로 검색
+        },
+        attributes: {
+            exclude: ['user_pw', 'user_img'] // user_id와 user_img를 제외
+        }
+    });
+}
+
+exports.getUserWithImg = async (user_idx) => {
+    return UserInfo.findAll({
+        where: {
+            user_idx: user_idx // user_idx로 검색
+        },
+        attributes: ['user_img'] // 필요한 필드만 가져오기
+    });
 }
 
 exports.updateUser = async (userData) => {
@@ -24,6 +44,16 @@ exports.updateUser = async (userData) => {
         user_rate: userData.user_rate,
         is_agree_privacy: userData.is_agree_privacy,
         last_login_time: userData.last_login_time
+    }, {
+        where: {
+            user_idx: userData.user_idx
+        }
+    });
+}
+
+exports.updateUserImg = async (userData) => {
+    return await UserInfo.update({
+        user_img: userData.user_img,
     }, {
         where: {
             user_idx: userData.user_idx

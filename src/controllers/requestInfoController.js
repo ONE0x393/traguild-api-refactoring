@@ -177,3 +177,26 @@ exports.updateRequestInfo = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.updateRequestImg = async (req, res) => {
+    /*
+    #swagger.description = "의뢰 정보 갱신"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "request_img": "",
+            "request_idx": 1,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/update`);
+        const requestInfo = await requestInfoService.updateRequestImg(req.body);
+        res.json(requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/update 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}

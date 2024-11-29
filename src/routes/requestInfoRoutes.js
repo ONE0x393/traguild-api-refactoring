@@ -32,4 +32,7 @@ router.post('/getApply', requestInfoController.getFecthApplicantByUser);
  */
 router.post('/update', requestInfoController.updateRequestInfo);
 
+//의뢰 이미지 수정
+router.post('/updateImg', requestInfoController.updateRequestImg);
+
 module.exports = router;

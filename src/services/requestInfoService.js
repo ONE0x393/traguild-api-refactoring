@@ -203,3 +203,26 @@ exports.updateRequestInfo = async (data) => {
     });
     return data;
 }
+
+exports.updateRequestImg = async (data) => {
+    const now = new Date();
+    data.updated_time = now.toISOString();
+
+    await RequestInfo.update({
+        request_img: data.request_img,
+        updated_time: data.updated_time,
+    }, {
+        where: {
+            request_idx: data.request_idx,
+            user_idx: data.user_idx
+        }
+    });
+    await esClient.update({
+        index: 'request_info',
+        id: data.request_idx,
+        body: {
+            doc: data
+        }
+    });
+    return data;
+}
