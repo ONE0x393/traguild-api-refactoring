@@ -66,6 +66,30 @@ exports.getFetchRequestInfosByUser = async (req, res) => {
     }
 }
 
+exports.getApplicantInfoByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자의 의뢰에 지원한 지원자 조회"
+    #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "page": 1,
+            "limit": 10
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getApplicant`);
+        const RequestApplicant = await requestApplicantService.getApplicantInfoByUser(req.body.user_idx, req.body);
+        res.json(RequestApplicant);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getApplicant 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateRequestApplicant = async (req, res) => {
     /*
     #swagger.description = "의뢰 지원자 정보 갱신"
@@ -93,7 +117,7 @@ exports.updateRequestApplicant = async (req, res) => {
 
 exports.updateRequestAllApplicantForReject = async (req, res) => {
     /*
-    #swagger.description = "의뢰 지원자 정보 갱신"
+    #swagger.description = "특정 의뢰에 지원한 사람들을 모두 반려"
     #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',

@@ -16,6 +16,10 @@ router.post('/all', requestApplicantController.getAllRequestApplicants);
  */
 router.post('/applyRequest', requestApplicantController.getFetchRequestInfosByUser);
 /**
+ * 특정 사용자가 올린 의뢰에 지원한 사람들 정보 조회
+ */
+router.post('/getApply', requestApplicantController.getApplicantInfoByUser);
+/**
  * 의뢰지원자 정보 수정
  */
 router.post('/update', requestApplicantController.updateRequestApplicant);

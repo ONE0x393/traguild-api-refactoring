@@ -48,7 +48,7 @@ exports.getAllRequestInfos = async (req, res) => {
 
 exports.getFetchRequestInfos = async (req, res) => {
     /*
-    #swagger.description = "의뢰 정보 n건 조회"
+    #swagger.description = "의뢰 정보 limit건 조회"
     #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',
@@ -88,33 +88,6 @@ exports.getRequestInfoByIdx = async (req, res) => {
         res.json(requestInfo);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo 500 ERROR: ${e.message}`);
-        res.status(500).json({message: e.message});
-    }
-}
-
-exports.getFecthApplicantByUser = async (req, res) => {
-    /*
-    #swagger.description = "특정 사용자의 의뢰에 지원한 사람들 조회"
-    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
-    #swagger.parameters['obj'] = {
-        in: 'body',
-        required: true,
-        schema: {
-            "user_idx": 1,
-            "page": 1,
-            "limit": 10
-        }
-    }
-    */
-    try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
-
-        //특정 유저가 등록한 모든 requestInfo를 가져온다.
-        const users_requestInfo = await requestInfoService.getRequestInfoByUser(req.body.user_idx, req.body);
-
-        res.json(users_requestInfo);
-    } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
@@ -180,7 +153,7 @@ exports.updateRequestInfo = async (req, res) => {
 
 exports.updateRequestImg = async (req, res) => {
     /*
-    #swagger.description = "의뢰 정보 갱신"
+    #swagger.description = "의뢰 이미지 갱신"
     #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',

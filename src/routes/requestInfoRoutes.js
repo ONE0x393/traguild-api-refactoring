@@ -24,15 +24,12 @@ router.post('/fetch', requestInfoController.getFetchRequestInfos);
  */
 router.post('/onlyMine', requestInfoController.getFecthApplicantOnlyMine);
 /**
- * 특정 유저의 의뢰에 대한 지원자들 조회(10명씩)
- */
-router.post('/getApply', requestInfoController.getFecthApplicantByUser);
-/**
  * 의뢰 정보 수정
  */
 router.post('/update', requestInfoController.updateRequestInfo);
-
-//의뢰 이미지 수정
+/**
+ * 의뢰 이미지 수정
+ */
 router.post('/updateImg', requestInfoController.updateRequestImg);
 
 module.exports = router;

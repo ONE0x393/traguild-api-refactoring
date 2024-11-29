@@ -75,6 +75,48 @@ exports.getFetchRequestInfosByUser = async (user_idx, data) => {
     }
 };
 
+exports.getApplicantInfoByUser = async (user_idx, data) => {
+    try{
+        const offset = (data.page - 1) * data.limit;
+        const result = await sequelize.query(
+            `
+                SELECT
+                    ri.request_title,
+                    ri.request_idx,
+                    ui.user_nickname,
+                    ui.user_id,
+                    ui.user_idx,
+                    ra.applicant_intro,
+                    ra.applicant_state,
+                    ri.request_region
+                FROM TB_REQUEST_INFO ri
+                         JOIN TB_REQUEST_APPLICANT ra ON ri.request_idx = ra.request_idx
+                         JOIN TB_USER_INFO ui ON ra.user_idx = ui.user_idx
+                WHERE ri.user_idx = :user_idx
+                ORDER BY ri.request_idx DESC
+                    LIMIT :limit OFFSET :offset
+            `,
+            {
+                replacements: {
+                    user_idx,      // `:user_idx`에 값을 바인딩
+                    limit: data.limit,   // `:limit`에 페이지당 데이터 수를 바인딩
+                    offset: offset,      // `:offset`에 계산된 오프셋 값 바인딩
+                },
+                type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
+            }
+        );
+        if (!result || result.length === 0) {
+            return [];
+        }
+
+        return result;
+
+    }catch (error){
+        console.error('Error fetching request applicants by user_idx:', error);
+        throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+    }
+};
+
 exports.updateRequestApplicant = async (data) => {
 
     return await RequestApplicant.update({
