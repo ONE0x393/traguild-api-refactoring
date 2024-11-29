@@ -4,7 +4,6 @@ const esClient = require('../config/esClient');
 
 exports.createCreditHistory = async (data) => {
     const now = new Date();
-    data.trade_time = now.toISOString();
 
     const history = await CreditHistory.create(data);
 

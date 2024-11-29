@@ -39,8 +39,8 @@ const insertCreditHistory = async () => {
     ]);
     for(const thing of history){
         await esClient.index({
-            index: 'request_info',
-            id: thing.request_idx,
+            index: 'credit_history',
+            id: thing.credit_trade_idx,
             body: thing
         });
     }

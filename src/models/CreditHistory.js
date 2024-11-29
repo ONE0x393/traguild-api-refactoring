@@ -26,10 +26,6 @@ const CreditHistory = sequelize.define('TB_CREDIT_HISTORY', {
     credit_from:{ //0일경우 어디에 사용되었는지, 충전일 경우 credit이 어디서 들어왔는지 출처
         type: DataTypes.STRING(20),
     },
-    trade_time: {  //Credit 거래 시간
-        type: DataTypes.DATE,
-        allowNull: false
-    },
     updated_time: {  //수정 시간
         type: DataTypes.DATE,
     },

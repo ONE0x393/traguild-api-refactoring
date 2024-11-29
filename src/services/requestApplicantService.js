@@ -77,9 +77,9 @@ exports.getFetchRequestInfosByUser = async (user_idx, data) => {
 
 exports.getApplicantInfoByUser = async (user_idx, data) => {
     try{
+
         const offset = (data.page - 1) * data.limit;
-        const result = await sequelize.query(
-            `
+        let query = `
                 SELECT
                     ri.request_title,
                     ri.request_idx,
@@ -92,10 +92,18 @@ exports.getApplicantInfoByUser = async (user_idx, data) => {
                 FROM TB_REQUEST_INFO ri
                          JOIN TB_REQUEST_APPLICANT ra ON ri.request_idx = ra.request_idx
                          JOIN TB_USER_INFO ui ON ra.user_idx = ui.user_idx
-                WHERE ri.user_idx = :user_idx AND ra.applicant_state = status
-                ORDER BY ri.request_idx DESC
-                    LIMIT :limit OFFSET :offset
-            `,
+                WHERE ri.user_idx = :user_idx
+            `;
+        if(data.status !== "전체"){
+            query += `AND ra.applicant_state = :status`;
+        }
+
+        query +=`
+            ORDER BY ri.request_idx DESC
+        LIMIT :limit OFFSET :offset
+        `
+        const result = await sequelize.query(
+            query,
             {
                 replacements: {
                     user_idx,      // `:user_idx`에 값을 바인딩

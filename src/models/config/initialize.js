@@ -27,12 +27,12 @@ const initialize = async () => {
             await insertUserRelation();
 
             // // Insert CommunityPost data
-            // const insertCommunityPost = require('@src/models/dummy/insertCommunityPost');
-            // await insertCommunityPost();
+            const insertCommunityPost = require('@src/models/dummy/insertCommunityPost');
+            await insertCommunityPost();
 
             // Insert CommunityComment data
-            // const insertCommunityComment = require('@src/models/dummy/insertCommunityComment');
-            // await insertCommunityComment();
+            const insertCommunityComment = require('@src/models/dummy/insertCommunityComment');
+            await insertCommunityComment();
 
             // Insert Report data
             const insertReport = require('@src/models/dummy/insertReport');
@@ -51,8 +51,8 @@ const initialize = async () => {
             await insertInterestRequest();
 
             // // Insert RequestInfo data
-            // const insertRequestInfo = require('@src/models/dummy/insertRequestInfo');
-            // await insertRequestInfo();
+            const insertRequestInfo = require('@src/models/dummy/insertRequestInfo');
+            await insertRequestInfo();
 
             // Insert RequestApplicant data
             const insertRequestApplicant = require('@src/models/dummy/insertRequestApplicant');
