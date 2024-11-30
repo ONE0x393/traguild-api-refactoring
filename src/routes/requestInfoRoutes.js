@@ -31,7 +31,7 @@ router.put('/', upload.single("image"), requestInfoController.createRequestInfo)
 /**
  * 의뢰 이미지 가져오기
  */
-router.get('/getImage/:idx', requestInfoController.createRequestInfo);
+router.get('/getImage/:idx', requestInfoController.getRequestImage);
 /**
  * 의뢰 정보 조회
  */
