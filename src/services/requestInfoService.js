@@ -149,7 +149,6 @@ exports.updateRequestInfo = async (data) => {
     }, {
         where: {
             request_idx: data.request_idx,
-            user_idx: data.user_idx
         }
     });
     await esClient.update({
