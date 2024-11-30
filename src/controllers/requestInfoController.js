@@ -35,18 +35,10 @@ exports.getRequestImage= async (req, res) => {
     /*
     #swagger.description = "의뢰 이미지 가져오기"
     #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
-    #swagger.consumes = ['multipart/form-data']
-    #swagger.parameters['obj'] = {
-        in: 'body',
-        required: true,
-        schema: {
-            request_idx: 1,
-        }
-    }
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} PUT /api/requestInfo/getImage/${req.params.idx}`);
-        const requestInfo = await requestInfoService.createRequestInfo(req.params.idx);
+        const requestInfo = await requestInfoService.getRequestImage(req.params.idx);
         logger.info(requestInfo)
         logger.info(requestInfo.request_img)
         res.sendFile(requestInfo.request_img, (err) => {
