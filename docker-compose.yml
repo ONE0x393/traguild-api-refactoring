@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - /data/upload:/data/upload
     depends_on:
      mysql-prod:
          condition: service_healthy

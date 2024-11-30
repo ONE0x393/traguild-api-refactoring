@@ -10,7 +10,7 @@
     "docker:dev": "docker compose --profile development down && docker compose --profile development up -d --build",
     "start": "cross-env NODE_ENV=production node ./src/config/swagger.js && cross-env NODE_ENV=production node ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development node ./src/config/swagger.js && cross-env NODE_ENV=development node ./src/server.js",
-    "server": "npm install && npm run docker && npm run start",
+    "server": "npm install && npm run docker",
     "server:dev": "npm install && npm run docker:dev && npm run start:dev"
   },
   "keywords": [],
