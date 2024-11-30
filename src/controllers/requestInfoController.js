@@ -23,7 +23,7 @@ exports.createRequestInfo= async (req, res) => {
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} PUT /api/requestInfo`);
-        const requestInfo = await requestInfoService.createRequestInfo(req.body);
+        const requestInfo = await requestInfoService.createRequestInfo(req.file, req.body);
         res.status(201).json(requestInfo);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} PUT /api/requestInfo 500 ERROR: ${e.message}`);
