@@ -31,6 +31,38 @@ exports.createRequestInfo= async (req, res) => {
     }
 };
 
+exports.getRequestImage= async (req, res) => {
+    /*
+    #swagger.description = "의뢰 이미지 가져오기"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.consumes = ['multipart/form-data']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            request_idx: 1,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} PUT /api/requestInfo/getImage/${req.params.idx}`);
+        const requestInfo = await requestInfoService.createRequestInfo(req.params.idx);
+        logger.info(requestInfo)
+        logger.info(requestInfo.request_img)
+        res.sendFile(requestInfo.request_img, (err) => {
+            if (err) {
+                console.error("Error sending file:", err.message);
+                if (!res.headersSent) {
+                    res.status(404).json({ error: "File not found" });
+                }
+            }
+        });
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} PUT /api/requestInfo/getImage/${req.params.idx} 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+};
+
 exports.getAllRequestInfos = async (req, res) => {
     /*
     #swagger.description = "의뢰 정보 전체 조회"

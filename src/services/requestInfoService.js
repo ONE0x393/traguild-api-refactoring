@@ -20,6 +20,21 @@ exports.createRequestInfo = async (fileData, data) => {
     //return RequestInfo.create(data);
 }
 
+exports.getRequestImage = async (request_idx) => {
+    const { body } = await esClient.search({
+        index: 'request_info',
+        _source: ['request_img'],
+        body: {
+            query: {
+                term: { request_idx: request_idx }
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source.request_img);
+    //return RequestInfo.create(data);
+}
+
 exports.getAllRequestInfos = async () => {
     const { body } = await esClient.search({
         index: 'request_info',

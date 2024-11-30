@@ -29,6 +29,10 @@ const upload = multer({ storage: storage });
  */
 router.put('/', upload.single("image"), requestInfoController.createRequestInfo);
 /**
+ * 의뢰 이미지 가져오기
+ */
+router.get('/getImage/:idx', requestInfoController.createRequestInfo);
+/**
  * 의뢰 정보 조회
  */
 router.post('/', requestInfoController.getRequestInfoByIdx);
