@@ -39,8 +39,8 @@ exports.getRequestImage= async (req, res) => {
     try{
         logger.info(`${requestIp.getClientIp(req)} PUT /api/requestInfo/getImage/${req.params.idx}`);
         const request_img = await requestInfoService.getRequestImage(req.params.idx);
-        logger.info(request_img)
-        res.sendFile(request_img, (err) => {
+        logger.info(request_img[0])
+        res.sendFile(request_img[0], (err) => {
             if (err) {
                 console.error("Error sending file:", err.message);
                 if (!res.headersSent) {

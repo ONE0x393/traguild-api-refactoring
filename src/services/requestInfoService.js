@@ -6,7 +6,7 @@ exports.createRequestInfo = async (fileData, data) => {
     const now = new Date();
     data.created_date = now.toISOString();
     data.updated_time = now.toISOString();
-    data.request_img = fileData.path;
+    data.request_img = fileData?.path ?? "";
 
     const request = await RequestInfo.create(data);
 
