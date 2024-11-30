@@ -52,8 +52,6 @@ exports.updateUser = async (userData) => {
 }
 
 exports.updateUserImg = async (fileData, userData) => {
-    logger.info("updateUserImg", fileData.path);
-    logger.info("updateUserImg", userData);
     return await UserInfo.update({
         user_img: fileData.path,
     }, {

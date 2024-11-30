@@ -135,11 +135,11 @@ exports.updateUserImg = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/updateUserImg`);
         const users = await userInfoService.updateUserImg(req.file, req.body);
         res.json(users);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/update 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/updateUserImg 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }
