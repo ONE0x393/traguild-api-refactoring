@@ -130,20 +130,13 @@ exports.updateUserImg = async (req, res) => {
         required: true,
         schema: {
             "user_idx": 1,
-            "user_pw": "chPw",
-            "user_region": "경상남도 창원시",
-            "user_emaill": "chmail@gmail.com",
-            "user_nickname": "율도국 정상화",
-            "user_credit": 9080,
-            "user_birth": "1932-04-03",
-            "user_rate": 73,
-            "is_agree_privacy": true
+            "user_img": "",
         }
     }
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
-        const users = await userInfoService.updateUserImg(req.body);
+        const users = await userInfoService.updateUserImg(req.file, req.body);
         res.json(users);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/userInfo/update 500 ERROR: ${e.message}`);

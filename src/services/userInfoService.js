@@ -51,14 +51,17 @@ exports.updateUser = async (userData) => {
     });
 }
 
-exports.updateUserImg = async (userData) => {
-    return await UserInfo.update({
-        user_img: userData.user_img,
-    }, {
-        where: {
-            user_idx: userData.user_idx
-        }
-    });
+exports.updateUserImg = async (fileData, userData) => {
+    console.info(fileData.path);
+    console.info(userData);
+    
+    // return await UserInfo.update({
+    //     user_img: userData.user_img,
+    // }, {
+    //     where: {
+    //         user_idx: userData.user_idx
+    //     }
+    // });
 }
 
 exports.updateUserForCredit = async (userData) => {
