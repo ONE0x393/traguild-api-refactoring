@@ -31,7 +31,7 @@ exports.getRequestImage = async (request_idx) => {
         }
     });
 
-    return body.hits.hits.map(hit => hit._source.request_img);
+    return body.hits.hits.map(hit => hit._source);
     //return RequestInfo.create(data);
 }
 
