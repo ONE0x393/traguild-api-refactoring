@@ -125,13 +125,18 @@ exports.updateUserImg = async (req, res) => {
     /*
     #swagger.description = "사용자 정보 갱신"
     #swagger.tags = ['userInfo - 사용자 정보 테이블']
-    #swagger.parameters['obj'] = {
-        in: 'body',
+    #swagger.consumes = ['multipart/form-data']
+    #swagger.parameters['image'] = {
+        in: 'formData',
+        type: 'file',
         required: true,
-        schema: {
-            "user_idx": 1,
-            "user_img": "",
-        }
+        description: '업로드할 이미지 파일'
+    }
+    #swagger.parameters['user_idx'] = {
+        in: 'formData',
+        type: 'integer',
+        required: true,
+        description: '사용자 인덱스'
     }
     */
     try{
