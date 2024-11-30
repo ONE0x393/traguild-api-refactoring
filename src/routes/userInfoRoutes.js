@@ -30,7 +30,7 @@ router.post('/', userInfoController.getUser);
 
 router.post('/all', userInfoController.getAllUsers);
 
-router.post('/userImg', userInfoController.getUserWithImg);
+router.get('/userImg/:idx', userInfoController.getUserWithImg);
 
 router.post('/update', userInfoController.updateUser);
 

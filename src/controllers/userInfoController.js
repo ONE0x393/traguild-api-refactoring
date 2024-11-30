@@ -82,9 +82,18 @@ exports.getUserWithImg = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/userImg`);
-        const users = await userInfoService.getUserWithImg(req.body.user_idx);
-        res.json(users);
+        logger.info(`${requestIp.getClientIp(req)} GET /api/userImg/${req.params.idx}`);
+        const users = await userInfoService.getUserWithImg(req.params.idx);
+        logger.info(users)
+        logger.info(users.user_img)
+        res.sendFile(users.user_img, (err) => {
+            if (err) {
+                console.error("Error sending file:", err.message);
+                if (!res.headersSent) {
+                    res.status(404).json({ error: "File not found" });
+                }
+            }
+        })
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/userImg 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});

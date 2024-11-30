@@ -25,7 +25,7 @@ exports.getUser = async (user_idx) => {
 }
 
 exports.getUserWithImg = async (user_idx) => {
-    return UserInfo.findAll({
+    return UserInfo.findOne({
         where: {
             user_idx: user_idx // user_idx로 검색
         },
