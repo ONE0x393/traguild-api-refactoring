@@ -13,13 +13,13 @@ exports.checkValidPW = async (req, res, next) => {
       : await userInfoService.getUserInfoById(body.user_id);
 
     try {
-      const isValid = bcrypt.compare(body._user_pw, user_pw);
-
+      const isValid = await bcrypt.compare(body.user_pw, user_pw);
+      
       if (isValid) next();
       else return res.status(400).json({ message: "기존 비밀번호가 일치하지 않습니다." });
     } catch (error) {
-      logger.error(`${requestIp.getClientIp(req)} Middleware("checkValidPW") 500 ERROR: ${e.message}`);
-      res.status(500).json({ message: e.message });
+      logger.error(`${requestIp.getClientIp(req)} Middleware("checkValidPW") 500 ERROR: ${error.message}`);
+      res.status(500).json({ message: error.message });
     }
   } catch (e) {
     logger.error(`${requestIp.getClientIp(req)} Middleware("checkValidPW") 500 ERROR: ${e.message}`);
