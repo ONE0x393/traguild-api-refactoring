@@ -11,7 +11,8 @@ const insertRequestInfo = async () => {
             "request_cost": 70000,
             "request_state": "모집완료",
             "created_date": "2024-07-29",
-            "updated_time": "2024-07-29"
+            "updated_time": "2024-07-29",
+            "is_deleted": true,
         },{
             "user_idx": 1,
             "request_region": "경남 김해",

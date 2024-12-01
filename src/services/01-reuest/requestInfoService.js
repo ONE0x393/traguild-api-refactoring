@@ -63,7 +63,13 @@ exports.getFetchRequestInfosOnlyMine = async (data) => {
             from: (data.page - 1) * data.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
             size: data.limit, // 가져올 개수
             query: {
-                term: { user_idx:data.user_idx }
+                bool: {
+                    must: [
+                        { term: { user_idx: data.user_idx } },
+                        // is_deleted 값이 ""이 아니면 조건을 추가
+                        ...(data.is_deleted !== "all" ? [{ term: { is_deleted: data.is_deleted } }] : [])
+                    ]
+                }
             }
         }
     });
@@ -87,6 +93,10 @@ exports.getFetchRequestInfos = async (data) => {
             size: data.limit, // 가져올 개수
             query: {
                 bool: {
+                    must: [
+                        // is_deleted 값이 ""이 아니면 조건을 추가
+                        ...(data.is_deleted !== "all" ? [{ term: { is_deleted: data.is_deleted } }] : [])
+                    ],
                     must_not: [ //검색자 자기자신의 의뢰는 제외하여 검색
                         {
                             term: { user_idx: data.user_idx }
