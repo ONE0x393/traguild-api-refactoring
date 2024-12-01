@@ -10,7 +10,7 @@ const interestRequestRoutes = require('./01-request/interestRequestRoutes');
 const requestInfoRoutes = require('./01-request/requestInfoRoutes');
 const requestApplicantRoutes = require('./01-request/requestApplicantRoutes');
 const creditHistoryRoutes = require('./03-myPage/creditHistoryRoutes');
-const loginRoutes = require('./auth/loginRoutes');
+const authRoutes = require('./auth/authRoutes');
 
 const router = express.Router();
 
@@ -25,6 +25,6 @@ router.use('/interestRequest', interestRequestRoutes);
 router.use('/requestInfo', requestInfoRoutes);
 router.use('/requestApplicant', requestApplicantRoutes);
 router.use('/creditHistory', creditHistoryRoutes);
-router.use('/login', loginRoutes);
+router.use('/auth', authRoutes);
 
 module.exports = router;

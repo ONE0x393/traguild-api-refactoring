@@ -9,7 +9,7 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         allowNull: false
     },
     user_id: {
-        type: DataTypes.STRING(26),
+        type: DataTypes.STRING(24),
         allowNull: false
     },
     user_pw: {
@@ -29,7 +29,7 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         allowNull: false
     },
     user_nickname:{
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(12),
         allowNull: false
     },
     user_img: {

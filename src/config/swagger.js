@@ -6,6 +6,7 @@ const outputFile = '../swagger-output.json'; // Swagger JSON 파일 경로
 const endpointsFiles = ['../app.js'];
 
 const hostAddr = process.env.HOST || "localhost:3000";
+const proto =  process.env.NODE_ENV === 'production' ? "https" : "http";
 
 const doc = {
     info: {
@@ -13,8 +14,8 @@ const doc = {
         description: '캡스톤 디자인 API 문서입니다.',
     },
     host: hostAddr,
-    schemes: ['https'],
-    basePath: '/', // 기본 경로 설정
+    schemes: [proto],
+    basePath: '/',
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
