@@ -50,8 +50,8 @@ exports.getFetchInterestRequestsByUser = async (req, res) => {
         logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/allByUser`);
         //특정 유저의 관심 의뢰 정보 가져오기
         const interestRequests = await interestRequestService.getInterestRequestByUser(req.body.user_idx);
-        if (!interestRequests.length) {
-            return res.status(404).json({ message: "No interest requests found for this user" });
+        if (!interestRequests.length) { //데이터가 없을 경우
+            return [];
         }
 
         const requestIdxList = interestRequests.map(item => item.request_idx); //관심있는 request_idx 배열화
