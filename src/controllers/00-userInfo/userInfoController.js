@@ -125,8 +125,8 @@ exports.updateUser = async (req, res) => {
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
         const body = req.body;
-        
-        if(body.user_pw){
+
+        if(body?.user_pw){
             const salt = bcrypt.genSaltSync(10);
             body.user_pw = bcrypt.hashSync(body.new_user_pw, salt)
         }

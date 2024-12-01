@@ -7,7 +7,7 @@ exports.checkValidPW = async (req, res, next) => {
   try {
     logger.info(`${requestIp.getClientIp(req)} Middleware("checkValidPW")`);
     const body = req.body;
-    if(!body.user_pw) next();
+    if(!body?.user_pw) return next();
 
     const { user_pw } = body?.user_idx
       ? await userInfoService.getUser(body.user_idx)
@@ -16,7 +16,7 @@ exports.checkValidPW = async (req, res, next) => {
     try {
       const isValid = await bcrypt.compare(body.user_pw, user_pw);
       
-      if (isValid) next();
+      if (isValid) return next();
       else return res.status(400).json({ message: "기존 비밀번호가 일치하지 않습니다." });
     } catch (error) {
       logger.error(`${requestIp.getClientIp(req)} Middleware("checkValidPW") 500 ERROR: ${error.message}`);
@@ -35,7 +35,7 @@ exports.checkValidID = async (req, res, next) => {
     const user = await userInfoService.getUserInfoById(body.user_email);
 
     if(user) return res.status(400).json({ message: "이미 존재하는 아이디입니다." });
-    else next();
+    else return next();
     
   } catch (e) {
     logger.error(`${requestIp.getClientIp(req)} Middleware("checkValidID") 500 ERROR: ${e.message}`);
