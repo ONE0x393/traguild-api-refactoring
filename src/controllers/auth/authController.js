@@ -67,3 +67,31 @@ exports.signInProc = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.passwordReset = async (req, res) => {
+    /*
+    #swagger.description = "비밀번호 초기화 (관리자 용)"
+    #swagger.tags = ['Auth - 인증 관련 API']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            user_id: "gdhong@gmail.com",
+            user_pw: "mypassword"
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/auth/signIn`);
+        const salt = bcrypt.genSaltSync(10);
+
+        const body = req.body;
+        body.user_pw = bcrypt.hashSync(body.user_pw, salt)
+
+        const user = await userInfoService.updateUser(body);
+        res.json(user);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/auth/signIn 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
