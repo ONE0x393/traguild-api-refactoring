@@ -7,7 +7,7 @@ exports.checkValidPW = async (req, res, next) => {
   try {
     logger.info(`${requestIp.getClientIp(req)} Middleware("checkValidPW")`);
     const body = req.body;
-    if(!user_pw) next();
+    if(!body.user_pw) next();
 
     const { user_pw } = body?.user_idx
       ? await userInfoService.getUser(body.user_idx)

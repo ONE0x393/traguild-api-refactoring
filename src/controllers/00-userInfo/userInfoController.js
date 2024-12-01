@@ -124,10 +124,12 @@ exports.updateUser = async (req, res) => {
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
-        const salt = bcrypt.genSaltSync(10);
-
         const body = req.body;
-        body.user_pw = bcrypt.hashSync(body.new_user_pw, salt)
+        
+        if(body.user_pw){
+            const salt = bcrypt.genSaltSync(10);
+            body.user_pw = bcrypt.hashSync(body.new_user_pw, salt)
+        }
 
         const users = await userInfoService.updateUser(req.body);
         res.json(users);
