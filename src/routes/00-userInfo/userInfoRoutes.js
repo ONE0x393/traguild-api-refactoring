@@ -1,4 +1,5 @@
 const express = require('express');
+const authMiddleware = require('../../middlewares/auth/auth.middle');
 const userInfoController = require('../../controllers/00-userInfo/userInfoController');
 const multer = require('multer');
 const fs = require('fs');
@@ -32,7 +33,7 @@ router.post('/all', userInfoController.getAllUsers);
 
 router.get('/userImg/:idx', userInfoController.getUserWithImg);
 
-router.post('/update', userInfoController.updateUser);
+router.post('/update', [authMiddleware.checkValidPW], userInfoController.updateUser);
 
 router.post('/updateUserImg', upload.single("image"), userInfoController.updateUserImg);
 

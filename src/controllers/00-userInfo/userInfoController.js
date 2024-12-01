@@ -2,6 +2,7 @@ const userInfoService = require('../../services/00-userInfo/userInfoService');
 const {request} = require("express");
 const logger = require('../../config/winston/logger');
 const requestIp = require('request-ip');
+const bcrypt = require("bcrypt");
 
 exports.createUser = async (req, res) => {
     /*
@@ -109,7 +110,8 @@ exports.updateUser = async (req, res) => {
         required: true,
         schema: {
             "user_idx": 1,
-            "user_pw": "chPw",
+            "user_pw": "current_password",
+            "new_user_pw": "new_password",
             "user_region": "경상남도 창원시",
             "user_emaill": "chmail@gmail.com",
             "user_nickname": "율도국 정상화",
@@ -122,6 +124,11 @@ exports.updateUser = async (req, res) => {
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/userInfo/update`);
+        const salt = bcrypt.genSaltSync(10);
+
+        const body = req.body;
+        body.user_pw = bcrypt.hashSync(body.new_user_pw, salt)
+
         const users = await userInfoService.updateUser(req.body);
         res.json(users);
     } catch (e){
