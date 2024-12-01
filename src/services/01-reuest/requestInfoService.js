@@ -66,8 +66,7 @@ exports.getFetchRequestInfosOnlyMine = async (data) => {
                 bool: {
                     must: [
                         { term: { user_idx: data.user_idx } },
-                        // is_deleted 값이 ""이 아니면 조건을 추가
-                        ...(data.is_deleted !== "all" ? [{ term: { is_deleted: data.is_deleted } }] : [])
+                        { term: { is_deleted: false } }
                     ]
                 }
             }
@@ -94,8 +93,7 @@ exports.getFetchRequestInfos = async (data) => {
             query: {
                 bool: {
                     must: [
-                        // is_deleted 값이 ""이 아니면 조건을 추가
-                        ...(data.is_deleted !== "all" ? [{ term: { is_deleted: data.is_deleted } }] : [])
+                        { term: { is_deleted: false } }
                     ],
                     must_not: [ //검색자 자기자신의 의뢰는 제외하여 검색
                         {
