@@ -13,7 +13,7 @@ const doc = {
         description: '캡스톤 디자인 API 문서입니다.',
     },
     host: hostAddr,
-    schemes: ['http'],
+    schemes: ['https'],
     basePath: '/', // 기본 경로 설정
 };
 
