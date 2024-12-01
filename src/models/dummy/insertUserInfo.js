@@ -1,4 +1,4 @@
-const UserInfo = require('@src/models/UserInfo');
+const UserInfo = require('@src/models/00-userInfo/UserInfo');
 
 const insertUserInfo = async () => {
     return UserInfo.bulkCreate([

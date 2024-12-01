@@ -1,4 +1,4 @@
-const CreditHistory = require('@src/models/CreditHistory');
+const CreditHistory = require('@src/models/03-myPage/CreditHistory');
 const esClient = require('@src/config/esClient');
 
 const insertCreditHistory = async () => {

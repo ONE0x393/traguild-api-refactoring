@@ -1,4 +1,4 @@
-const InterestRequest = require('@src/models/InterestRequest');
+const InterestRequest = require('@src/models/01-request/InterestRequest');
 
 const insertInterestRequest = async () => {
     return InterestRequest.bulkCreate([

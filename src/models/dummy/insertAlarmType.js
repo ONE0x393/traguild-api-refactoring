@@ -1,4 +1,4 @@
-const AlarmType = require('@src/models/AlarmType');
+const AlarmType = require('@src/models/03-myPage/AlarmType');
 
 const insertAlarmType = async () => {
     return AlarmType.bulkCreate([

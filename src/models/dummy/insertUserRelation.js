@@ -1,4 +1,4 @@
-const UserRelation = require('@src/models/UserRelation');
+const UserRelation = require('@src/models/00-userInfo/UserRelation');
 
 const insertUserRelation = async () => {
     return UserRelation.bulkCreate([

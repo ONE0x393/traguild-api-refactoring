@@ -1,4 +1,4 @@
-const CommunityPost = require('@src/models/CommunityPost');
+const CommunityPost = require('@src/models/02-community/CommunityPost');
 const esClient = require('@src/config/esClient');
 
 const insertCommunityPost = async () => {

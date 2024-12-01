@@ -1,4 +1,4 @@
-const RequestApplicant = require('@src/models/RequestApplicant');
+const RequestApplicant = require('@src/models/01-request/RequestApplicant');
 
 const insertRequestApplicant = async () => {
     return RequestApplicant.bulkCreate([

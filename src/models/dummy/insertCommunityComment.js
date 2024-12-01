@@ -1,4 +1,4 @@
-const CommunityComment = require('@src/models/CommunityComment');
+const CommunityComment = require('@src/models/02-community/CommunityComment');
 const esClient = require('@src/config/esClient');
 
 const insertCommunityComment = async () => {

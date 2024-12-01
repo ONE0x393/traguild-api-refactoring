@@ -1,4 +1,4 @@
-const Report = require('@src/models/Report');
+const Report = require('@src/models/03-myPage/Report');
 
 const insertReport = async () => {
     return Report.bulkCreate([

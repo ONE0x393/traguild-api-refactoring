@@ -1,4 +1,4 @@
-const RequestInfo = require('@src/models/RequestInfo');
+const RequestInfo = require('@src/models/01-request/RequestInfo');
 const esClient = require('@src/config/esClient');
 
 const insertRequestInfo = async () => {

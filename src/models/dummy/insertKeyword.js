@@ -1,4 +1,4 @@
-const Keyword = require('@src/models/Keyword');
+const Keyword = require('@src/models/03-myPage/Keyword');
 
 const insertKeyword = async () => {
     return Keyword.bulkCreate([

@@ -1,6 +1,6 @@
 require('module-alias/register');
 const logger = require("@src/config/winston/logger");
-const initialize = require('@src/models/config/initialize');
+const initialize = require('@src/config/initialize');
 const esClient = require('@src/config/esClient');
 const app = require('@src/app');
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
