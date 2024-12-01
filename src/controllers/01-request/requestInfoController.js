@@ -135,7 +135,8 @@ exports.getFecthApplicantOnlyMine = async (req, res) => {
         //특정 유저가 등록한 모든 requestInfo를 가져온다.
         const users_requestInfo = await requestInfoService.getFetchRequestInfosOnlyMine(req.body);
         if(!users_requestInfo.length){
-            return res.status(404).json({ message: "No requests found for by this user" });
+            return [];
+            // return res.status(404).json({ message: "No requests found for by this user" });
         }
 
         res.json(users_requestInfo);
