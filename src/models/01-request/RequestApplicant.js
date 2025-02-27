@@ -2,12 +2,6 @@ const {DataTypes} = require('sequelize');
 const sequelize = require('@src/config/database');
 
 const RequestApplicant = sequelize.define('TB_REQUEST_APPLICANT', {
-    applicant_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,  // primary key로 설정
-        autoIncrement: true // 자동 증가 값
-    },
     request_idx:{  //의뢰 고유 KEY
         type: DataTypes.INTEGER,
         allowNull: false
