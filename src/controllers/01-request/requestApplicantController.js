@@ -74,9 +74,10 @@ exports.getApplicantInfoByUser = async (req, res) => {
         in: 'body',
         required: true,
         schema: {
-            "user_idx": 1,
+            "user_idx": 3,
             "page": 1,
-            "limit": 10
+            "limit": 10,
+            "status": "대기"
         }
     }
     */
