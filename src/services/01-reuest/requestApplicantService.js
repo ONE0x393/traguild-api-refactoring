@@ -88,7 +88,7 @@ exports.getApplicantInfoByUser = async (user_idx, data) => {
                     ui.user_idx,
                     ra.applicant_intro,
                     ra.applicant_state,
-                    ra.applicant_id,
+                    ra.applicant_idx,
                     ri.request_region
                 FROM TB_REQUEST_INFO ri
                          JOIN TB_REQUEST_APPLICANT ra ON ri.request_idx = ra.request_idx
