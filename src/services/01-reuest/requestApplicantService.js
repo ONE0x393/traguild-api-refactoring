@@ -51,7 +51,7 @@ exports.getFetchRequestInfosByUser = async (user_idx, data) => {
 
         const result = await sequelize.query(
             `
-            SELECT ra.applicant_id, ra.applicant_state, ra.applicant_intro, ra.is_canceled, ri.*
+            SELECT ra.id, ra.applicant_state, ra.applicant_intro, ra.is_canceled, ri.*
             FROM TB_REQUEST_APPLICANT ra
             JOIN TB_REQUEST_INFO ri USING(request_idx)
             WHERE ra.user_idx = :user_idx
@@ -88,7 +88,6 @@ exports.getApplicantInfoByUser = async (user_idx, data) => {
                     ui.user_idx,
                     ra.applicant_intro,
                     ra.applicant_state,
-                    ra.applicant_id,
                     ri.request_region
                 FROM TB_REQUEST_INFO ri
                          JOIN TB_REQUEST_APPLICANT ra ON ri.request_idx = ra.request_idx
