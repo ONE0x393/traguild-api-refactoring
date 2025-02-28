@@ -62,6 +62,18 @@ const initialize = async () => {
             const insertCreditHistory = require('@src/models/dummy/insertCreditHistory');
             await insertCreditHistory();
 
+            // Insert ChatMessage data
+            const insertChatMessage = require('@src/models/dummy/insertChatMessage');
+            await insertChatMessage();
+
+            // Insert ChatRoom data
+            const insertChatRoom = require('@src/models/dummy/insertChatRoom');
+            await insertChatRoom();
+
+            // Insert ChatList data
+            const insertChatList = require('@src/models/dummy/insertChatList');
+            await insertChatList();
+
             logger.info('Initial data inserted');
         } else await sequelize.sync();
     } catch(e){

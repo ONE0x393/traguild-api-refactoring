@@ -12,6 +12,10 @@ const requestApplicantRoutes = require('./01-request/requestApplicantRoutes');
 const creditHistoryRoutes = require('./03-myPage/creditHistoryRoutes');
 const authRoutes = require('./auth/authRoutes');
 
+const chatMessage = require('./04-Chat/chatMessageRoutes');
+const chatRoom = require('./04-Chat/chatRoomRoutes');
+const chatList = require('./04-Chat/chatListRoutes');
+
 const router = express.Router();
 
 router.use('/userInfo', userInfoRoutes);
@@ -26,5 +30,8 @@ router.use('/requestInfo', requestInfoRoutes);
 router.use('/requestApplicant', requestApplicantRoutes);
 router.use('/creditHistory', creditHistoryRoutes);
 router.use('/auth', authRoutes);
+router.use('/chatMessage', chatMessage);
+router.use('/chatRoom', chatRoom);
+router.use('/chatList', chatList);
 
 module.exports = router;
