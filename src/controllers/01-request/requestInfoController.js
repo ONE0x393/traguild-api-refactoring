@@ -93,6 +93,30 @@ exports.getFetchRequestInfos = async (req, res) => {
     }
 }
 
+exports.getFetchRequestInfosByTitle = async (req, res) => {
+    /*
+    #swagger.description = "의뢰제목으로 의뢰 정보 limit건 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "request_title": "오전 중 창고정리",
+            "page": 1,
+            "limit": 10
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
+        const requestInfo = await requestInfoService.getFetchRequestInfosByTitle(req.body);
+        res.json(requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.getRequestInfoByIdx = async (req, res) => {
     /*
     #swagger.description = "특정 의뢰 정보 조회"

@@ -49,6 +49,10 @@ router.post('/fetch', requestInfoController.getFetchRequestInfos);
  */
 router.post('/onlyMine', requestInfoController.getFecthApplicantOnlyMine);
 /**
+ * 제목으로 의뢰 조회
+ */
+router.post('/title', requestInfoController.getFetchRequestInfosByTitle);
+/**
  * 의뢰 정보 수정
  */
 router.post('/update', requestInfoController.updateRequestInfo);

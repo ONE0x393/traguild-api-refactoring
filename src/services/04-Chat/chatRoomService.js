@@ -1,6 +1,7 @@
 const ChatRoomService = require('../../models/04-Chat/ChatRoom');
 const sequelize = require('../../config/database');
 const esClient = require('../../config/esClient');
+const getSynonymSearch = require('../../config/synonymSearch');
 
 exports.createChatRoom = async (data) => {
     const now = new Date();
@@ -32,11 +33,25 @@ exports.getAllChatRooms = async () => {
 
 
 exports.getChatRoomByName = async (chat_room_name) => {
+    const queryString = await getSynonymSearch(chat_room_name);
+
     const { body } = await esClient.search({
         index: 'chat_room',
         body: {
             query: {
-                match: { chat_room_name: chat_room_name } //텍스트 조건은 match로
+                bool: {
+                    should: [
+                        {
+                            match: { chat_room_name: queryString } // 텍스트 조건은 match로
+                        },
+                        {
+                            wildcard: {
+                                chat_room_name: `*${chat_room_name}*` // wildcard 쿼리: 요청 제목에 검색어가 포함된 문서 찾기
+                            }
+                        }
+                    ],
+                    minimum_should_match: 1 // `should` 쿼리 중 하나라도 만족하면 결과에 포함
+                }
             }
         }
     });

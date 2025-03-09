@@ -1,6 +1,7 @@
 const RequestInfo = require('../../models/01-request/RequestInfo');
 const sequelize = require('../../config/database');
 const esClient = require('../../config/esClient');
+const getSynonymSearch = require('../../config/synonymSearch');
 
 exports.createRequestInfo = async (fileData, data) => {
     const now = new Date();
@@ -100,6 +101,52 @@ exports.getFetchRequestInfos = async (data) => {
                             term: { user_idx: data.user_idx }
                         }
                     ]
+                }
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+    //return await RequestInfo.findAll();
+}
+
+exports.getFetchRequestInfosByTitle = async (data) => {
+    const queryString = await getSynonymSearch(data.request_title);
+    const { body } = await esClient.search({
+        index: 'request_info',
+        body: {
+            sort: [
+                {
+                    request_idx: {
+                        order: 'desc' // 역순 정렬 (내림차순)
+                    }
+                }
+            ],
+            from: (data.page - 1) * data.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
+            size: data.limit, // 가져올 개수
+            query: {
+                bool: {
+                    must: [
+                        {
+                            term: { is_deleted: false } // is_deleted가 false인 데이터만
+                        },
+                    ],
+                    must_not: [
+                        {
+                            term: { user_idx: data.user_idx } // user_idx가 data.user_idx와 일치하는 데이터만
+                        }
+                    ],
+                    should: [
+                        {
+                            match: { request_title: queryString } // match 쿼리: 요청 제목이 검색어와 일치하는 문서 찾기
+                        },
+                        {
+                            wildcard: {
+                                request_title: `*${data.request_title}*` // wildcard 쿼리: 요청 제목에 검색어가 포함된 문서 찾기
+                            }
+                        }
+                    ],
+                    minimum_should_match: 1 // `should` 쿼리 중 하나라도 만족하면 결과에 포함
                 }
             }
         }
