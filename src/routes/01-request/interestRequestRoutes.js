@@ -19,6 +19,10 @@ router.post('/fetch', interestRequestController.getFetchInterestRequestsByUser);
  * 관심의뢰 정보 수정
  */
 router.post('/update', interestRequestController.updateInterestRequest);
+/**
+ * 관심의뢰 정보 삭제
+ */
+router.post('/delete', interestRequestController.deleteInterestRequest);
 
 
 module.exports = router;

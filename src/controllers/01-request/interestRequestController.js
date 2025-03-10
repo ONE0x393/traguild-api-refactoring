@@ -88,3 +88,25 @@ exports.updateInterestRequest = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.deleteInterestRequest = async (req, res) => {
+    /*
+    #swagger.description = "관심 의뢰 정보 삭제"
+    #swagger.tags = ['interestRequest - 관심 의뢰 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "interest_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/update`);
+        const InterestRequest = await interestRequestService.deleteInterestRequest(req.body);
+        res.json(InterestRequest);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/update 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}

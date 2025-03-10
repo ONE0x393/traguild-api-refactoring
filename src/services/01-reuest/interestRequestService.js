@@ -41,8 +41,6 @@ exports.getInterestRequestByUser = async (user_idx) => {
 
 exports.updateInterestRequest = async (data) => {
 
-
-
     await InterestRequest.update({
         user_idx: data.user_idx,
         request_idx: data.request_idx
@@ -60,3 +58,18 @@ exports.updateInterestRequest = async (data) => {
     });
     return data;
 }
+
+exports.deleteInterestRequest = async (data) => {
+    // Elasticsearch에서 데이터 삭제
+    await esClient.delete({
+        index: 'interest_request',
+        id: data.interest_idx
+    });
+
+    // 데이터베이스에서 InterestRequest 데이터 삭제
+    await InterestRequest.destroy({
+        where: { interest_idx: data.interest_idx }
+    });
+
+    return { message: 'Interest request deleted successfully' };
+};
