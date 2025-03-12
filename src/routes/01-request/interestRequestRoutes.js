@@ -22,7 +22,7 @@ router.post('/update', interestRequestController.updateInterestRequest);
 /**
  * 관심의뢰 정보 삭제
  */
-router.post('/delete', interestRequestController.deleteInterestRequest);
+router.delete('/delete', interestRequestController.deleteInterestRequest);
 
 
 module.exports = router;
