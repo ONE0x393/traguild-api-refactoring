@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+      - "8282:8282"
     volumes:
       - /data/upload:/data/upload
     depends_on:
