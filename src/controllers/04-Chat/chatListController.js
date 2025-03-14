@@ -85,6 +85,28 @@ exports.getChatListByRoom = async (req, res) => {
     }
 }
 
+exports.getAllChattingListByMine = async (req, res) => {
+    /*
+    #swagger.description = "특정 채팅방의 채팅현황 조회"
+    #swagger.tags = ['chatList - 채팅현황 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/chatList/room`);
+        const chatList = await chatListService.getAllChattingListByMine(req.body.user_idx);
+        res.json(chatList);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/chatList/room 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateChatList = async (req, res) => {
     /*
     #swagger.description = "채팅현황 정보 갱신"
