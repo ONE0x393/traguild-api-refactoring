@@ -10,7 +10,6 @@ exports.createChatList= async (req, res) => {
         in: 'body',
         required: true,
         schema: {
-            "chat_list_idx": 1,
             "user_idx": 1,
             "chat_room_idx": 1,
         }
