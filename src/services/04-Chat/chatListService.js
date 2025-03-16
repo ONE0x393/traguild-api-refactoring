@@ -72,7 +72,8 @@ exports.getAllChattingListByMine = async (user_idx) => {
                                            WHERE chat_room_idx = a.chat_room_idx
                                        )
                 WHERE a.chat_room_idx IN (SELECT chat_room_idx FROM TB_CHAT_LIST WHERE user_idx = :user_idx)
-                  AND a.user_idx != :user_idx;
+                  AND a.user_idx != :user_idx
+                ORDER BY m.send_time DESC;
             `,
             {
                 replacements: {

@@ -102,11 +102,11 @@ exports.deleteInterestRequest = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/update`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/delete`);
         const InterestRequest = await interestRequestService.deleteInterestRequest(req.body);
         res.json(InterestRequest);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/update 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/delete 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

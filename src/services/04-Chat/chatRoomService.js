@@ -74,6 +74,32 @@ exports.getChatRoomByIdx = async (chat_room_idx) => {
     //return RequestInfo.findByPk(request_idx);
 }
 
+exports.checkRoomExistByIdx = async (data) => {
+    try {
+        const result = await sequelize.query(
+            `
+                SELECT a.user_idx
+                FROM TB_CHAT_LIST a
+                WHERE a.chat_room_idx IN (SELECT chat_room_idx FROM TB_CHAT_LIST WHERE user_idx = :user_idx)
+                  AND a.user_idx != :user_idx;
+            `,
+            {
+                replacements: {
+                    user_idx: data.user_idx, // data.user_idx 값 바인딩
+                },
+                type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
+            }
+        );
+        // result 배열에서 data.other_idx와 같은 값이 있는지 확인
+        const isExist = result.some(item => item.user_idx === data.other_idx);
+
+        return isExist;
+    } catch (error) {
+        console.error('Error fetching requestInfos by user_idx:', error);
+        throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+    }
+}
+
 exports.updateChatRoom = async (data) => {
     await ChatRoomService.update({
         chat_room_name: data.chat_room_name,
