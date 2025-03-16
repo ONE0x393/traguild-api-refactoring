@@ -108,11 +108,11 @@ exports.getFetchRequestInfosByTitle = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/title`);
         const requestInfo = await requestInfoService.getFetchRequestInfosByTitle(req.body);
         res.json(requestInfo);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/fetch 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/title 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

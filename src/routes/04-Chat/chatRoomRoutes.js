@@ -20,6 +20,10 @@ router.post('/all', chatRoomController.getAllChatRooms);
  */
 router.post('/name', chatRoomController.getChatRoomByName);
 /**
+ * 상대방과의 채팅방 존재 유무확인
+ */
+router.post('/check', chatRoomController.checkRoomExistByIdx);
+/**
  * 채팅 수정
  */
 router.post('/update', chatRoomController.updateChatRoom);

@@ -98,11 +98,11 @@ exports.getAllChattingListByMine = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/chatList/room`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/chatList/mine`);
         const chatList = await chatListService.getAllChattingListByMine(req.body.user_idx);
         res.json(chatList);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/chatList/room 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/chatList/mine 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

@@ -83,6 +83,29 @@ exports.getChatRoomByName = async (req, res) => {
     }
 }
 
+exports.checkRoomExistByIdx = async (req, res) => {
+    /*
+    #swagger.description = "상대방과의 채팅방 존재 유무확인"
+    #swagger.tags = ['chatRoom - 채팅방 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "other_idx": 2,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/chatRoom/check`);
+        const chatRoom = await chatRoomService.checkRoomExistByIdx(req.body);
+        res.json(chatRoom);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/chatRoom/check 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateChatRoom = async (req, res) => {
     /*
     #swagger.description = "채팅방 정보 갱신"
