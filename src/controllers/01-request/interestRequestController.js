@@ -85,19 +85,19 @@ exports.getFetchInterestRequestsByUser = async (req, res) => {
         const interestRequests = await interestRequestService.getInterestRequestByUser(req.body.user_idx);
 
         if (interestRequests.length===0) { //데이터가 없을 경우
-            res.json([]);
+            return res.json([]);
         }
         const requestIdxList = interestRequests.map(item => item.request_idx); //관심있는 request_idx 배열화
 
         //배열을 넘겨받아 한꺼번에 처리
         const Results = await requestInfoService.getRequestInfosByIdxList(requestIdxList, req.body);
         if(Results.length === 0){
-            res.json([]);
+            return res.json([]);
         }
-        res.json(Results);
+        return res.json(Results);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/fetch 500 ERROR: ${e.message}`);
-        res.status(500).json({message: e.message});
+        return res.status(500).json({message: e.message});
     }
 }
 
