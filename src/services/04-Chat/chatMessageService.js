@@ -54,7 +54,10 @@ exports.getChatMessageByRoom = async (chat_room_idx) => {
             query: {
                 term: { chat_room_idx: chat_room_idx }
             },
-            size: 10000 // 최근 10000개만 가져오기
+            size: 10000, // 최근 10000개만 가져오기
+            sort: [
+                { "chat_idx": { "order": "asc" } }  // Sorting by chat_idx in ascending order
+            ],
         }
     });
 
