@@ -80,11 +80,13 @@ exports.getFetchInterestRequestsByUser = async (req, res) => {
    */
     try {
         logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/fetch`);
-        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/fetch => ${req.body}`);
         
         //특정 유저의 관심 의뢰 정보 가져오기
         const interestRequests = await interestRequestService.getInterestRequestByUser(req.body.user_idx);
-        res.json(interestRequests);
+
+        if (interestRequests.length===0) { //데이터가 없을 경우
+            res.json([]);
+        } else res.json(interestRequests);
 
 
     } catch (e){
