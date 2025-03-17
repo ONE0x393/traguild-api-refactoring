@@ -15,7 +15,7 @@ services:
      elastic-prod:
          condition: service_healthy
     environment:
-      - TZ: "Asia/Seoul"
+      - TZ=Asia/Seoul
     restart: on-failure
     profiles:
       - production
@@ -33,7 +33,7 @@ services:
     depends_on:
       - app
     environment:
-      - TZ: "Asia/Seoul"
+      - TZ=Asia/Seoul
     profiles:
       - production
 
