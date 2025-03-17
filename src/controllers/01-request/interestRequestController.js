@@ -45,6 +45,15 @@ exports.getFetchInterestRequestsByUser = async (req, res) => {
     /*
    #swagger.description = "관심 의뢰 정보 전체 조회"
    #swagger.tags = ['interestRequest - 관심 의뢰 테이블']
+   #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "page": 1,
+            "limit": 10
+        }
+    }
    */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/allByUser`);
@@ -74,6 +83,7 @@ exports.updateInterestRequest = async (req, res) => {
         in: 'body',
         required: true,
         schema: {
+            "interest_idx": 6,
             "user_idx": 1,
             "request_idx": 25
         }
