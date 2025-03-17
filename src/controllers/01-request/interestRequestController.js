@@ -87,6 +87,9 @@ exports.getFetchInterestRequestsByUser = async (req, res) => {
         }
 
         const requestIdxList = interestRequests.map(item => item.request_idx); //관심있는 request_idx 배열화
+        if (requestIdxList.length) {
+            return []; // 빈 배열 반환 후 종료
+        }
 
         //배열을 넘겨받아 한꺼번에 처리
         const Results = await requestInfoService.getRequestInfosByIdxList(requestIdxList, req.body);
