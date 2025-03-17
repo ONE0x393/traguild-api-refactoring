@@ -91,9 +91,10 @@ exports.getFetchInterestRequestsByUser = async (req, res) => {
 
         //배열을 넘겨받아 한꺼번에 처리
         const Results = await requestInfoService.getRequestInfosByIdxList(requestIdxList, req.body);
-
+        if(Results.length === 0){
+            res.json([]);
+        }
         res.json(Results);
-
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/fetch 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
