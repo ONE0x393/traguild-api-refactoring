@@ -27,16 +27,25 @@ exports.getAllInterestRequests = async () => {
 }
 
 exports.getInterestRequestByUser = async (user_idx) => {
-    const { body } = await esClient.search({
-        index: 'interest_request',
-        body: {
+    try {
+        const { body } = await esClient.search({
+          index: 'interest_request',
+          body: {
             query: {
-                term: { user_idx: user_idx }
+              term: { user_idx: user_idx }
             }
+          }
+        });
+    
+        return body?.hits?.hits?.map((hit) => hit._source) || [];
+      } catch (error) {
+        if (error.meta?.body?.error?.type === 'index_not_found_exception') {
+          return [];
         }
-    });
-
-    return body.hits.hits.map(hit => hit._source);
+        // 그 밖의 에러는 필요 시 로깅 처리
+        console.error(error);
+        return [];
+      }
 }
 
 exports.getInterestRequestExactly = async (data) => {
