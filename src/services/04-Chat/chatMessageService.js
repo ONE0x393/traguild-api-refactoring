@@ -4,7 +4,8 @@ const esClient = require('../../config/esClient');
 
 exports.createChatMessage = async (data) => {
     const now = new Date();
-    data.send_time = now.toISOString();
+    const koreaTime = new Date(now.getTime() + 9 * 60 * 60 * 1000); // UTC+9 적용
+    data.send_time = koreaTime.toISOString();
     const chat = await ChatMessageService.create(data);
 
     await esClient.index({
