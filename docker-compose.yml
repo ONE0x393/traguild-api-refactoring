@@ -14,6 +14,8 @@ services:
          condition: service_healthy
      elastic-prod:
          condition: service_healthy
+    environment:
+      - TZ: "Asia/Seoul"
     restart: on-failure
     profiles:
       - production
@@ -30,6 +32,8 @@ services:
       - /etc/nginx/ssl:/etc/nginx/ssl
     depends_on:
       - app
+    environment:
+      - TZ: "Asia/Seoul"
     profiles:
       - production
 
@@ -88,6 +92,7 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - TZ=Asia/Seoul
     ulimits:
       memlock:
         soft: -1
@@ -114,6 +119,7 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - TZ=Asia/Seoul
     ulimits:
       memlock:
         soft: -1
