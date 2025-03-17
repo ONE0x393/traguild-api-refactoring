@@ -39,6 +39,24 @@ exports.getInterestRequestByUser = async (user_idx) => {
     return body.hits.hits.map(hit => hit._source);
 }
 
+exports.getInterestRequestExactly = async (data) => {
+    const { body } = await esClient.search({
+        index: 'interest_request',
+        body: {
+            query: {
+                bool: {
+                    must: [
+                        { term: { user_idx: data.user_idx } },
+                        { term: { request_idx: data.request_idx } }
+                    ]
+                }
+            }
+        }
+    });
+
+    return body.hits.hits.map(hit => hit._source);
+}
+
 exports.updateInterestRequest = async (data) => {
 
     await InterestRequest.update({

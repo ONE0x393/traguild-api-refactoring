@@ -12,6 +12,10 @@ router.put('/', interestRequestController.createInterestRequest);
  */
 router.post('/all', interestRequestController.getAllInterestRequests);
 /**
+ * 유저와 의뢰정보로 특정 관심 조회
+ */
+router.post('/exactly', interestRequestController.getInterestRequestExactly);
+/**
  * 모든 관심의뢰 정보 조회
  */
 router.post('/fetch', interestRequestController.getFetchInterestRequestsByUser);

@@ -41,6 +41,29 @@ exports.getAllInterestRequests = async (req, res) => {
     }
 }
 
+exports.getInterestRequestExactly = async (req, res) => {
+    /*
+    #swagger.description = "유저와 의뢰정보로 특정 관심 조회"
+    #swagger.tags = ['interestRequest - 관심 의뢰 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "request_idx": 1,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/interestRequest/Exactly`);
+        const InterestRequest = await interestRequestService.getInterestRequestExactly(req.body);
+        res.json(InterestRequest);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/interestRequest/Exactly 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.getFetchInterestRequestsByUser = async (req, res) => {
     /*
    #swagger.description = "관심 의뢰 정보 전체 조회"
