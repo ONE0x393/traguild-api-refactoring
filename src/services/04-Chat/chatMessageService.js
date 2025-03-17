@@ -53,7 +53,8 @@ exports.getChatMessageByRoom = async (chat_room_idx) => {
         body: {
             query: {
                 term: { chat_room_idx: chat_room_idx }
-            }
+            },
+            size: 10000 // 최근 10000개만 가져오기
         }
     });
 
