@@ -61,7 +61,7 @@ exports.getAllChattingListByMine = async (user_idx) => {
     try {
         const result = await sequelize.query(
             `
-                SELECT a.user_idx, a.chat_room_idx,b.user_nickname, m.chat_detail
+                SELECT a.user_idx, a.chat_room_idx,b.user_nickname, m.chat_detail, m.send_time
                 FROM TB_CHAT_LIST a
                          JOIN TB_USER_INFO b ON a.user_idx = b.user_idx
                          LEFT JOIN TB_CHAT_MESSAGE m
