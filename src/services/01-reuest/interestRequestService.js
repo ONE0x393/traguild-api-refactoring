@@ -32,7 +32,8 @@ exports.getInterestRequestByUser = async (user_idx) => {
         body: {
             query: {
                 term: { user_idx: user_idx }
-            }
+            },
+            size: 1000  // 너무 큰 결과를 방지하기 위해 적절한 값으로 제한
         }
     });
 
