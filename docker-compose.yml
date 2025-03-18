@@ -9,6 +9,7 @@ services:
       - "8282:8282"
     volumes:
       - /data/upload:/data/upload
+      - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
      mysql-prod:
          condition: service_healthy
