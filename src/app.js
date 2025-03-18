@@ -4,6 +4,7 @@ const logger = require("./config/winston/logger");
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 const cors = require('cors');
+const fs = require('fs');
 const sequelize = require('./config/database');
 
 const swaggerUi = require('swagger-ui-express');
