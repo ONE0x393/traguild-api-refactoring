@@ -1,4 +1,5 @@
 const express = require('express');
+const process = require("process");
 const logger = require("./config/winston/logger");
 const bodyParser = require('body-parser');
 const routes = require('./routes');
@@ -22,7 +23,19 @@ app.use('/api', routes);
 
 ///////////////////socket.io chat구현 -시작-///////////////////////
 const http = require("http");
-const server_chat = http.createServer(app); //http로 app실행
+const https = require("https");
+
+let server_chat;
+
+if(process.env.NODE_ENV != "production") server_chat = http.createServer(app);  //http로 app실행
+else {
+    const privateKey = fs.readFileSync('/etc/letsencrypt/live/traguild.kro.kr/privkey.pem', 'utf8');
+    const certificate = fs.readFileSync('/etc/letsencrypt/live/traguild.kro.kr/fullchain.pem', 'utf8');
+    const credentials = { key: privateKey, cert: certificate };
+
+    server_chat = https.createServer(credentials, app);
+}
+
 const { Server } = require("socket.io") //socket.io 사용
 const io = new Server(server_chat, {
     cors: {
