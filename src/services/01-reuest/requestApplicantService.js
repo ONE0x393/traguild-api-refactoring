@@ -127,6 +127,67 @@ exports.getApplicantInfoByUser = async (user_idx, data) => {
     }
 };
 
+exports.getAcceptedApplicantByUser = async (user_idx) => {
+    try{
+        let query = `
+            SELECT B.*
+            FROM TB_REQUEST_APPLICANT A
+            LEFT JOIN TB_REQUEST_INFO B ON A.request_idx = B.request_idx
+            WHERE A.user_idx = :user_idx AND A.applicant_state = '승인' AND B.is_deleted = 0
+            `;
+        const result = await sequelize.query(
+            query,
+            {
+                replacements: {
+                    user_idx
+                },
+                type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
+            }
+        );
+        if (!result || result.length === 0) {
+            return [];
+        }
+
+        return result;
+
+    }catch (error){
+        console.error('Error fetching request accepted applicants by user_idx:', error);
+        throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+    }
+};
+
+exports.getFinishedApplicantByUser = async (user_idx) => {
+    try{
+        let query = `
+            SELECT B.*
+            FROM TB_REQUEST_APPLICANT A
+            LEFT JOIN TB_REQUEST_INFO B ON A.request_idx = B.request_idx
+            WHERE A.user_idx = :user_idx 
+              AND A.applicant_state = '승인' 
+              AND B.is_deleted = 0 
+              AND B.request_state = '완료'
+            `;
+        const result = await sequelize.query(
+            query,
+            {
+                replacements: {
+                    user_idx
+                },
+                type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
+            }
+        );
+        if (!result || result.length === 0) {
+            return [];
+        }
+
+        return result;
+
+    }catch (error){
+        console.error('Error fetching request accepted applicants by user_idx:', error);
+        throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+    }
+};
+
 exports.updateRequestApplicant = async (data) => {
 
     return await RequestApplicant.update({

@@ -91,6 +91,50 @@ exports.getApplicantInfoByUser = async (req, res) => {
     }
 }
 
+exports.getAcceptedApplicantByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자가 지원한 의뢰중 승인된 의뢰 목록 조회"
+    #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getAccepted`);
+        const RequestApplicant = await requestApplicantService.getAcceptedApplicantByUser(req.body.user_idx);
+        res.json(RequestApplicant);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getAccepted 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
+exports.getFinishedApplicantByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자가 지원하여 승인된 의뢰중 완료된 의뢰 목록 조회"
+    #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getFinished`);
+        const RequestApplicant = await requestApplicantService.getFinishedApplicantByUser(req.body.user_idx);
+        res.json(RequestApplicant);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getFinished 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateRequestApplicant = async (req, res) => {
     /*
     #swagger.description = "의뢰 지원자 정보 갱신"

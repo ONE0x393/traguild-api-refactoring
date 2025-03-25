@@ -20,6 +20,14 @@ router.post('/applyRequest', requestApplicantController.getFetchRequestInfosByUs
  */
 router.post('/getApply', requestApplicantController.getApplicantInfoByUser);
 /**
+ * 특정 사용자가 지원한 의뢰중 승인된 의뢰 목록 조회
+ */
+router.post('/getAccepted', requestApplicantController.getAcceptedApplicantByUser);
+/**
+ * 특정 사용자가 지원하여 승인된 의뢰중 완료된 의뢰 목록 조회
+ */
+router.post('/getFinished', requestApplicantController.getFinishedApplicantByUser);
+/**
  * 의뢰지원자 정보 수정
  */
 router.post('/update', requestApplicantController.updateRequestApplicant);

@@ -5,11 +5,11 @@ const insertRequestApplicant = async () => {
         {
             "request_idx": 1,
             "user_idx": 2,
-            "applicant_state": "대기"
+            "applicant_state": "승인"
         },{
             "request_idx": 2,
             "user_idx": 2,
-            "applicant_state": "취소",
+            "applicant_state": "승인",
             "is_canceled": "1"
         },{
             "request_idx": 2,

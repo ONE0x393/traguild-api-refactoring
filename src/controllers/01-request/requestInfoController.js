@@ -170,6 +170,34 @@ exports.getFecthApplicantOnlyMine = async (req, res) => {
     }
 }
 
+exports.getHowManyAcceptByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자가 자신의 의뢰중 몇개의 의뢰에 대해 수락을 하였는지 목록 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/howMuch`);
+
+        const users_requestInfo = await requestInfoService.getHowManyAcceptByUser(req.body.user_idx);
+        if(!users_requestInfo.length){
+            return [];
+            // return res.status(404).json({ message: "No requests found for by this user" });
+        }
+
+        res.json(users_requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/howMuch 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateRequestInfo = async (req, res) => {
     /*
     #swagger.description = "의뢰 정보 갱신"

@@ -44,10 +44,10 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
     user_birth: {
         type: DataTypes.DATE,
     },
-    user_rate: {
-        type: DataTypes.STRING(50),
+    user_rate: { //유저 평판
+        type: DataTypes.FLOAT,
         allowNull: false,
-        defaultValue: 50
+        defaultValue: 50.0
     },
     is_agree_privacy: {
         type: DataTypes.BOOLEAN,
