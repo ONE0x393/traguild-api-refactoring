@@ -7,6 +7,10 @@ const ChatRoom = sequelize.define('TB_CHAT_ROOM', {
         autoIncrement: true,
         primaryKey: true
     },
+    request_idx: {  //채팅방을 개설하게 된 의뢰 KEY
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     chat_room_name: {  //채팅방 이름
         type: DataTypes.STRING(25),
         allowNull: false
