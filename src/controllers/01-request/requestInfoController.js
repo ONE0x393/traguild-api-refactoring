@@ -159,7 +159,7 @@ exports.getFecthApplicantOnlyMine = async (req, res) => {
         //특정 유저가 등록한 모든 requestInfo를 가져온다.
         const users_requestInfo = await requestInfoService.getFetchRequestInfosOnlyMine(req.body);
         if(!users_requestInfo.length){
-            return [];
+            return res.json([]);
             // return res.status(404).json({ message: "No requests found for by this user" });
         }
 
@@ -187,7 +187,7 @@ exports.getHowManyAcceptByUser = async (req, res) => {
 
         const users_requestInfo = await requestInfoService.getHowManyAcceptByUser(req.body.user_idx);
         if(!users_requestInfo.length){
-            return [];
+            return res.json([]);
             // return res.status(404).json({ message: "No requests found for by this user" });
         }
 

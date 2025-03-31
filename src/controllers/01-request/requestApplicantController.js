@@ -106,6 +106,9 @@ exports.getAcceptedApplicantByUser = async (req, res) => {
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getAccepted`);
         const RequestApplicant = await requestApplicantService.getAcceptedApplicantByUser(req.body.user_idx);
+        if(!RequestApplicant.length){
+            return res.json([]);
+        }
         res.json(RequestApplicant);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getAccepted 500 ERROR: ${e.message}`);
@@ -128,6 +131,9 @@ exports.getFinishedApplicantByUser = async (req, res) => {
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getFinished`);
         const RequestApplicant = await requestApplicantService.getFinishedApplicantByUser(req.body.user_idx);
+        if(!RequestApplicant.length){
+            return res.json([]);
+        }
         res.json(RequestApplicant);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/getFinished 500 ERROR: ${e.message}`);
