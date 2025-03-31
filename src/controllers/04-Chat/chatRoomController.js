@@ -11,6 +11,7 @@ exports.createChatRoom= async (req, res) => {
         required: true,
         schema: {
             "chat_room_name": "창원 한화 모집공고",
+            "request_idx": 1
         }
     }
     */
