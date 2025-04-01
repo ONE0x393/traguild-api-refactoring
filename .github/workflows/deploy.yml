@@ -50,6 +50,9 @@ jobs:
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'DB_NAME=${{ secrets.DB_NAME }}' >> ~/app/.env.production"
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_HOST=${{ secrets.ES_HOST }}' >> ~/app/.env.production"
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'ES_PORT=${{ secrets.ES_PORT }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'TW_SID=${{ secrets.TW_SID }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'TW_TOKEN=${{ secrets.TW_TOKEN }}' >> ~/app/.env.production"
+        ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "echo 'TW_SERVICE=${{ secrets.TW_SERVICE }}' >> ~/app/.env.production"
 
     - name: Deploy with Docker Compose
       run: |

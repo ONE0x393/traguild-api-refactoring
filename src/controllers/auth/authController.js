@@ -4,6 +4,72 @@ const {request} = require("express");
 const logger = require('../../config/winston/logger');
 const requestIp = require('request-ip');
 const bcrypt = require("bcrypt");
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+require('dotenv').config({path: envFile});
+const ENV = process.env;
+
+exports.sendCodeProc = async (req, res) => {
+    /*
+    #swagger.description = "휴대폰 번호 인증요청 프로세스"
+    #swagger.tags = ['Auth - 인증 관련 API']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            user_id: "01012341234"
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/auth/`);
+
+        const {user_id} = req.body;
+        const numbers = "+82" + String(user_id).substring(1, 11);
+
+        const client = require('twilio')(ENV.TW_SID, ENV.TW_TOKEN);
+
+        const result = await client.verify.v2.services(ENV.TW_SERVICE)
+            .verifications
+            .create({to: numbers, channel: 'sms'});
+
+        return res.json(result);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/auth/ 500 ERROR: ${e.message}`);
+        return res.status(500).json({message: e.message});
+    }
+}
+
+exports.verifyCodeProc = async (req, res) => {
+    /*
+    #swagger.description = "휴대폰 번호 인증 프로세스"
+    #swagger.tags = ['Auth - 인증 관련 API']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            user_id: "01012341234",
+            code: "1234"
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/auth/verify`);
+
+        const {user_id, code} = req.body;
+        const numbers = "+82" + String(user_id).substring(1, 11);
+
+        const client = require('twilio')(ENV.TW_SID, ENV.TW_TOKEN);
+
+        const result = await client.verify.v2.services(ENV.TW_SERVICE)
+            .verificationChecks
+            .create({to: numbers, code: code});
+
+        res.json(result);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/auth/verify 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
 
 exports.siginUpProc = async (req, res) => {
     /*

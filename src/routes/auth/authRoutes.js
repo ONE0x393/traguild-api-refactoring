@@ -4,6 +4,8 @@ const authController = require('../../controllers/auth/authController');
 
 const router = express.Router();
 
+router.post("/", authController.sendCodeProc);
+router.post("/verify", authController.verifyCodeProc);
 router.put('/signUp', [authMiddleware.checkValidID], authController.siginUpProc);
 router.post('/signIn', authController.signInProc);
 // router.post('/signOut', authController.signOutProc);
