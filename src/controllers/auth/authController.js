@@ -66,7 +66,8 @@ exports.verifyCodeProc = async (req, res) => {
 
         if(result.status == "approved"){
             req.body.user_pw = "";
-            const users = await AuthService.siginUpProc(req.body);
+
+            const users = await AuthService.verifyCodeProc(req.body);
             return res.json(users);
         }
 
