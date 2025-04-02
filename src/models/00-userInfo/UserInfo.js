@@ -18,19 +18,20 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
     },
     user_name: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     user_region:{
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: false,
+        defaultValue: ""
     },
     user_email: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     user_nickname:{
         type: DataTypes.STRING(12),
-        allowNull: false
+        allowNull: true
     },
     user_img: {
         type: DataTypes.STRING(200),

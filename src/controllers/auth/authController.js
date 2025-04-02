@@ -32,7 +32,7 @@ exports.sendCodeProc = async (req, res) => {
             .verifications
             .create({to: numbers, channel: 'sms'});
 
-        return res.json(result);
+        return res.json({message: result.status});
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/auth/ 500 ERROR: ${e.message}`);
         return res.status(500).json({message: e.message});
@@ -64,7 +64,13 @@ exports.verifyCodeProc = async (req, res) => {
             .verificationChecks
             .create({to: numbers, code: code});
 
-        res.json(result);
+        if(result.status == "approved"){
+            req.body.user_pw = "";
+            const users = await AuthService.siginUpProc(req.body);
+            return res.json(users);
+        }
+
+        return res.json(result);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/auth/verify 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
