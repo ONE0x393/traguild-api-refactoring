@@ -36,6 +36,9 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.STRING(5),
         defaultValue: "모집", //기본은 모집
     },
+    request_category: {  //의뢰 카테고리
+        type: DataTypes.STRING(50),
+    },
     created_date: {  //등록날짜
         type: DataTypes.DATE,
         allowNull: false

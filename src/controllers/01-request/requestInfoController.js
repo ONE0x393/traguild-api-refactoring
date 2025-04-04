@@ -95,15 +95,18 @@ exports.getFetchRequestInfos = async (req, res) => {
 
 exports.getFetchRequestInfosByTitle = async (req, res) => {
     /*
-    #swagger.description = "의뢰제목으로 의뢰 정보 limit건 조회"
+    #swagger.description = "의뢰제목으로 의뢰 정보 limit건 조회/ mode:0은 통상검색, mode:1은 category 적용검색"
     #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',
         required: true,
         schema: {
+            "user_idx": 1,
             "request_title": "오전 중 창고정리",
             "page": 1,
-            "limit": 10
+            "limit": 10,
+            "mode": 0,
+            "request_category": "알바"
         }
     }
     */

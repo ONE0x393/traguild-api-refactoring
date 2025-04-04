@@ -104,6 +104,7 @@ exports.updateChatRoom = async (data) => {
     await ChatRoomService.update({
         chat_room_name: data.chat_room_name,
         last_chat_user_idx: data.last_chat_user_idx,
+        request_idx: data.request_idx,
         chat_num: data.chat_num,
     }, {
         where: {
