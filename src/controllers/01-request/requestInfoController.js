@@ -170,6 +170,30 @@ exports.getFecthApplicantOnlyMine = async (req, res) => {
     }
 }
 
+exports.getHowManyRequestByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자가 등록한 의뢰글 개수 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/howManyrequest`);
+
+        const users_requestInfo = await requestInfoService.getHowManyRequestByUser(req.body.user_idx);
+
+        res.json(users_requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/howManyrequest 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.getHowManyAcceptByUser = async (req, res) => {
     /*
     #swagger.description = "특정 사용자가 자신의 의뢰중 몇개의 의뢰에 대해 수락을 하였는지 목록 조회"
@@ -183,7 +207,7 @@ exports.getHowManyAcceptByUser = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/howMuch`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/howManyAccept`);
 
         const users_requestInfo = await requestInfoService.getHowManyAcceptByUser(req.body.user_idx);
         if(!users_requestInfo.length){
@@ -193,7 +217,7 @@ exports.getHowManyAcceptByUser = async (req, res) => {
 
         res.json(users_requestInfo);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/howMuch 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/howManyAccept 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

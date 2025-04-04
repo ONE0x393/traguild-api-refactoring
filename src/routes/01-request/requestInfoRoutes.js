@@ -49,6 +49,10 @@ router.post('/fetch', requestInfoController.getFetchRequestInfos);
  */
 router.post('/onlyMine', requestInfoController.getFecthApplicantOnlyMine);
 /**
+ * 특정 사용자가 자신의 의뢰중 몇개의 의뢰를 등록했는지 개수 조회
+ */
+router.post('/howManyrequest', requestInfoController.getHowManyRequestByUser);
+/**
  * 특정 사용자가 자신의 의뢰중 몇개의 의뢰에 대해 수락을 하였는지 목록 조회
  */
 router.post('/howManyAccept', requestInfoController.getHowManyAcceptByUser);
