@@ -37,6 +37,7 @@ const insertRequestInfo = async () => {
             "request_content": "2주 동안 현대차 생산라인에서 일할 분 모집합니다. 모집인원 0명, 중식과 석식 제공",
             "request_cost": 250000,
             "request_state": "모집중",
+            "request_category": "알바",
             "created_date": "2024-07-14",
             "updated_time": "2024-07-14"
         },{
@@ -73,6 +74,7 @@ const insertRequestInfo = async () => {
             "request_content": "대한 캐피탈에서 인턴을 모집합니다.",
             "request_cost": 50000,
             "request_state": "모집예정",
+            "request_category": "인턴",
             "created_date": "2024-08-20",
             "updated_time": "2024-08-20"
         },{

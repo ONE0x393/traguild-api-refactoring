@@ -170,6 +170,42 @@ exports.getFetchRequestInfos = async (data) => {
 
 exports.getFetchRequestInfosByTitle = async (data) => {
     const queryString = await getSynonymSearch(data.request_title);
+
+    const query= {
+        bool: {
+            must: [
+                {
+                    term: { is_deleted: false } // is_deleted가 false인 데이터만
+                },
+            ],
+            must_not: [
+                {
+                    term: { user_idx: data.user_idx } // data의 user_idx를 제외한
+                }
+            ],
+            should: [
+                {
+                    match: { request_title: queryString } // match 쿼리: 요청 제목이 검색어와 일치하는 문서 찾기
+                },
+                {
+                    wildcard: {
+                        request_title: `*${data.request_title}*` // wildcard 쿼리: 요청 제목에 검색어가 포함된 문서 찾기
+                    }
+                }
+            ],
+            minimum_should_match: 1 // `should` 쿼리 중 하나라도 만족하면 결과에 포함
+        }
+    };
+
+    // 만약 data.mode가 1일 경우, request_category 필터를 추가
+    if (data.mode === 1) {
+        query.bool.filter = [
+            {
+                term: { request_category: data.request_category } // 요청 카테고리가 일치하는 데이터만 필터링
+            }
+        ];
+    }
+
     const { body } = await esClient.search({
         index: 'request_info',
         body: {
@@ -182,31 +218,7 @@ exports.getFetchRequestInfosByTitle = async (data) => {
             ],
             from: (data.page - 1) * data.limit, // 시작 위치, 0부터 시작하기 때문에 page-1
             size: data.limit, // 가져올 개수
-            query: {
-                bool: {
-                    must: [
-                        {
-                            term: { is_deleted: false } // is_deleted가 false인 데이터만
-                        },
-                    ],
-                    must_not: [
-                        {
-                            term: { user_idx: data.user_idx } // user_idx가 data.user_idx와 일치하는 데이터만
-                        }
-                    ],
-                    should: [
-                        {
-                            match: { request_title: queryString } // match 쿼리: 요청 제목이 검색어와 일치하는 문서 찾기
-                        },
-                        {
-                            wildcard: {
-                                request_title: `*${data.request_title}*` // wildcard 쿼리: 요청 제목에 검색어가 포함된 문서 찾기
-                            }
-                        }
-                    ],
-                    minimum_should_match: 1 // `should` 쿼리 중 하나라도 만족하면 결과에 포함
-                }
-            }
+            query: query // 위에서 정의한 쿼리 객체
         }
     });
 
@@ -272,6 +284,7 @@ exports.updateRequestInfo = async (data) => {
         request_content: data.request_content,
         request_cost: data.request_cost,
         request_state: data.request_state,
+        request_category: data.request_category,
         created_date: data.created_date,
         is_deleted: data.is_deleted,
         applicant_idx: data.applicant_idx
