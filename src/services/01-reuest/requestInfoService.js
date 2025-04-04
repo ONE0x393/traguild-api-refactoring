@@ -78,6 +78,32 @@ exports.getFetchRequestInfosOnlyMine = async (data) => {
     //return await RequestInfo.findAll();
 }
 
+exports.getHowManyRequestByUser = async (user_idx) => {
+    try{
+        let query = `
+            SELECT COUNT(*)
+            FROM TB_REQUEST_INFO
+            WHERE user_idx = :user_idx 
+              AND is_deleted = 0
+            `;
+        const result = await sequelize.query(
+            query,
+            {
+                replacements: {
+                    user_idx
+                },
+                type: sequelize.QueryTypes.SELECT, // 쿼리 유형 지정 (SELECT)
+            }
+        );
+
+        return result[0]["COUNT(*)"];
+
+    }catch (error){
+        console.error('Error how much accept request by user_idx:', error);
+        throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+    }
+}
+
 exports.getHowManyAcceptByUser = async (user_idx) => {
     try{
         let query = `
