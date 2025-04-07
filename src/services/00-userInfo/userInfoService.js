@@ -42,6 +42,7 @@ exports.updateUser = async (userData) => {
     return await UserInfo.update({
         user_pw: userData.user_pw,
         user_nickname: userData.user_nickname,
+        user_region: userData.user_region,
         user_credit: userData.user_credit,
         user_birth: userData.user_birth,
         user_rate: userData.user_rate,
