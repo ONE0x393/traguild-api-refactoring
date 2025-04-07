@@ -9,9 +9,10 @@ const insertRequestInfo = async () => {
             "request_title": "오전 중 창고정리",
             "request_content": "오전 중에 야채창고 정리할 인력 다섯분 구합니다. 야리끼리로 처리되고 일당은 7만원입니다. 오후에 창고물자 입고랑 연계 신청가능합니다",
             "request_cost": 70000,
-            "request_state": "완료",
+            "request_state": "모집",
             "created_date": "2024-07-29",
             "updated_time": "2024-07-29",
+            "reserved_start_time": "2024-04-04T09:30:00.000Z"  // 3일 전 날짜
         },{
             "user_idx": 1,
             "request_region": "경남 김해",

@@ -286,6 +286,7 @@ exports.updateRequestInfo = async (data) => {
         request_state: data.request_state,
         request_category: data.request_category,
         created_date: data.created_date,
+        reserved_start_time: data.reserved_start_time,
         is_deleted: data.is_deleted,
         applicant_idx: data.applicant_idx
     }, {

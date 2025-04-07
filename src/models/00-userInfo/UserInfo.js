@@ -50,6 +50,16 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         allowNull: false,
         defaultValue: 50.0
     },
+    user_like: { //유저 좋아요
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    user_dislike: { //유저 싫어요
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
     is_agree_privacy: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

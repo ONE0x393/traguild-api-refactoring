@@ -43,6 +43,10 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.DATE,
         allowNull: false
     },
+    reserved_start_time: {  //의뢰 시작 시간
+        type: DataTypes.DATE,
+        //allowNull: false
+    },
     updated_time: {
         type: DataTypes.DATE,
         allowNull: false,

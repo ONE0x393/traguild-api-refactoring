@@ -45,6 +45,8 @@ exports.updateUser = async (userData) => {
         user_credit: userData.user_credit,
         user_birth: userData.user_birth,
         user_rate: userData.user_rate,
+        user_like: userData.user_like,
+        user_dislike: userData.user_dislike,
         is_agree_privacy: userData.is_agree_privacy,
     }, {
         where: {
