@@ -225,6 +225,30 @@ exports.getHowManyAcceptByUser = async (req, res) => {
     }
 }
 
+exports.getHowManyCompleteByUser = async (req, res) => {
+    /*
+    #swagger.description = "특정 사용자가 완료한 의뢰 개수 조회"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestInfo/howManyComplete`);
+
+        const users_requestInfo = await requestInfoService.getHowManyCompleteByUser(req.body.user_idx);
+
+        res.json(users_requestInfo);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestInfo/howManyComplete 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateRequestInfo = async (req, res) => {
     /*
     #swagger.description = "의뢰 정보 갱신"

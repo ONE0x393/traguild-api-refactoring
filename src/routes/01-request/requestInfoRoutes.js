@@ -57,6 +57,10 @@ router.post('/howManyrequest', requestInfoController.getHowManyRequestByUser);
  */
 router.post('/howManyAccept', requestInfoController.getHowManyAcceptByUser);
 /**
+ * 특정 사용자가 완료한 의뢰 개수 조회
+ */
+router.post('/getHowManyComplete', requestInfoController.getHowManyCompleteByUser);
+/**
  * 제목으로 의뢰 조회
  */
 router.post('/title', requestInfoController.getFetchRequestInfosByTitle);
