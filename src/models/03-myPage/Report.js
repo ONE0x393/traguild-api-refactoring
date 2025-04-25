@@ -11,6 +11,10 @@ const Report = sequelize.define('TB_REPORT', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    reported_request_idx: {  //피신고의뢰글 고유 KEY
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     reported_user_idx: {  //피신고자 고유 KEY
         type: DataTypes.INTEGER,
         allowNull: false
