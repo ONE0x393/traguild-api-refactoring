@@ -15,5 +15,9 @@ router.post('/all', reportController.getAllReports);
  * 사용자에 대한 신고 정보 조회
  */
 router.post('/byUser', reportController.getReportsByUser);
+/**
+ * 사용자가 특정 의뢰에 대해 신고를 했는지 확인
+ */
+router.post('/checkAlready', reportController.checkReportAlreadyByUser);
 
 module.exports = router;

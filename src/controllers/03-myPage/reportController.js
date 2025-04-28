@@ -61,3 +61,26 @@ exports.getReportsByUser = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.checkReportAlreadyByUser = async (req, res) => {
+    /*
+    #swagger.description = "사용자가 특정 의뢰에 대해 신고를 했는지 확인"
+    #swagger.tags = ['report - 신고 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "user_idx": 1,
+            "request_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/report/checkAlready`);
+        const resData = await reportService.checkReportAlreadyByUser(req.body.user_idx, req.body.request_idx);
+        res.json(resData);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/report/checkAlready 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
