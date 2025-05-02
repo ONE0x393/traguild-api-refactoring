@@ -71,13 +71,14 @@ exports.checkReportAlreadyByUser = async (req, res) => {
         required: true,
         schema: {
             "user_idx": 1,
-            "request_idx": 1
+            "request_idx": 1,
+            "report_type": "욕설/비방"
         }
     }
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/report/checkAlready`);
-        const resData = await reportService.checkReportAlreadyByUser(req.body.user_idx, req.body.request_idx);
+        const resData = await reportService.checkReportAlreadyByUser(req.body);
         res.json(resData);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/report/checkAlready 500 ERROR: ${e.message}`);

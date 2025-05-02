@@ -17,13 +17,19 @@ exports.getReportsByUser = async (user_idx) => {
     });
 }
 
-exports.checkReportAlreadyByUser = async (user_idx, request_idx) => {
+exports.checkReportAlreadyByUser = async (data) => {
     const reports = await Report.findAll({
         where: {
-            reported_user_idx: user_idx,
-            reported_request_idx: request_idx
+            report_user_idx: data.report_user_idx,
+            reported_request_idx: data.reported_request_idx
         }
     });
 
-    return reports.length > 0;  // 데이터가 존재하면 true, 없으면 false 반환
+    if (reports.length > 0) {
+        return "이미 신고하였습니다.";  // 신고가 이미 존재하면 이 메시지를 반환
+    } else {
+        // 신고가 존재하지 않으면 createReport 함수를 호출
+        Report.create(data);
+        return "신고가 접수되었습니다."
+    }
 }
