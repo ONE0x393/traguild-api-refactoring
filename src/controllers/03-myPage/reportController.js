@@ -64,7 +64,7 @@ exports.getReportsByUser = async (req, res) => {
 
 exports.checkReportAlreadyByUser = async (req, res) => {
     /*
-    #swagger.description = "사용자가 특정 의뢰에 대해 신고를 했는지 확인"
+    #swagger.description = "사용자가 특정 의뢰에 대해 신고를 했는지 확인(이미 존재하여 신고가 접수되지 않으면 false/신고에 성공하면 true)"
     #swagger.tags = ['report - 신고 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',
@@ -77,11 +77,11 @@ exports.checkReportAlreadyByUser = async (req, res) => {
     }
     */
     try{
-        logger.info(`${requestIp.getClientIp(req)} POST /api/report/checkAlready`);
+        logger.info(`${requestIp.getClientIp(req)} POST /api/report/reportProcess`);
         const resData = await reportService.checkReportAlreadyByUser(req.body);
         res.json(resData);
     } catch (e){
-        logger.error(`${requestIp.getClientIp(req)} POST /api/report/checkAlready 500 ERROR: ${e.message}`);
+        logger.error(`${requestIp.getClientIp(req)} POST /api/report/reportProcess 500 ERROR: ${e.message}`);
         res.status(500).json({message: e.message});
     }
 }

@@ -18,6 +18,6 @@ router.post('/byUser', reportController.getReportsByUser);
 /**
  * 사용자가 특정 의뢰에 대해 신고를 했는지 확인
  */
-router.post('/checkAlready', reportController.checkReportAlreadyByUser);
+router.post('/reportProcess', reportController.checkReportAlreadyByUser);
 
 module.exports = router;

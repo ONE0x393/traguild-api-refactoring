@@ -26,10 +26,9 @@ exports.checkReportAlreadyByUser = async (data) => {
     });
 
     if (reports.length > 0) {
-        return "이미 신고하였습니다.";  // 신고가 이미 존재하면 이 메시지를 반환
+        return false;  //이미 존재하여 신고가 접수되지 않으면 false
     } else {
-        // 신고가 존재하지 않으면 createReport 함수를 호출
         Report.create(data);
-        return "신고가 접수되었습니다."
+        return true; //신고에 성공하면 true
     }
 }
