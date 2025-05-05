@@ -28,6 +28,10 @@ router.post('/getAccepted', requestApplicantController.getAcceptedApplicantByUse
  */
 router.post('/getFinished', requestApplicantController.getFinishedApplicantByUser);
 /**
+ * 특정 의뢰에 대한 지원자 목록 조회
+ */
+router.post('/howManyApplicant', requestApplicantController.getManyApplicantForThisRequest);
+/**
  * 의뢰지원자 정보 수정
  */
 router.post('/update', requestApplicantController.updateRequestApplicant);

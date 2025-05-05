@@ -188,6 +188,21 @@ exports.getFinishedApplicantByUser = async (user_idx) => {
     }
 };
 
+exports.getManyApplicantForThisRequest = async (request_idx) => {
+    try {
+        const applicants = await RequestApplicant.findAll({
+            where: {
+                request_idx: request_idx,
+                is_canceled: false
+            }
+        });
+        return applicants;
+    } catch (error) {
+        console.error("Error request applicants by request_idx:", error);
+        throw error;
+    }
+};
+
 exports.updateRequestApplicant = async (data) => {
 
     return await RequestApplicant.update({

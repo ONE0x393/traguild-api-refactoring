@@ -9,6 +9,7 @@ const alarmTypeRoutes = require('./03-myPage/alarmTypeRoutes');
 const interestRequestRoutes = require('./01-request/interestRequestRoutes');
 const requestInfoRoutes = require('./01-request/requestInfoRoutes');
 const requestApplicantRoutes = require('./01-request/requestApplicantRoutes');
+const requestCommentRoutes = require('./01-request/requestCommentRoutes');
 const creditHistoryRoutes = require('./03-myPage/creditHistoryRoutes');
 const authRoutes = require('./auth/authRoutes');
 
@@ -28,6 +29,7 @@ router.use('/alarmType', alarmTypeRoutes);
 router.use('/interestRequest', interestRequestRoutes);
 router.use('/requestInfo', requestInfoRoutes);
 router.use('/requestApplicant', requestApplicantRoutes);
+router.use('/requestComment', requestCommentRoutes);
 router.use('/creditHistory', creditHistoryRoutes);
 router.use('/auth', authRoutes);
 router.use('/chatMessage', chatMessage);

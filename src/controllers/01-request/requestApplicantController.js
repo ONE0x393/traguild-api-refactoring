@@ -141,6 +141,31 @@ exports.getFinishedApplicantByUser = async (req, res) => {
     }
 }
 
+exports.getManyApplicantForThisRequest = async (req, res) => {
+    /*
+    #swagger.description = "특정 의뢰에 대한 지원자 목록 조회"
+    #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "request_idx": 1
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/howManyApplicant`);
+        const RequestApplicant = await requestApplicantService.getManyApplicantForThisRequest(req.body.request_idx);
+        if(!RequestApplicant.length){
+            return res.json([]);
+        }
+        res.json(RequestApplicant);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/howManyApplicant 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.updateRequestApplicant = async (req, res) => {
     /*
     #swagger.description = "의뢰 지원자 정보 갱신"
