@@ -57,3 +57,26 @@ jobs:
     - name: Deploy with Docker Compose
       run: |
         ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} -p ${{ secrets.SERVER_PORT }} "cd ~/app && docker compose --profile production down && docker compose --profile production up -d --build"
+
+    - name: Send Discord webhook
+      run: |
+        curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "embeds": [
+              {
+                "title": "🚀 Server Deployment Complete",
+                "description": "The server has been successfully deployed and is now live.",
+                "color": 5814783,
+                "fields": [
+                  {
+                    "name": "📘 API Documentation",
+                    "value": "[Access Swagger Docs](https://traguild.kro.kr/api-docs)"
+                  }
+                ],
+                "timestamp": "'$(TZ=Asia/Seoul date +"%Y-%m-%dT%H:%M:%S%:z")'"
+              }
+            ]
+          }' \
+         ${{ secrets.DISCORD_WEBHOOK_URL }}
+
