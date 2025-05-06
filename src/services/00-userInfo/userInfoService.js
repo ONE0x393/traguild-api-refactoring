@@ -49,6 +49,7 @@ exports.updateUser = async (userData) => {
         user_like: userData.user_like,
         user_dislike: userData.user_dislike,
         is_agree_privacy: userData.is_agree_privacy,
+        is_available: userData.is_available,
     }, {
         where: {
             user_idx: userData.user_idx
