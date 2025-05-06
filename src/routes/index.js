@@ -17,6 +17,8 @@ const chatMessage = require('./04-Chat/chatMessageRoutes');
 const chatRoom = require('./04-Chat/chatRoomRoutes');
 const chatList = require('./04-Chat/chatListRoutes');
 
+const payments = require('./pg/paymentsRoutes');
+
 const router = express.Router();
 
 router.use('/userInfo', userInfoRoutes);
@@ -35,5 +37,6 @@ router.use('/auth', authRoutes);
 router.use('/chatMessage', chatMessage);
 router.use('/chatRoom', chatRoom);
 router.use('/chatList', chatList);
+router.use('/v1/payments', payments);
 
 module.exports = router;
