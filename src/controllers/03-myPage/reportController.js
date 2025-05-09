@@ -62,3 +62,18 @@ exports.getReportsByUser = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.getAllReportsHistory = async (req, res) => {
+    /*
+    #swagger.description = "신고 내역 전체 조회"
+    #swagger.tags = ['report - 신고 정보 테이블']
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/report/allHistory`);
+        const resData = await reportService.getAllReportsHistory();
+        res.json(resData);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/report/allHistory 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}

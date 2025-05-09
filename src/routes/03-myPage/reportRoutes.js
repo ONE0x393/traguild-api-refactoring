@@ -12,6 +12,10 @@ router.put('/', reportController.checkReportAlreadyByUser);
  */
 router.post('/all', reportController.getAllReports);
 /**
+ * 신고 내역 조회
+ */
+router.post('/allHistory', reportController.getAllReportsHistory);
+/**
  * 사용자에 대한 신고 정보 조회
  */
 router.post('/byUser', reportController.getReportsByUser);
