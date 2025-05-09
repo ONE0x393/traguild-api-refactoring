@@ -5,12 +5,14 @@ const insertChatRoom = async () => {
     const rooms = await ChatRoom.bulkCreate([
         {
             "chat_room_idx": 1,
+            "request_idx":1,
             "chat_room_name": "한화 모집 공고",
             "last_chat_user_idx": 2,
             "chat_num": 4,
         },
         {
             "chat_room_idx": 2,
+            "request_idx":1,
             "chat_room_name": "아이스크림 품평 동호회",
             "last_chat_user_idx": 1,
             "chat_num": 2,

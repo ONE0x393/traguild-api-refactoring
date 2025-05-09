@@ -18,7 +18,7 @@ const insertUserInfo = async () => {
             "user_region": "경상남도 김해시",
             "user_email": "cskim@gmail.com",
             "user_nickname": "철수를 구하시오",
-            "user_credit": 540,
+            "user_credit": 0,
             "user_birth": "1978-12-30"
         },{
             "user_id": "userid2",

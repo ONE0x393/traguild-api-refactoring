@@ -1,23 +1,43 @@
 const RequestInfo = require('../../models/01-request/RequestInfo');
+const UserInfoService = require('../../services/00-userInfo/userInfoService');
 const sequelize = require('../../config/database');
 const esClient = require('../../config/esClient');
 const getSynonymSearch = require('../../config/synonymSearch');
 
 exports.createRequestInfo = async (fileData, data) => {
-    const now = new Date();
-    data.created_date = now.toISOString();
-    data.updated_time = now.toISOString();
-    data.request_img = fileData?.path ?? "";
 
-    const request = await RequestInfo.create(data);
+    const user_info = await UserInfoService.getUser(data.user_idx);
+    const user_credit = user_info?.user_credit;
 
-    await esClient.index({
-        index: 'request_info',
-        id: request.request_idx,
-        body: request
-    });
+    if(user_credit>0){
+        //credit -1 수정 후 작업
+        await UserInfoService.updateUser({
+            user_idx: data.user_idx,
+            user_credit: user_credit-1
+        });
 
-    return request;
+        const now = new Date();
+        data.created_date = now.toISOString();
+        data.updated_time = now.toISOString();
+        data.request_img = fileData?.path ?? "";
+
+        const request = await RequestInfo.create(data);
+        const result = request.toJSON(); // 순수 JS 객체로 변환
+
+        result.status = "OK";
+        result.msg = "";
+
+        await esClient.index({
+            index: 'request_info',
+            id: request.request_idx,
+            body: request
+        });
+
+        return result;
+    }
+    else{
+        return {status: "FAIL", msg: "크레딧이 부족합니다."};
+    }
     //return RequestInfo.create(data);
 }
 

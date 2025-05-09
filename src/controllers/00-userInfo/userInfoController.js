@@ -176,7 +176,7 @@ exports.updateUserForCredit = async (req, res) => {
         required: true,
         schema: {
             "user_idx": 1,
-            user_credit: 9080,
+            "user_credit": 9080,
         }
     }
     */
