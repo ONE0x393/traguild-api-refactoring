@@ -17,7 +17,12 @@ exports.getReportsByUser = async (user_idx) => {
     });
 }
 
-exports.getAllReportsHistory = async () => {
+exports.getAllReportsHistory = async (data) => {
+    const limit = data.limit;
+    const safePage = parseInt(data.page, 10);
+    const currentPage = isNaN(safePage) || safePage < 1 ? 1 : safePage;
+    const offset = (currentPage - 1) * limit;
+
     const query = `
         SELECT
             r.report_user_idx,
@@ -31,17 +36,18 @@ exports.getAllReportsHistory = async () => {
             r.created_time
         FROM
             TB_REPORT r
-                JOIN
-            TB_USER_INFO reporter
-            ON r.report_user_idx = reporter.user_idx
-                JOIN
-            TB_USER_INFO reported
-            ON r.reported_user_idx = reported.user_idx
-                JOIN
-            TB_REQUEST_INFO req
-            ON r.reported_request_idx = req.request_idx
+                JOIN TB_USER_INFO reporter ON r.report_user_idx = reporter.user_idx
+                JOIN TB_USER_INFO reported ON r.reported_user_idx = reported.user_idx
+                JOIN TB_REQUEST_INFO req ON r.reported_request_idx = req.request_idx
+        ORDER BY
+            r.created_time DESC
+        LIMIT :limit OFFSET :offset
     `;
-    const [results, metadata] = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
+
+    const results = await sequelize.query(query, {
+        replacements: { limit, offset },
+        type: sequelize.QueryTypes.SELECT
+    });
     return results;
 }
 
