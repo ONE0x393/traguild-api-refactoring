@@ -85,3 +85,29 @@ exports.getAllReportsHistory = async (req, res) => {
         res.status(500).json({message: e.message});
     }
 }
+
+exports.updateReport = async (req, res) => {
+    /*
+    #swagger.description = "신고 내역 전체 조회"
+    #swagger.tags = ['report - 신고 정보 테이블']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+        schema: {
+            "report_user_idx": 1,
+            "reported_request_idx": 1,
+            "reported_user_idx": 1,
+            "report_type": "욕설/비방",
+            "is_complete": false,
+        }
+    }
+    */
+    try{
+        logger.info(`${requestIp.getClientIp(req)} POST /api/report/update`);
+        const resData = await reportService.updateReport(req.body);
+        res.json(resData);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} POST /api/report/update 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}

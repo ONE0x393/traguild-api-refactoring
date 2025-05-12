@@ -33,12 +33,16 @@ exports.getAllChatMessages = async () => {
 }
 
 
-exports.getChatMessageByIdx = async (chat_idx) => {
+exports.getChatMessageByIdx = async (user_idx) => {
+    const { body: exists } = await esClient.indices.exists({ index: 'chat_message' });
+    if (!exists) {
+        return [];
+    }
     const { body } = await esClient.search({
         index: 'chat_message',
         body: {
             query: {
-                term: { chat_idx: chat_idx }
+                term: { user_idx: user_idx }
             }
         }
     });
@@ -48,6 +52,11 @@ exports.getChatMessageByIdx = async (chat_idx) => {
 }
 
 exports.getChatMessageByRoom = async (chat_room_idx) => {
+    const { body: exists } = await esClient.indices.exists({ index: 'chat_message' });
+    if (!exists) {
+        return [];
+    }
+
     const { body } = await esClient.search({
         index: 'chat_message',
         body: {

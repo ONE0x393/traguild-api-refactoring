@@ -1,5 +1,7 @@
 const Report = require('../../models/03-myPage/Report');
 const sequelize = require('../../config/database');
+const RequestInfo = require("@src/models/01-request/RequestInfo");
+const esClient = require("@src/config/esClient");
 
 exports.createReport = async (reportData) => {
     return Report.create(reportData);
@@ -40,6 +42,7 @@ exports.getAllReportsHistory = async (data) => {
                 JOIN TB_USER_INFO reported ON r.reported_user_idx = reported.user_idx
                 JOIN TB_REQUEST_INFO req ON r.reported_request_idx = req.request_idx
         ORDER BY
+            r.is_complete ASC,
             r.created_time DESC
         LIMIT :limit OFFSET :offset
     `;
@@ -66,3 +69,20 @@ exports.checkReportAlreadyByUser = async (data) => {
         return true; //신고에 성공하면 true
     }
 }
+
+exports.updateReport = async (data) => {
+    await Report.update({
+        report_user_idx: data.report_user_idx,
+        reported_request_idx: data.reported_request_idx,
+        reported_user_idx: data.reported_user_idx,
+        report_type: data.report_type,
+        is_complete: data.is_complete,
+        created_time: data.created_time,
+    }, {
+        where: {
+            report_user_idx: data.report_user_idx,
+            reported_request_idx: data.reported_request_idx
+        }
+    });
+    return data;
+};

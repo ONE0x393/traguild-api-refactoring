@@ -19,5 +19,9 @@ router.post('/allHistory', reportController.getAllReportsHistory);
  * 사용자에 대한 신고 정보 조회
  */
 router.post('/byUser', reportController.getReportsByUser);
+/**
+ * 사용자에 대한 신고 정보 수정
+ */
+router.post('/update', reportController.updateReport);
 
 module.exports = router;

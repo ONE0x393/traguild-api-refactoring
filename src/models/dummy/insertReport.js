@@ -7,7 +7,8 @@ const insertReport = async () => {
             "reported_user_idx": 2,
             "reported_request_idx": 1,
             "report_type": "비속어",
-            "created_time": "2021-01-01 00:00:00",
+            "is_complete": true,
+            "created_time": "2021-01-02 00:00:00",
         }, {
             "report_user_idx": 1,
             "reported_user_idx": 3,
