@@ -69,10 +69,11 @@ exports.updateUserImg = async (fileData, userData) => {
 
 exports.updateUserForCredit = async (userData) => {
     return await UserInfo.update({
-        user_credit: userData.user_credit,
+        user_credit: literal(`user_credit + ?`)
     }, {
         where: {
             user_idx: userData.user_idx
-        }
+        },
+        replacements: [userData.user_credit]
     });
-}
+};

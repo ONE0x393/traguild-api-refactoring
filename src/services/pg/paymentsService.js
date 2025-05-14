@@ -21,7 +21,6 @@ exports.paymentsConfirm = async (paymentInfo = {}) => {
     },
   );
   const data = await response.json();
-  console.log(data);
 
   return data;
 }
