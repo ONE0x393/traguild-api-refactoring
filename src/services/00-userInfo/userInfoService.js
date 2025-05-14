@@ -1,3 +1,4 @@
+const { literal } = require('sequelize');
 const UserInfo = require('../../models/00-userInfo/UserInfo');
 const sequelize = require('../../config/database');
 
@@ -68,12 +69,16 @@ exports.updateUserImg = async (fileData, userData) => {
 }
 
 exports.updateUserForCredit = async (userData) => {
+    const creditToAdd = parseInt(userData.user_credit, 10);
+    if (isNaN(creditToAdd)) {
+        throw new Error('Invalid credit value');
+    }
+
     return await UserInfo.update({
-        user_credit: literal(`user_credit + ?`)
+        user_credit: literal(`user_credit + ${creditToAdd}`),
     }, {
         where: {
             user_idx: userData.user_idx
-        },
-        replacements: [userData.user_credit]
+        }
     });
 };
