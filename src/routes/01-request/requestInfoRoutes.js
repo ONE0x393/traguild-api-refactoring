@@ -40,6 +40,12 @@ router.post('/', requestInfoController.getRequestInfoByIdx);
  * 모든 의뢰 정보 조회
  */
 router.post('/all', requestInfoController.getAllRequestInfos);
+
+/**
+ * 사용자 주변 의뢰 정보 조회
+ */
+router.get('/nearby', requestInfoController.getNearBy);
+
 /**
  * 내 의뢰를 제외한 의뢰들 조회
  */

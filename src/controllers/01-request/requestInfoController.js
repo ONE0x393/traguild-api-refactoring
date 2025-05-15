@@ -93,6 +93,38 @@ exports.getFetchRequestInfos = async (req, res) => {
     }
 }
 
+exports.getNearBy = async (req, res) => {
+    /*
+    #swagger.description = "사용자 주변 의뢰 정보"
+    #swagger.tags = ['requestInfo - 의뢰 정보 테이블']
+    #swagger.parameters['latitude'] = {
+        in: 'query',
+        required: true,
+        type: 'number',
+        format: 'double',
+        description: '위도 (예: 37.5665)'
+    }
+    #swagger.parameters['longitude'] = {
+        in: 'query',
+        required: true,
+        type: 'number',
+        format: 'double',
+        description: '경도 (예: 126.9780)'
+    }
+*/
+    try{
+        logger.info(`${requestIp.getClientIp(req)} GET /api/requestInfo/nearby`);
+        console.log(req.query.latitude);
+        console.log(req.query.longitude);
+        
+        const resData = await requestInfoService.getNearBy(req.query);
+        res.json(resData);
+    } catch (e){
+        logger.error(`${requestIp.getClientIp(req)} GET /api/requestInfo/nearby 500 ERROR: ${e.message}`);
+        res.status(500).json({message: e.message});
+    }
+}
+
 exports.getFetchRequestInfosByTitle = async (req, res) => {
     /*
     #swagger.description = "의뢰제목으로 의뢰 정보 limit건 조회/ mode:0은 통상검색, mode:1은 category 적용검색"
