@@ -15,6 +15,14 @@ const RequestInfo = sequelize.define('TB_REQUEST_INFO', {
         type: DataTypes.STRING(20),
         defaultValue:"자유"
     },
+    latitude: {  // 위도
+        type: DataTypes.DOUBLE,
+        defaultValue: 127.0495556
+    },
+    longitude: {  // 경도
+        type: DataTypes.DOUBLE,
+        defaultValue: 37.514575
+    },
     request_title: {  //의뢰 제목
         type: DataTypes.STRING(20),
         allowNull: false

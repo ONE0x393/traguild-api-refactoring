@@ -328,6 +328,8 @@ exports.updateRequestInfo = async (data) => {
         request_idx: data.request_idx,
         user_idx: data.user_idx,
         request_region: data.request_region,
+        latitude: data.latitude,
+        longitude: data.longitude,
         request_title: data.request_title,
         request_content: data.request_content,
         request_cost: data.request_cost,
