@@ -76,6 +76,7 @@ exports.getNearBy = async (data) => {
         FROM TB_REQUEST_INFO
         WHERE latitude BETWEEN :latMin AND :latMax
             AND longitude BETWEEN :lonMin AND :lonMax
+          AND request_state = '모집'
     `,
     {
       replacements: {
