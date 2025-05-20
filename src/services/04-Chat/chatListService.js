@@ -61,19 +61,25 @@ exports.getAllChattingListByMine = async (user_idx) => {
     try {
         const result = await sequelize.query(
             `
-                SELECT a.user_idx, a.chat_room_idx,b.user_nickname, m.chat_detail, m.send_time
-                FROM TB_CHAT_LIST a
-                         JOIN TB_USER_INFO b ON a.user_idx = b.user_idx
-                         LEFT JOIN TB_CHAT_MESSAGE m
-                                   ON a.chat_room_idx = m.chat_room_idx
-                                       AND m.chat_idx = (
-                                           SELECT MAX(chat_idx)
-                                           FROM TB_CHAT_MESSAGE
-                                           WHERE chat_room_idx = a.chat_room_idx
-                                       )
-                WHERE a.chat_room_idx IN (SELECT chat_room_idx FROM TB_CHAT_LIST WHERE user_idx = :user_idx)
-                  AND a.user_idx != :user_idx
-                ORDER BY m.send_time DESC;
+                SELECT tcl.*, request_idx, request_title, user_nickname, request_title, request_img, request_state, applicant_idx, is_deleted, chat_idx, chat_detail, send_time
+                FROM TB_CHAT_LIST tcl
+                    JOIN TB_USER_INFO USING(user_idx)
+                    JOIN TB_CHAT_ROOM USING(chat_room_idx)
+                    JOIN TB_REQUEST_INFO ri USING(request_idx)
+                    LEFT JOIN TB_CHAT_MESSAGE tcm 
+                        ON tcm.chat_room_idx = tcl.chat_room_idx
+                        AND tcm.chat_idx = (
+                            SELECT MAX(chat_idx)
+                        FROM TB_CHAT_MESSAGE
+                        WHERE chat_room_idx = tcl.chat_room_idx
+                        )
+                WHERE tcl.chat_room_idx IN (
+                    SELECT tmp.chat_room_idx 
+                    FROM TB_CHAT_LIST tmp
+                    WHERE tmp.user_idx = :user_idx
+                )
+                AND tcl.user_idx != :user_idx
+                ORDER BY send_time DESC
             `,
             {
                 replacements: {
