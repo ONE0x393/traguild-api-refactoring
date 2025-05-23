@@ -162,7 +162,7 @@ exports.getFinishedApplicantByUser = async (user_idx) => {
             SELECT B.*
             FROM TB_REQUEST_APPLICANT A
             LEFT JOIN TB_REQUEST_INFO B ON A.request_idx = B.request_idx
-            WHERE A.user_idx = :user_idx 
+            WHERE B.applicant_idx = :user_idx 
               AND A.applicant_state = '승인' 
               AND B.is_deleted = 0 
               AND B.request_state = '완료'
@@ -179,7 +179,6 @@ exports.getFinishedApplicantByUser = async (user_idx) => {
         if (!result || result.length === 0) {
             return [];
         }
-
         return result;
 
     }catch (error){
