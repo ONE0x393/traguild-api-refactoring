@@ -61,24 +61,31 @@ exports.getAllChattingListByMine = async (user_idx) => {
     try {
         const result = await sequelize.query(
             `
-                SELECT tcl.*, request_idx, request_title, user_nickname, request_title, request_img, request_state, applicant_idx, is_deleted, chat_idx, chat_detail, send_time
+                SELECT a.user_idx AS host_user_idx, a.out_room_check AS host_out_room_check, subA.*
+                FROM
+                (SELECT tcl.*, ri.request_idx, ri.user_idx AS 'requested_user_idx', request_title, user_nickname, request_img, request_state,
+                        applicant_idx, is_deleted, chat_idx, chat_detail, send_time
                 FROM TB_CHAT_LIST tcl
                     JOIN TB_USER_INFO USING(user_idx)
                     JOIN TB_CHAT_ROOM USING(chat_room_idx)
                     JOIN TB_REQUEST_INFO ri USING(request_idx)
-                    LEFT JOIN TB_CHAT_MESSAGE tcm 
-                        ON tcm.chat_room_idx = tcl.chat_room_idx
-                        AND tcm.chat_idx = (
-                            SELECT MAX(chat_idx)
-                        FROM TB_CHAT_MESSAGE
-                        WHERE chat_room_idx = tcl.chat_room_idx
-                        )
+                    LEFT JOIN TB_CHAT_MESSAGE tcm
+                    ON tcm.chat_room_idx = tcl.chat_room_idx
+                    AND tcm.chat_idx = (
+                        SELECT MAX(tmp.chat_idx)
+                        FROM TB_CHAT_MESSAGE tmp
+                        WHERE tmp.chat_room_idx = tcl.chat_room_idx
+                    )
                 WHERE tcl.chat_room_idx IN (
-                    SELECT tmp.chat_room_idx 
+                    SELECT tmp.chat_room_idx
                     FROM TB_CHAT_LIST tmp
                     WHERE tmp.user_idx = :user_idx
+                    AND tmp.out_room_check = 0
                 )
                 AND tcl.user_idx != :user_idx
+                ) AS subA
+                LEFT JOIN TB_CHAT_LIST a
+                ON subA.chat_room_idx = a.chat_room_idx AND a.user_idx = :user_idx
                 ORDER BY send_time DESC
             `,
             {
