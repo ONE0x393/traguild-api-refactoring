@@ -159,7 +159,7 @@ exports.getAcceptedApplicantByUser = async (user_idx) => {
 exports.getFinishedApplicantByUser = async (user_idx) => {
     try{
         let query = `
-            SELECT B.*
+            SELECT DISTINCT B.*
             FROM TB_REQUEST_APPLICANT A
             LEFT JOIN TB_REQUEST_INFO B ON A.request_idx = B.request_idx
             WHERE B.applicant_idx = :user_idx 

@@ -9,19 +9,21 @@ const insertRequestInfo = async () => {
             "request_title": "오전 중 창고정리",
             "request_content": "오전 중에 야채창고 정리할 인력 다섯분 구합니다. 야리끼리로 처리되고 일당은 7만원입니다. 오후에 창고물자 입고랑 연계 신청가능합니다",
             "request_cost": 70000,
-            "request_state": "모집",
+            "request_state": "완료",
             "created_date": "2024-07-29",
             "updated_time": "2024-07-29",
-            "reserved_start_time": "2024-04-04T09:30:00.000Z"  // 3일 전 날짜
+            "reserved_start_time": "2024-04-04T09:30:00.000Z",  // 3일 전 날짜
+            "applicant_idx": 2,
         },{
             "user_idx": 1,
             "request_region": "경남 김해",
             "request_title": "오후 중 창고물자 입고",
             "request_content": "오후 중에 창고에 물자 입고할 인력 10명 구합니다. 야리끼리로 처리되고 일당은 10만원입니다. 오전 정리일 일당이랑 별개입니다.",
             "request_cost": 100000,
-            "request_state": "모집",
+            "request_state": "완료",
             "created_date": "2024-07-29",
-            "updated_time": "2024-07-29"
+            "updated_time": "2024-07-29",
+            "applicant_idx": 2,
         },{
             "user_idx": 3,
             "request_region": "창원",
@@ -105,7 +107,7 @@ const insertRequestInfo = async () => {
             "request_content": "제목이랑 같습니다",
             "request_cost": 20000,
             "request_state": "모집",
-            "applicant_idx": 642,
+            "applicant_idx": 641,
             "created_date": "2024-08-20",
             "updated_time": "2024-08-20"
         },
