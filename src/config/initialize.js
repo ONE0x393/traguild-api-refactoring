@@ -74,6 +74,10 @@ const initialize = async () => {
             const insertChatList = require('@src/models/dummy/insertChatList');
             await insertChatList();
 
+            // Insert UserTitle data
+            const insertUserTitle = require('@src/models/dummy/insertUserTitle');
+            await insertUserTitle();
+
             logger.info('Initial data inserted');
         } else await sequelize.sync();
     } catch(e){

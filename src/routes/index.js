@@ -1,6 +1,7 @@
 const express = require('express');
 const userInfoRoutes = require('./00-userInfo/userInfoRoutes');
 const userRelationRoutes = require('./00-userInfo/userRelationRoutes');
+const userTitleRoutes = require('./00-userInfo/userTitleRoutes');
 const communityPostRoutes = require('./02-community/communityPostRoutes');
 const communityCommentRoutes = require('./02-community/communityCommentRoutes');
 const reportRoutes = require('./03-myPage/reportRoutes');
@@ -23,6 +24,7 @@ const router = express.Router();
 
 router.use('/userInfo', userInfoRoutes);
 router.use('/userRelation', userRelationRoutes);
+router.use('/userTitle', userTitleRoutes);
 router.use('/communityPost', communityPostRoutes);
 router.use('/communityComment', communityCommentRoutes);
 router.use('/report', reportRoutes);

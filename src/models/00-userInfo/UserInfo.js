@@ -60,6 +60,16 @@ const UserInfo = sequelize.define('TB_USER_INFO', {
         allowNull: false,
         defaultValue: 0
     },
+    user_level: { //유저 레벨
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+    },
+    user_exp: { //유저 경험치
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
     is_agree_privacy: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
