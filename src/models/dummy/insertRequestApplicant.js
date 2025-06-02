@@ -46,7 +46,7 @@ const insertRequestApplicant = async () => {
         },{
             "request_idx": 6,
             "user_idx": 34556,
-            "applicant_state": "대기"
+            "applicant_state": "승인"
         },{
             "request_idx": 6,
             "user_idx": 2346,

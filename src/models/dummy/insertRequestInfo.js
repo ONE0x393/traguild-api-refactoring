@@ -60,7 +60,8 @@ const insertRequestInfo = async () => {
             "request_cost": 50000,
             "request_state": "모집예정",
             "created_date": "2024-08-20",
-            "updated_time": "2024-08-20"
+            "updated_time": "2024-08-20",
+            "applicant_idx": 2346,
         },{
             "user_idx": 1,
             "request_region": "포항",

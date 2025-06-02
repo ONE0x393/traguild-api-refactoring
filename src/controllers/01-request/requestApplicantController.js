@@ -193,19 +193,20 @@ exports.updateRequestApplicant = async (req, res) => {
 
 exports.updateRequestAllApplicantForReject = async (req, res) => {
     /*
-    #swagger.description = "특정 의뢰에 지원한 사람들을 모두 반려"
+    #swagger.description = "특정 의뢰에 지원한 사람들을 모두 반려(의뢰의 지원자 중 특정 user_idx를 선택하여 넣어주면 그 외에 user_idx데이터는 모두 반려처리)"
     #swagger.tags = ['requestApplicant - 의뢰 지원자 정보 테이블']
     #swagger.parameters['obj'] = {
         in: 'body',
         required: true,
         schema: {
             "request_idx": 1,
+            "user_idx": 1,
         }
     }
     */
     try{
         logger.info(`${requestIp.getClientIp(req)} POST /api/requestApplicant/rejectAll`);
-        const RequestApplicant = await requestApplicantService.updateRequestAllApplicantForReject(req.body.request_idx, req.body.applicant_state);
+        const RequestApplicant = await requestApplicantService.updateRequestAllApplicantForReject(req.body);
         res.json(RequestApplicant);
     } catch (e){
         logger.error(`${requestIp.getClientIp(req)} POST /api/requestApplicant/rejectAll 500 ERROR: ${e.message}`);
