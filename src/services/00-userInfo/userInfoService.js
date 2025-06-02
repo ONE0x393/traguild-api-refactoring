@@ -44,10 +44,10 @@ exports.getUser = async (user_idx) => {
     });
 
     if (!result || result.length === 0) {
-        return [];
+        return {};
     }
 
-    return result;
+    return result[0];
 }
 
 exports.getUserInfoById = async (user_id) => {
