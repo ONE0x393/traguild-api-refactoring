@@ -55,17 +55,7 @@ exports.getRequestImage = async (request_idx) => {
 };
 
 exports.getAllRequestInfos = async () => {
-  const { body } = await esClient.search({
-    index: "request_info",
-    body: {
-      query: {
-        match_all: {},
-      },
-    },
-  });
-
-  return body.hits.hits.map((hit) => hit._source);
-  //return await RequestInfo.findAll();
+  return await RequestInfo.findAll();
 };
 
 exports.getNearBy = async (data) => {
