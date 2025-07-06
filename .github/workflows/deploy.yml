@@ -70,7 +70,7 @@ jobs:
                 "color": 5814783,
                 "fields": [
                   {
-                    "name": "📘 API Documentation",
+                    "name": "📘 API Documentation ",
                     "value": "[Access Swagger Docs](https://traguild.kro.kr/api-docs)"
                   }
                 ],
